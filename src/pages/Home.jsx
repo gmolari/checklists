@@ -17,6 +17,10 @@ const Home = () => {
 
     const [selectValue, setSelectValue] = useState('');
 
+    function submit(){
+        
+    }
+
     // ATENDIMENTO, MANUTENÇÃO, ATIVAÇÃO, 
     // MIGRAÇÃO NS, CORPORATIVO/EMPRESARIAL, 
     // RETENÇÃO, SMARTZAP, PONTO FORA
@@ -30,7 +34,7 @@ const Home = () => {
                     options={typeOfChecklists} 
                     onChange={(e) => {setSelectValue(e.value)}}
                 />
-                <button>Next</button>
+                <Link to={'/choose-checklist/'+selectValue} className={styles.button} >Next</Link>
             </section>
         </div>
     )  

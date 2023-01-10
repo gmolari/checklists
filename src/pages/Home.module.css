@@ -12,3 +12,20 @@
     flex-direction: column;
     gap: .5em;
 }
+
+.button {
+    border: none;
+    width: 50%;
+    background: #259cfd;
+    color: white;
+    padding: 1em;
+    align-self: center;
+    border-radius: 100px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.button:hover {
+    cursor: pointer;
+    background: #259cfd7e;
+}
