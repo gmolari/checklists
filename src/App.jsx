@@ -12,9 +12,8 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<Home/>}/>
-          <Route path="/"/>
-          <Route path="/choose-checklist/:type" element={<ChooseChecklist/>}/>
-          <Route path="/choose-checklist/:type/:check" element={<Checklist/>}/>
+          <Route path="/choose-checklist/:type" element={<Home/>}/>
+          <Route path="/choose-checklist/:type/:check" element={<Home/>}/>
         </Routes>
       </Router>
     </main>

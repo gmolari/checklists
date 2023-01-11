@@ -6,6 +6,7 @@ import CopyToClipboard from 'react-copy-to-clipboard'
 
 const Checklist = () => {
     const {type, check} = useParams();
+
     const [questions, setQuestions] = useState(checklists[type].checks[check].questions);
     const [ans, setAns] = useState({});
     const [formatAns, setFormatAns] = useState();
@@ -35,6 +36,7 @@ const Checklist = () => {
 
     return (
         <div className={styles.divMainContainer}>
+            <h2 className={styles.h2}> {checklists[type].checks[check].name[0]} </h2>
             {
                 questions.map((e) => 
                     <div key={`div${questions.indexOf(e)}`} 

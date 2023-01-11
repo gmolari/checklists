@@ -6,11 +6,15 @@
     font-size: 1.2em;
 }
 
+.h2 {
+    margin: 0 0 0 1em;
+}
+
 .divQuestion {
     display: flex;
     flex-direction: column;
     width: 50%;
-    margin: 1em 0 0 .5em;
+    margin: 1em;
 
 }
 
@@ -26,8 +30,9 @@
     display: flex;
     flex-direction: column;
     position: fixed;
-    right: 3em;
-    bottom: 3em;
+    right: 0;
+    bottom: 0;
+    margin: 1em;
     align-items: center;
     justify-content: center;
 }
