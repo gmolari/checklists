@@ -9,7 +9,6 @@ const Checklist = () => {
     const [questions, setQuestions] = useState(checklists[type].checks[check].questions);
     const [ans, setAns] = useState({});
     const [formatAns, setFormatAns] = useState();
-    const [msg, setMsg] = useState();
 
     useEffect(() => {
         let formatedAns = ''
@@ -31,6 +30,7 @@ const Checklist = () => {
 
     const copied = () => {
         setMsg('Copiado com sucesso!')
+        setTimeout(() => {setMsg('')}, 5000)
     }
 
     return (
@@ -40,12 +40,15 @@ const Checklist = () => {
                     <div key={`div${questions.indexOf(e)}`} 
                         className={styles.divQuestion}>
                         
-                        <p key={`p${questions.indexOf(e)}`} className={styles.p}>
+                        <label htmlFor={`idInp${questions.indexOf(e)}`} 
+                            key={`p${questions.indexOf(e)}`} 
+                            className={styles.p}>
                             {e}
-                        </p>
+                        </label>
                         
                         <input 
-                            name={`${questions.indexOf(e)}`} 
+                            name={`${questions.indexOf(e)}`}
+                            id={`idInp${questions.indexOf(e)}`}
                             key={`inp${questions.indexOf(e)}`} 
                             type="text" 
                             className={styles.inputText}
@@ -54,9 +57,12 @@ const Checklist = () => {
                     </div>
                 )
             }
-            <CopyToClipboard onCopy={copied} text={formatAns}>
-                <button className={styles.button} onClick={() => console.log(formatAns)}> Click me </button>
-            </CopyToClipboard> <span className={styles.span}> {msg} </span>
+            <div className={styles.divButton}>
+                <span className={styles.span}> Copiado com Sucesso! </span>
+                <CopyToClipboard onCopy={copied} text={formatAns}>
+                    <button className={styles.button} onClick={() => console.log(formatAns)}> Copy </button>
+                </CopyToClipboard>
+            </div>
         </div>
     )
 
