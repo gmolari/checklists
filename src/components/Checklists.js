@@ -1,37 +1,41 @@
 const checklists = {
     'attendance': {
-        fiber: {
-            name: 'Fibra',
-            q1: 'Responsável pela realização dos procedimentos (Cliente):'
-        },
-        building: {
-            name: 'Prédio/Condomínio',
-            q1: 'Responsável pela realização dos procedimentos (Cliente):'
-        },
-        radio: {
-            name: 'Radio',
-            q1: 'Responsável pela realização dos procedimentos (Cliente):'
-        },
-        smart: {
-            name: 'Smartzap',
-            q1: 'Responsável pela realização dos procedimentos (Cliente):'
-        },
-        
+        name : 'Atendimento',
+        checks: {
+            fiber: {
+                name: ['Fibra','fiber'],
+                q1: 'Responsável pela realização dos procedimentos (Cliente):'
+            },
+            building: {
+                name: ['Prédio/Condomínio', 'building'],
+                q1: 'Responsável pela realização dos procedimentos (Cliente):'
+            },
+            radio: {
+                name: ['Radio', 'radio'],
+                q1: 'Responsável pela realização dos procedimentos (Cliente):'
+            },
+            smart: {
+                name: ['Smartzap', 'smart'],
+                q1: 'Responsável pela realização dos procedimentos (Cliente):'
+            },
+        }
     },
     'maintenance': {
-        huawei: {
-            name: 'Huawei',
-            q1: 'Responsável pela realização dos procedimentos (Cliente):'
-        },
-        zte: {
-            name: 'ZTE',
-            q1: 'Responsável pela realização dos procedimentos (Cliente):'
-        },
-        fiberhome: {
-            name: 'Fiberhome/C-DATA',
-            q1: 'Responsável pela realização dos procedimentos (Cliente):'
-        },
-        
+        name : 'Manutenção',
+        checks: {
+            huawei: {
+                name: ['Huawei','huawei'],
+                q1: 'Responsável pela realização dos procedimentos (Cliente):'
+            },
+            zte: {
+                name: ['ZTE','zte'],
+                q1: 'Responsável pela realização dos procedimentos (Cliente):'
+            },
+            fiberhome_cdata: {
+                name: ['Fiberhome/C-DATA', 'fiberhome_cdata'],
+                q1: 'Responsável pela realização dos procedimentos (Cliente):'
+            },
+        }
     },
 }
 

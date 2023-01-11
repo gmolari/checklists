@@ -3,6 +3,7 @@ import './App.css'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import ChooseChecklist from './pages/ChooseChecklist'
+import Checklist from './pages/Checklist'
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
           <Route exact path="/" element={<Home/>}/>
           <Route path="/"/>
           <Route path="/choose-checklist/:type" element={<ChooseChecklist/>}/>
+          <Route path="/choose-checklist/:type/:check" element={<Checklist/>}/>
         </Routes>
       </Router>
     </main>
