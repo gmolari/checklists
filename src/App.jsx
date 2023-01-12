@@ -13,8 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/choose-checklist" element={<Home/>} />
-          <Route path="/choose-checklist/:type" element={<Home/>}/>
-          <Route path="/choose-checklist/:type/:check" element={<Home/>}/>
+          <Route path="/choose-checklist/:check" element={<Home/>}/>
         </Routes>
       </Router>
     </main>

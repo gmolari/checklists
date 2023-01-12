@@ -20,6 +20,10 @@ const Checklist = ({type, check}) => {
         setFormatAns(formatedAns);
     }, [ans])
 
+    useEffect(() => {
+        setQuestions(checklists[type].checks[check].questions);
+    }, [check])
+
 
     const handleAns = (value) => {
         setAns(prevValue => ({

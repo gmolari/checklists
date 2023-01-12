@@ -19,7 +19,8 @@ const Home = () => {
     ]);
 
     const [selectValue, setSelectValue] = useState('');
-    const {type, check} = useParams();
+    const [type, setType] = useState('')
+    const {check} = useParams();
 
     // ATENDIMENTO, MANUTENÇÃO, ATIVAÇÃO, 
     // MIGRAÇÃO NS, CORPORATIVO/EMPRESARIAL, 
@@ -42,15 +43,14 @@ const Home = () => {
                     <h3> Choose the type of Checklist: </h3>
                     <Select
                         options={typeOfChecklists}
-                        onChange={(e) => {setSelectValue(e.value)}}
+                        onChange={(e) => {setType(e.value)}}
                     />
-                    <Link to={'/choose-checklist/'+selectValue} className={styles.button} >Next</Link>
                 </section>
             </div>
 
             <div className={styles.divContainerChoose}>
                 {
-                    type !== undefined ?
+                    type !== '' ?
                         <ChooseChecklist type={type} />
                     : ''
                 }
