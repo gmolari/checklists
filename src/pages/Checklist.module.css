@@ -15,32 +15,40 @@
     margin: 0 1em;
 }
 
+.divQuestionSche {
+    display: flex;
+    margin: 0 1em;
+    align-items: center;
+}
+
 .divQuestion:last-child {
     color: red;
     margin: 0 0 1em
 }
 
+.divQuestion input {
+    text-transform: capitalize;
+}
+
 .inputText {
     border: none;
     padding: .2em;
-    background: rgba(128, 128, 128, 0.411);
+    background: rgba(170, 170, 170, 0.13);
     height: 1.5em;
     outline: none;
     border-radius: 5px;
 }
 
 .divButton {
-    display: flex;
     flex-direction: column;
     position: fixed;
-    right: 29%;
     bottom: 0;
-    margin: 1em;
-    align-items: center;
-    justify-content: center;
+    text-align: end;
+    width: 100%;
 }
 
 .button {
+    margin: 1em;
     padding: 2em 3em;
     align-self: center;
     border: none;
@@ -48,7 +56,6 @@
     color: white;
     border-radius: 100px;
     font-weight: bold;
-    outline: none;
     text-transform: uppercase;
 }
 

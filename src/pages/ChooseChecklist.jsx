@@ -1,10 +1,9 @@
 import styles from './ChooseChecklist.module.css'
 import { Link } from 'react-router-dom'
-import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import checklists from '../components/Checklists'
 
-const ChooseChecklist = ({type}) => {
+const ChooseChecklist = ({type, setCheck}) => {
     const [arrayChecklist, setArrayChecklist] = useState([]);
 
     for (const check in checklists[type].checks){
@@ -28,11 +27,9 @@ const ChooseChecklist = ({type}) => {
                 <h2> {checklists[type].name} </h2>
                 <div className={styles.divContainerButtons}>
                     {arrayChecklist.map((index) =>
-                        <Link to={`/choose-checklist/${index[1]}`} key={index[0]} className={styles.link}>
-                            <button className={styles.button} key={index[0]+'1'}> 
-                                {index[0].toUpperCase()} 
-                            </button> 
-                        </Link>
+                        <button className={styles.button} key={index[0]+'1'} onClick={() => setCheck(index[1])}> 
+                            {index[0].toUpperCase()} 
+                        </button> 
                     )}
                 </div>
             </section>

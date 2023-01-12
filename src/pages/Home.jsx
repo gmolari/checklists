@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Select from 'react-select'
 import styles from "./Home.module.css"
 import Checklist from "./Checklist"
@@ -16,11 +16,16 @@ const Home = () => {
         {value: 'retention', label: 'Retention'},
         {value: 'Smartzap', label: 'Smartzap'},
         {value: 'out_point', label: 'Out Point'},
+        {value: 'schedulling', label: 'Schedulling'},
     ]);
 
-    const [selectValue, setSelectValue] = useState('');
     const [type, setType] = useState('')
-    const {check} = useParams();
+    const [check, setCheck] = useState('')
+
+    function setInfos(e) {
+        setCheck('');
+        setType(e.value)
+    }
 
     // ATENDIMENTO, MANUTENÇÃO, ATIVAÇÃO, 
     // MIGRAÇÃO NS, CORPORATIVO/EMPRESARIAL, 
@@ -31,7 +36,7 @@ const Home = () => {
 
             <div className={styles.divContainerChecklist}>
                 {
-                    check !== undefined ?
+                    check !== '' ?
                         <Checklist type={type} check={check} />
                     : ''
                 }
@@ -43,7 +48,7 @@ const Home = () => {
                     <h3> Choose the type of Checklist: </h3>
                     <Select
                         options={typeOfChecklists}
-                        onChange={(e) => {setType(e.value)}}
+                        onChange={setInfos}
                     />
                 </section>
             </div>
@@ -51,7 +56,7 @@ const Home = () => {
             <div className={styles.divContainerChoose}>
                 {
                     type !== '' ?
-                        <ChooseChecklist type={type} />
+                        <ChooseChecklist setCheck={setCheck} type={type} />
                     : ''
                 }
             </div>

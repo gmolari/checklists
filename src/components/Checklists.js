@@ -47,7 +47,6 @@ const checklists = {
                 name: ['Radio', 'radio'],
                 questions: [
                     'Responsável pela realização dos procedimentos (Cliente):',
-
                     'Telefone utilizado para contato (Origem no DRA):',
                     'Confirmado Endereço e telefone do cliente? Qual(is) número(s) foi(ram) confirmado(s)?',
                     'Telefone com WhatsApp para contato?',
@@ -122,19 +121,57 @@ const checklists = {
         name : 'Manutenção Delta',
         checks: {
             fiber: {
-                name: ['Manutenção Delta Fibra','fiber'],
+                name: ['Delta Fibra','fiber'],
                 questions: [
                     'Responsável pela realização dos procedimentos (Cliente):',
                 ]
             },
             building: {
-                name: ['Manutenção Delta Prédio/condomínio','building'],
+                name: ['Delta Prédio/condomínio','building'],
                 questions: [
                     'Responsável pela realização dos procedimentos (Cliente):',
                 ]
             },
         }
     },
+    'schedulling': {
+        name : 'Agendamento',
+        checks: {
+            fiber: {
+                name: ['Fibra','fiber'],
+                questions: [
+                    'CONTATO:',
+                    'PERÍODO:',
+                    'REFERÊNCIA:',
+                    'CAIXA:' ,
+                    'PORTA:',
+                    'LOCAL-CTO:', 
+                    'ONU:',
+                    'DBM:',
+                    'MOTIVO:', 
+                    'OBS:',
+                ]
+            },
+            building: {
+                name: ['Prédio/condomínio','building'],
+                questions: [
+                    'CONTATO:',
+                    'PERÍODO:',
+                    'REFERÊNCIA:',
+                    'CONDOMÍNIO:',
+                    'MOTIVO:', 
+                    'OBS:',
+                ]
+            },
+            los: {
+                name: ['LOS VERMELHO','los'],
+                questions: [
+                    'Responsável pela realização dos procedimentos (Cliente):',
+                ]
+            },
+        }
+    },
+
 
 }
 

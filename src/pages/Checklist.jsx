@@ -1,6 +1,5 @@
 import styles from './Checklist.module.css'
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
 import checklists from '../components/Checklists'
 import CopyToClipboard from 'react-copy-to-clipboard'
 
@@ -14,8 +13,29 @@ const Checklist = ({type, check}) => {
     useEffect(() => {
         let formatedAns = ''
         for(const i in questions) {
-            formatedAns = formatedAns +
-            `${questions[i]} \n${ans[i] ? ans[i] : ''} \n\n`
+            switch(type) {
+                case 'schedulling':
+                    
+                break;
+            }
+            
+            if (type !== 'schedulling'){
+                formatedAns = formatedAns +
+                `${questions[i]} \n${ans[i] ? ans[i] : ''} \n\n`
+            }else {
+                if (questions[i].includes('CAIXA')) {
+                    formatedAns = formatedAns +
+                    `¶ ${questions[i]} ${ans[i] ? ans[i] : ''}`
+                    continue;
+                }
+                if (questions[i].includes('PORTA')){
+                    formatedAns = formatedAns +
+                    ` ${questions[i]} ${ans[i] ? ans[i] : ''}\n`
+                    continue    
+                }
+                formatedAns = formatedAns +
+                `¶ ${questions[i]} ${ans[i] ? ans[i] : ''}\n`
+            }
         }
         setFormatAns(formatedAns);
     }, [ans])
@@ -42,6 +62,7 @@ const Checklist = ({type, check}) => {
         <div className={styles.divMainContainer}>
             <h2 className={styles.h2}> {checklists[type].checks[check].name[0]} </h2>
             {
+                type !== 'schedulling' ?
                 questions.map((e) => 
                     <div key={`div${questions.indexOf(e)}`} 
                         className={styles.divQuestion}>
@@ -58,8 +79,31 @@ const Checklist = ({type, check}) => {
                             key={`inp${questions.indexOf(e)}`} 
                             type="text" 
                             className={styles.inputText}
-                            autocomplete="off"
-                            onChange={handleAns} />
+                            autoComplete="off"
+                            onChange={handleAns}
+                             />
+                    
+                    </div>
+                ) : 
+                questions.map((e) => 
+                    <div key={`div${questions.indexOf(e)}`} 
+                        className={styles.divQuestionSche}>
+                        
+                        <label htmlFor={`idInp${questions.indexOf(e)}`} 
+                            key={`p${questions.indexOf(e)}`} 
+                            className={styles.p}>
+                            ¶ {e}
+                        </label>
+                        
+                        <input 
+                            name={`${questions.indexOf(e)}`}
+                            id={`idInp${questions.indexOf(e)}`}
+                            key={`inp${questions.indexOf(e)}`} 
+                            type="text" 
+                            className={styles.inputText}
+                            autoComplete="off"
+                            onChange={handleAns}
+                             />
                     
                     </div>
                 )
@@ -67,7 +111,7 @@ const Checklist = ({type, check}) => {
             <div className={styles.divButton}>
                 <span className={styles.span}> {msg} </span>
                 <CopyToClipboard onCopy={copied} text={formatAns}>
-                    <button className={styles.button} onClick={() => console.log(formatAns)}> Copy </button>
+                    <button className={styles.button}> Copy </button>
                 </CopyToClipboard>
             </div>
         </div>
