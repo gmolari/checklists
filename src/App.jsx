@@ -4,7 +4,6 @@ import { Route, BrowserRouter as Router, Routes, redirect } from 'react-router-d
 import Home from './pages/Home'
 import ChooseChecklist from './pages/ChooseChecklist'
 import Checklist from './pages/Checklist'
-import Redirect from './pages/Redirect'
 
 function App() {
 

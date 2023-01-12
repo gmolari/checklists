@@ -54,6 +54,7 @@ const Checklist = ({type, check}) => {
                             key={`inp${questions.indexOf(e)}`} 
                             type="text" 
                             className={styles.inputText}
+                            autocomplete="off"
                             onChange={handleAns} />
                     
                     </div>
