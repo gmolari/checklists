@@ -20,7 +20,6 @@ const Home = () => {
 
     const [selectValue, setSelectValue] = useState('');
     const {type, check} = useParams();
-    console.log(type)
 
     // ATENDIMENTO, MANUTENÇÃO, ATIVAÇÃO, 
     // MIGRAÇÃO NS, CORPORATIVO/EMPRESARIAL, 
@@ -28,17 +27,35 @@ const Home = () => {
 
     return (
         <div className={styles.divContainerMain}>
-            
 
-            <h2> A page for your Checklists! </h2>
-            <section className={styles.section}>
-                <h3> Choose the type of Checklist: </h3>
-                <Select 
-                    options={typeOfChecklists} 
-                    onChange={(e) => {setSelectValue(e.value)}}
-                />
-                <Link to={'/choose-checklist/'+selectValue} className={styles.button} >Next</Link>
-            </section>
+            <div className={styles.divContainerChecklist}>
+                {
+                    check !== undefined ?
+                        <Checklist type={type} check={check} />
+                    : ''
+                }
+            </div>
+
+            <div className={styles.divContainerSelect}>
+                <h2> A page for your Checklists! </h2>
+                <section className={styles.section}>
+                    <h3> Choose the type of Checklist: </h3>
+                    <Select
+                        options={typeOfChecklists}
+                        onChange={(e) => {setSelectValue(e.value)}}
+                    />
+                    <Link to={'/choose-checklist/'+selectValue} className={styles.button} >Next</Link>
+                </section>
+            </div>
+
+            <div className={styles.divContainerChoose}>
+                {
+                    type !== undefined ?
+                        <ChooseChecklist type={type} />
+                    : ''
+                }
+            </div>
+            
         </div>
     )  
 }

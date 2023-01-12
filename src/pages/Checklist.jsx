@@ -4,12 +4,12 @@ import { useParams } from 'react-router-dom'
 import checklists from '../components/Checklists'
 import CopyToClipboard from 'react-copy-to-clipboard'
 
-const Checklist = () => {
-    const {type, check} = useParams();
+const Checklist = ({type, check}) => {
 
     const [questions, setQuestions] = useState(checklists[type].checks[check].questions);
     const [ans, setAns] = useState({});
     const [formatAns, setFormatAns] = useState();
+    const [msg, setMsg] = useState('')
 
     useEffect(() => {
         let formatedAns = ''
@@ -60,7 +60,7 @@ const Checklist = () => {
                 )
             }
             <div className={styles.divButton}>
-                <span className={styles.span}> Copiado com Sucesso! </span>
+                <span className={styles.span}> {msg} </span>
                 <CopyToClipboard onCopy={copied} text={formatAns}>
                     <button className={styles.button} onClick={() => console.log(formatAns)}> Copy </button>
                 </CopyToClipboard>

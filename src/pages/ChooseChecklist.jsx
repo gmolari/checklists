@@ -4,12 +4,13 @@ import { useParams } from 'react-router-dom'
 import { useState } from 'react'
 import checklists from '../components/Checklists'
 
-const ChooseChecklist = () => {
-    const {type} = useParams();
+const ChooseChecklist = ({type}) => {
     const [arrayChecklist, setArrayChecklist] = useState([]);
 
-    for (const check in checklists[type].checks){
-        arrayChecklist.length < 4 ? arrayChecklist.push(checklists[type].checks[check].name) : '';
+    if (type !== '') {
+        for (const check in checklists[type].checks){
+            arrayChecklist.length < 4 ? arrayChecklist.push(checklists[type].checks[check].name) : '';
+        }
     }
     
 
