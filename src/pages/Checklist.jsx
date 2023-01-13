@@ -6,15 +6,15 @@ import CopyToClipboard from 'react-copy-to-clipboard'
 const Checklist = ({type, check, cookies, setCookies}) => {
 
     const [questions, setQuestions] = useState(checklists[type].checks[check].questions);
-    // const [ans, setAns] = useState({});
+    const [ans, setAns] = useState({});
     const [formatAns, setFormatAns] = useState();
     const [msg, setMsg] = useState('')
 
     useEffect(()=>{
         cookies.ans ? '':
-        setCookies('ans', '', {path: '/', maxAge: 60*60})
+        setCookies('ans', ans, {path: '/', maxAge: 60*60})
         for(const i in questions){
-            cookies.ans[i] ? document.getElementById(`idInp${i}`).value = cookies.ans[i] : ''
+            cookies.ans[i] ? document.getElementById(`idInp${i}`).value = cookies.ans[type][check][i] : ''
         }
     }, [])
 
@@ -37,33 +37,47 @@ const Checklist = ({type, check, cookies, setCookies}) => {
                 case 'schedulling':
                     if (questions[i].includes('CAIXA')) {
                         formatedAns = formatedAns +
-                        `¶ ${questions[i]} ${cookies.ans[i] ? cookies.ans[i] : ''}`
+                        `¶ ${questions[i]} ${ans[i] ? ans[i] : ''}`
                         continue;
                     }
 
                     if (questions[i].includes('PORTA')){
                         formatedAns = formatedAns +
-                        ` ${questions[i]} ${cookies.ans[i] ? cookies.ans[i] : ''}\n`
+                        ` ${questions[i]} ${ans[i] ? ans[i] : ''}\n`
                         continue    
                     }
+
+                    if (check === 'los' && i > 5 ) {
+                        formatedAns = formatedAns +
+                        ` ${questions[i]} \n`
+                        continue   
+                    }
+
                     formatedAns = formatedAns +
-                    `¶ ${questions[i]} \n${cookies.ans[i] ? cookies.ans[i] : ''}`
+                    `¶ ${questions[i]} ${ans[i] ? ans[i] : ''}\n`
+
                 break;   
 
                 default: 
                     formatedAns = formatedAns +
-                    `${questions[i]} \n${cookies.ans[i] ? cookies.ans[i] : ''} \n\n`
+                    `${questions[i]} \n${ans[i] ? ans[i] : ''} \n\n`
                 break;
             }
         }
         setFormatAns(formatedAns);
-    }, [cookies.ans,questions])
+    }, [ans,questions])
 
-    const handleAns = (value) => {
-        setCookies(`ans`, {
-            ...cookies.ans,
+    function handleAns(value) {
+        console.log(type)
+        setAns(prevValue => ({
+            ...prevValue,
             [value.target.name]: value.target.value
-        },{path: '/', maxAge: 60*60})
+        }))
+        
+        setCookies(`ans`, 
+        {type: {
+            check: ans
+        }},{path: '/', maxAge: 60*60})
     }   
 
     const copied = () => {

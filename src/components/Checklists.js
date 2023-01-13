@@ -166,7 +166,15 @@ const checklists = {
             los: {
                 name: ['LOS VERMELHO','los'],
                 questions: [
-                    'Responsável pela realização dos procedimentos (Cliente):',
+                    'CONTATO:',
+                    'PERÍODO:', 
+                    'REFERÊNCIA:', 
+                    'CTO: PORTA:', 
+                    'LOCAL-CTO:', 
+                    'ONU:' ,
+                    'DBM: Inativa',
+                    'MOTIVO: LOS VERMELHO',
+                    'OBS: Verificar conectores, infra, ONU...',
                 ]
             },
         }

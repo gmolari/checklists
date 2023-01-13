@@ -21,6 +21,14 @@
     align-items: center;
 }
 
+.divQuestionSche input{
+    width: 75%;
+}
+
+.divQuestionSche label{
+    width: 25%;
+}
+
 .divQuestion:last-child {
     color: red;
     margin: 0 0 1em
