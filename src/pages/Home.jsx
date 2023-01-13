@@ -12,7 +12,6 @@ const Home = ({cookies, setCookies}) => {
         {value: 'migration', label: 'NS Migration'},
         {value: 'corp_emp', label: 'Corporate and Business'},
         {value: 'retention', label: 'Retention'},
-        {value: 'Smartzap', label: 'Smartzap'},
         {value: 'out_point', label: 'Out Point'},
         {value: 'schedulling', label: 'Schedulling'},
     ]);
