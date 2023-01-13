@@ -169,12 +169,13 @@ const checklists = {
                     'CONTATO:',
                     'PERÍODO:', 
                     'REFERÊNCIA:', 
-                    'CTO: PORTA:', 
+                    'CAIXA:', 
+                    'PORTA:', 
                     'LOCAL-CTO:', 
                     'ONU:' ,
-                    'DBM: Inativa',
-                    'MOTIVO: LOS VERMELHO',
-                    'OBS: Verificar conectores, infra, ONU...',
+                    'DBM:',
+                    'MOTIVO:',
+                    'OBS:',
                 ]
             },
         }

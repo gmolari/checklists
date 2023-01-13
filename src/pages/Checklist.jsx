@@ -9,13 +9,14 @@ const Checklist = ({type, check, cookies, setCookies}) => {
     const [ans, setAns] = useState({});
     const [formatAns, setFormatAns] = useState();
     const [msg, setMsg] = useState('')
+    const cookieAnswer = useState({[type]: {[check]: {}}});
 
     useEffect(()=>{
         cookies.ans ? '':
         setCookies('ans', ans, {path: '/', maxAge: 60*60})
-        for(const i in questions){
-            cookies.ans[i] ? document.getElementById(`idInp${i}`).value = cookies.ans[type][check][i] : ''
-        }
+        // for(const i in questions){
+        //     cookies.ans[i] ? document.getElementById(`idInp${i}`).value = cookies.ans[type][check][i] : ''
+        // }
     }, [])
 
     function resetForm(){
@@ -47,12 +48,6 @@ const Checklist = ({type, check, cookies, setCookies}) => {
                         continue    
                     }
 
-                    if (check === 'los' && i > 5 ) {
-                        formatedAns = formatedAns +
-                        ` ${questions[i]} \n`
-                        continue   
-                    }
-
                     formatedAns = formatedAns +
                     `¶ ${questions[i]} ${ans[i] ? ans[i] : ''}\n`
 
@@ -65,19 +60,16 @@ const Checklist = ({type, check, cookies, setCookies}) => {
             }
         }
         setFormatAns(formatedAns);
-    }, [ans,questions])
+        setCookies('ans', cookieAnswer[0], {maxAge: 60*60*24})
+    }, [ans,questions, cookieAnswer])
 
     function handleAns(value) {
-        console.log(type)
         setAns(prevValue => ({
             ...prevValue,
             [value.target.name]: value.target.value
         }))
-        
-        setCookies(`ans`, 
-        {type: {
-            check: ans
-        }},{path: '/', maxAge: 60*60})
+
+        cookieAnswer[0][type][check] = ans
     }   
 
     const copied = () => {
@@ -93,7 +85,7 @@ const Checklist = ({type, check, cookies, setCookies}) => {
                 questions.map((e) => 
                     <div key={`div${questions.indexOf(e)}`} 
                         className={styles.divQuestion}>
-                        
+
                         <label htmlFor={`idInp${questions.indexOf(e)}`} 
                             key={`p${questions.indexOf(e)}`} 
                             className={styles.p}>
@@ -115,7 +107,7 @@ const Checklist = ({type, check, cookies, setCookies}) => {
                 questions.map((e) => 
                     <div key={`div${questions.indexOf(e)}`} 
                         className={styles.divQuestionSche}>
-                        
+    
                         <label htmlFor={`idInp${questions.indexOf(e)}`} 
                             key={`p${questions.indexOf(e)}`} 
                             className={styles.p}>
@@ -137,7 +129,9 @@ const Checklist = ({type, check, cookies, setCookies}) => {
             }
             <div className={styles.divButton}>
                 <span className={styles.span}> {msg} </span>
-                <button className={styles.button} onClick={() => console.log(cookies.ans)} > Debug </button>
+                <button className={styles.button} 
+                        onClick={() => console.log(cookies.ans)} 
+                        > Debug </button>
                 <button className={styles.button} onClick={resetForm} > Reset Form </button>
                 <CopyToClipboard onCopy={copied} text={formatAns}>
                     <button className={styles.button}> Copy </button>
