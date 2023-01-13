@@ -18,6 +18,13 @@ const Checklist = ({type, check, cookies, setCookies}) => {
         }
     }, [])
 
+    function resetForm(){
+        for(const i in questions){
+            document.getElementById(`idInp${i}`).value = ''
+        }
+        setCookies('ans', '', {path: '/', maxAge: 60*60})
+    }
+
 
     useEffect(() => {
         setQuestions(checklists[type].checks[check].questions);
@@ -116,7 +123,8 @@ const Checklist = ({type, check, cookies, setCookies}) => {
             }
             <div className={styles.divButton}>
                 <span className={styles.span}> {msg} </span>
-                <button onClick={() => console.log(cookies.ans)} > Testes </button>
+                <button className={styles.button} onClick={() => console.log(cookies.ans)} > Debug </button>
+                <button className={styles.button} onClick={resetForm} > Reset Form </button>
                 <CopyToClipboard onCopy={copied} text={formatAns}>
                     <button className={styles.button}> Copy </button>
                 </CopyToClipboard>
