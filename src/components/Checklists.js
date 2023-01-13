@@ -1,4 +1,102 @@
 const checklists = {
+    'out_point': {
+        name: 'Ponto Fora',
+        checks: {
+            out_point: {
+                name: ['Ponto fora', 'out_point'],
+                questions: [
+                    'Qual o ponto ou bloco fora?',
+                    'Há quanto tempo o ponto está fora?',
+                    'Quem é o responsável pelo local e quais seus contatos?',
+                    'Após entrado em contato com o responsável, foi certificado que há energia no local?',
+                    'Quais horários disponíveis para recebimento de técnico?',
+                    'Outros clientes relataram o mesmo problema ? Quais?',
+                    'Quais blocos foram afetados e possuem falta de conexão? (em caso de prédio)',
+                ]
+            }
+        }
+    },
+
+    'retention': {
+        name: 'Retenção',
+        checks: {
+            retention: {
+                name: ['Retenção', 'retention'],
+                questions: [
+                    'Responsável pelo Atendimento:',
+                    'Nome de Contato que reportou solicitação? ',
+                    'Os telefones de contato foram atualizados? Qual número?',
+                    'Qual melhor horário para que seja feito contato com o cliente?',
+                    'Descreva detalhadamente a solicitação/problemas informados pelo cliente.',
+                    'Foi realizado algum procedimento para evitar o cancelamento ?',
+                    'Alguma observação adicional sobre o atendimento realizado?',
+                ]
+            }
+        }
+    },
+
+    'corp_emp': {
+        name: 'Corporativo e Empresarial',
+        checks: {
+            corporative: {
+                name: ['Corporativo', 'corporative'],
+                questions: [
+                    'Nome do responsável pelo contato:',
+                    'Número de contato DRA:',
+                    'Suporte Interno:',
+                    'Local está com energia?',
+                    'Que tipo de equipamento  a Persis entrega o Link? (ONU ou Switch)',
+                    `EM CASO DE ONU:
+                    Cliente possui somente uma ONU e roteador no local? Se não, como está realizada a distribuição de equipamentos?`,
+                    'ONU está com LOS Vermelha?',
+                    `EM CASO DE SWITCH:
+                    O equipamento está ligado?`,
+                    'As portas de UPlink e acesso estão acesas?',
+                    'Nome do contato no local?',
+                    'Telefone do contato no local?',
+                    'Caso necessário visita ao local, qual o horário permitido de acesso?',
+                    'Qual seria o protocolo interno?',
+                    'Descreva o que ocorre com o cliente:',
+                ]
+            },
+            business: {
+                name: ['Empresarial', 'business'],
+                questions: [
+                    'Nome do responsável pelo contato:',
+                    'Número de contato DRA:',
+                    'Suporte Interno:',
+                    'Local está com energia?',
+                    'ONU está com LOS Vermelha?',
+                    'Cliente possui somente uma ONU e roteador no local? Se não, como está realizada a distribuição de equipamentos?',
+                    'Foi realizado teste com cabo direto da ONU?',
+                    'Nome do contato no local?',
+                    'Telefone do contato no local?',
+                    'Caso necessário visita ao local, qual o horário permitido de acesso?',
+                    'Descreva o que ocorre com o cliente:',
+                    'Em caso de reclamação de lentidão ou perda de pacotes solicitar os teste de Ping e Winmtr para os seguintes destinos:',
+                ]
+            },
+            algar: {
+                name: ['Algar Telecom', 'algar'],
+                questions: [
+                    'Nome do responsável pelo contato:',
+                    'Número de contato DRA:',
+                    'Suporte Interno:',
+                    'Local está com energia?',
+                    'ONU possui algum alerta no Smart OLT?',
+                    'Qual o número do plano no integrator?',
+                    'Qual o designador do circuito?',
+                    'Qual o designador do circuito pela ALGAR?',
+                    'Qual o protocolo interno da ALGAR?',
+                    'Qual o nome do responsável no local atendido?',
+                    'Qual o telefone do responsável no local atendido?',
+                    'Se necessário envio de técnico, quais os horários para envio?',
+                    'Qual o problema descrito pelo cliente?',
+                ]
+            }
+        }
+    },
+
     'attendance': {
         name : 'Atendimento',
         checks: {
