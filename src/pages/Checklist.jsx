@@ -3,12 +3,20 @@ import { useState, useEffect } from 'react'
 import checklists from '../components/Checklists'
 import CopyToClipboard from 'react-copy-to-clipboard'
 
-const Checklist = ({type, check}) => {
+const Checklist = ({type, check, cookies, setCookies}) => {
 
     const [questions, setQuestions] = useState(checklists[type].checks[check].questions);
-    const [ans, setAns] = useState({});
+    // const [ans, setAns] = useState({});
     const [formatAns, setFormatAns] = useState();
     const [msg, setMsg] = useState('')
+
+    useEffect(()=>{
+        cookies.ans ? '':
+        setCookies('ans', '', {path: '/', maxAge: 60*60})
+        for(const i in questions){
+            cookies.ans[i] ? document.getElementById(`idInp${i}`).value = cookies.ans[i] : ''
+        }
+    }, [])
 
 
     useEffect(() => {
@@ -22,33 +30,33 @@ const Checklist = ({type, check}) => {
                 case 'schedulling':
                     if (questions[i].includes('CAIXA')) {
                         formatedAns = formatedAns +
-                        `¶ ${questions[i]} ${ans[i] ? ans[i] : ''}`
+                        `¶ ${questions[i]} ${cookies.ans[i] ? cookies.ans[i] : ''}`
                         continue;
                     }
 
                     if (questions[i].includes('PORTA')){
                         formatedAns = formatedAns +
-                        ` ${questions[i]} ${ans[i] ? ans[i] : ''}\n`
+                        ` ${questions[i]} ${cookies.ans[i] ? cookies.ans[i] : ''}\n`
                         continue    
                     }
                     formatedAns = formatedAns +
-                    `¶ ${questions[i]} \n${ans[i] ? ans[i] : ''}`
+                    `¶ ${questions[i]} \n${cookies.ans[i] ? cookies.ans[i] : ''}`
                 break;   
 
                 default: 
                     formatedAns = formatedAns +
-                    `${questions[i]} \n${ans[i] ? ans[i] : ''} \n\n`
+                    `${questions[i]} \n${cookies.ans[i] ? cookies.ans[i] : ''} \n\n`
                 break;
             }
         }
         setFormatAns(formatedAns);
-    }, [ans, questions])
+    }, [cookies.ans,questions])
 
     const handleAns = (value) => {
-        setAns(prevValue => ({
-            ...prevValue,
+        setCookies(`ans`, {
+            ...cookies.ans,
             [value.target.name]: value.target.value
-        }))
+        },{path: '/', maxAge: 60*60})
     }   
 
     const copied = () => {
@@ -79,7 +87,7 @@ const Checklist = ({type, check}) => {
                             className={styles.inputText}
                             autoComplete="off"
                             onChange={handleAns}
-                             />
+                            />
                     
                     </div>
                 ) : 
@@ -108,7 +116,7 @@ const Checklist = ({type, check}) => {
             }
             <div className={styles.divButton}>
                 <span className={styles.span}> {msg} </span>
-                {/* <button onClick={() => console.log(formatAns)} > Testes </button> */}
+                <button onClick={() => console.log(cookies.ans)} > Testes </button>
                 <CopyToClipboard onCopy={copied} text={formatAns}>
                     <button className={styles.button}> Copy </button>
                 </CopyToClipboard>

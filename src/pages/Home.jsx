@@ -17,6 +17,7 @@ const Home = ({cookies, setCookies}) => {
         {value: 'out_point', label: 'Out Point'},
         {value: 'schedulling', label: 'Schedulling'},
     ]);
+    
 
     function setInfos(e) {
         setCookies('check', '', {path: '/', maxAge: 60*10})
@@ -36,8 +37,8 @@ const Home = ({cookies, setCookies}) => {
 
             <div className={styles.divContainerChecklist}>
                 {
-                    cookies.check !== '' ?
-                        <Checklist type={cookies.type} check={cookies.check} />
+                    cookies.check ?
+                        <Checklist type={cookies.type} check={cookies.check} cookies={cookies} setCookies={setCookies} />
                     : ''
                 }
             </div>
@@ -55,7 +56,7 @@ const Home = ({cookies, setCookies}) => {
 
             <div className={styles.divContainerChoose}>
                 {
-                    cookies.type !== '' ?
+                    cookies.type ?
                         <ChooseChecklist setCheck={setCheck} type={cookies.type} />
                     : ''
                 }
