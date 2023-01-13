@@ -10,47 +10,45 @@ const Checklist = ({type, check}) => {
     const [formatAns, setFormatAns] = useState();
     const [msg, setMsg] = useState('')
 
-    useEffect(() => {
-        let formatedAns = ''
-        for(const i in questions) {
-            switch(type) {
-                case 'schedulling':
-                    
-                break;
-            }
-            
-            if (type !== 'schedulling'){
-                formatedAns = formatedAns +
-                `${questions[i]} \n${ans[i] ? ans[i] : ''} \n\n`
-            }else {
-                if (questions[i].includes('CAIXA')) {
-                    formatedAns = formatedAns +
-                    `¶ ${questions[i]} ${ans[i] ? ans[i] : ''}`
-                    continue;
-                }
-                if (questions[i].includes('PORTA')){
-                    formatedAns = formatedAns +
-                    ` ${questions[i]} ${ans[i] ? ans[i] : ''}\n`
-                    continue    
-                }
-                formatedAns = formatedAns +
-                `¶ ${questions[i]} ${ans[i] ? ans[i] : ''}\n`
-            }
-        }
-        setFormatAns(formatedAns);
-    }, [ans])
 
     useEffect(() => {
         setQuestions(checklists[type].checks[check].questions);
     }, [check])
 
+    useEffect(() => {
+        let formatedAns = ''
+        for(const i in questions) {
+            switch(type) {
+                case 'schedulling':
+                    if (questions[i].includes('CAIXA')) {
+                        formatedAns = formatedAns +
+                        `¶ ${questions[i]} ${ans[i] ? ans[i] : ''}`
+                        continue;
+                    }
+
+                    if (questions[i].includes('PORTA')){
+                        formatedAns = formatedAns +
+                        ` ${questions[i]} ${ans[i] ? ans[i] : ''}\n`
+                        continue    
+                    }
+                    formatedAns = formatedAns +
+                    `¶ ${questions[i]} \n${ans[i] ? ans[i] : ''}`
+                break;   
+
+                default: 
+                    formatedAns = formatedAns +
+                    `${questions[i]} \n${ans[i] ? ans[i] : ''} \n\n`
+                break;
+            }
+        }
+        setFormatAns(formatedAns);
+    }, [ans, questions])
 
     const handleAns = (value) => {
         setAns(prevValue => ({
             ...prevValue,
             [value.target.name]: value.target.value
         }))
-        
     }   
 
     const copied = () => {
@@ -110,6 +108,7 @@ const Checklist = ({type, check}) => {
             }
             <div className={styles.divButton}>
                 <span className={styles.span}> {msg} </span>
+                {/* <button onClick={() => console.log(formatAns)} > Testes </button> */}
                 <CopyToClipboard onCopy={copied} text={formatAns}>
                     <button className={styles.button}> Copy </button>
                 </CopyToClipboard>

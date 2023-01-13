@@ -27,7 +27,7 @@ const ChooseChecklist = ({type, setCheck}) => {
                 <h2> {checklists[type].name} </h2>
                 <div className={styles.divContainerButtons}>
                     {arrayChecklist.map((index) =>
-                        <button className={styles.button} key={index[0]+'1'} onClick={() => setCheck(index[1])}> 
+                        <button className={styles.button} key={index[0]+type} onClick={() => setCheck(index[1])}> 
                             {index[0].toUpperCase()} 
                         </button> 
                     )}

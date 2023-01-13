@@ -1,11 +1,10 @@
-import { Link, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import Select from 'react-select'
 import styles from "./Home.module.css"
 import Checklist from "./Checklist"
 import ChooseChecklist from './ChooseChecklist'
 
-const Home = () => {
+const Home = ({cookies, setCookies}) => {
     const [typeOfChecklists, setTypeOfChecklists] = useState([
         {value: 'attendance', label: 'Attendance'},
         {value: 'maintenance', label: 'Maintenance'},
@@ -19,12 +18,13 @@ const Home = () => {
         {value: 'schedulling', label: 'Schedulling'},
     ]);
 
-    const [type, setType] = useState('')
-    const [check, setCheck] = useState('')
-
     function setInfos(e) {
-        setCheck('');
-        setType(e.value)
+        setCookies('check', '', {path: '/', maxAge: 60*10})
+        setCookies('type', e.value, {path: '/', maxAge: 60*10})
+    }
+
+    function setCheck(valor) {
+        setCookies('check', valor, {path: '/', maxAge: 60*10})
     }
 
     // ATENDIMENTO, MANUTENÇÃO, ATIVAÇÃO, 
@@ -36,8 +36,8 @@ const Home = () => {
 
             <div className={styles.divContainerChecklist}>
                 {
-                    check !== '' ?
-                        <Checklist type={type} check={check} />
+                    cookies.check !== '' ?
+                        <Checklist type={cookies.type} check={cookies.check} />
                     : ''
                 }
             </div>
@@ -55,8 +55,8 @@ const Home = () => {
 
             <div className={styles.divContainerChoose}>
                 {
-                    type !== '' ?
-                        <ChooseChecklist setCheck={setCheck} type={type} />
+                    cookies.type !== '' ?
+                        <ChooseChecklist setCheck={setCheck} type={cookies.type} />
                     : ''
                 }
             </div>
