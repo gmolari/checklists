@@ -10,15 +10,18 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
   const [ans, setAns] = useState({});
   const [formatAns, setFormatAns] = useState();
   const [msg, setMsg] = useState("");
-  const cookieAnswer = useState({ [type]: { [check]: {} } });
+  const [cookieAnswer, setCookieAnswer] = useState({});
 
   useEffect(() => {
-    cookies.ans ? "" : setCookies("ans", ans, { path: "/", maxAge: 60 * 60 });
+    setCookieAnswer(cookies.ans);
     for (const i in questions) {
-      cookies.ans[type][check][i]
-        ? (document.getElementById(`idInp${i}`).value =
-            cookies.ans[type][check][i])
-        : "";
+      if (cookies.ans) {
+        if (cookies.ans[type] && cookies.ans[type][check])
+          cookies.ans[type][check][i]
+            ? (document.getElementById(`idInp${i}`).value =
+                cookies.ans[type][check][i])
+            : (document.getElementById(`idInp${i}`).value = "");
+      } else setCookies("ans", ans, { path: "/", maxAge: 60 * 60 *24});
     }
   }, []);
 
@@ -26,7 +29,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
     for (const i in questions) {
       document.getElementById(`idInp${i}`).value = "";
     }
-    setCookies("ans", "", { path: "/", maxAge: 60 * 60 });
+    setCookies("ans", "", { path: "/", maxAge: 60 * 60 *24 });
   }
 
   useEffect(() => {
@@ -62,7 +65,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
       }
     }
     setFormatAns(formatedAns);
-    setCookies("ans", cookieAnswer[0], { maxAge: 60 * 60 * 24 });
+    setCookies("ans", cookieAnswer, { maxAge: 60 * 60 * 24 });
   }, [ans, questions, cookieAnswer]);
 
   function handleAns(value) {
@@ -71,7 +74,12 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
       [value.target.name]: value.target.value,
     }));
 
-    cookieAnswer[0][type][check] = ans;
+    setCookieAnswer((prevValue) => ({
+      ...prevValue,
+      [type]: {
+        [check]: ans,
+      },
+    }));
   }
 
   const copied = () => {
