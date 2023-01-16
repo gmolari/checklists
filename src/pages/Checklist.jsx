@@ -11,11 +11,29 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
   const [formatAns, setFormatAns] = useState();
   const [msg, setMsg] = useState("");
   const [cookieAnswer, setCookieAnswer] = useState({});
-  const [cookieCache, setCookieCache] = useState({});
 
   useEffect(() => {
     if (cookies.ans) {
       setCookieAnswer(cookies.ans);
+
+      if (cookies.ans[type]) {
+        if (cookies.ans[type][check]) {
+          //cookies.ans[type][check]
+          for (const value in questions) {
+            const inpAns = document.getElementById(`idInp${value}`);
+            let valueCookie = cookies.ans[type][check][value];
+            valueCookie ? (inpAns.value = valueCookie) : (inpAns.value = "");
+
+            //end's for
+          }
+
+          //third if
+        }
+
+        //second if
+      }
+
+      //first if
     }
   }, []);
 
@@ -23,6 +41,20 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
     setQuestions(checklists[type].checks[check].questions);
     if (cookies.ans) {
       setCookieAnswer(cookies.ans);
+    }
+    if (check !== "") {
+      for (const value in questions) {
+        const inpAns = document.getElementById(`idInp${value}`);
+        setAns((prevValue) => ({
+          ...prevValue,
+          [check]: {
+            ...prevValue[check],
+            [inpAns.name]: inpAns.value,
+          },
+        }));
+
+        //end's for
+      }
     }
   }, [check]);
 
@@ -57,9 +89,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
 
     setCookieAnswer((prevValue) => ({
       ...prevValue,
-      [type]: {
-        [check]: ans,
-      },
+      [type]: ans,
     }));
 
     setFormatAns(formatedAns);
@@ -72,7 +102,10 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
   function handleAns(value) {
     setAns((prevValue) => ({
       ...prevValue,
-      [value.target.name]: value.target.value,
+      [check]: {
+        ...prevValue[check],
+        [value.target.name]: value.target.value,
+      },
     }));
   }
 
@@ -144,12 +177,12 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
           ))}
       <div className={styles.divButton}>
         <span className={styles.span}> {msg} </span>
-        <button
+        {/* <button
           className={styles.button}
-          onClick={() => console.log(cookieAnswer)}
+          onClick={() => console.log("Cookies Ans: ", cookies.ans)}
         >
           Debug
-        </button>
+        </button> */}
         <button className={styles.button} onClick={resetForm}>
           Reset Form
         </button>
