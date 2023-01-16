@@ -11,18 +11,19 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
   const [formatAns, setFormatAns] = useState();
   const [msg, setMsg] = useState("");
   const [cookieAnswer, setCookieAnswer] = useState({});
+  const [cookieCache, setCookieCache] = useState({});
 
-    useEffect(() => {
-      if (cookies.ans) {
-        setCookieAnswer(cookies.ans)
-
-        
-      }
-
-    }, [])
+  useEffect(() => {
+    if (cookies.ans) {
+      setCookieAnswer(cookies.ans);
+    }
+  }, []);
 
   useEffect(() => {
     setQuestions(checklists[type].checks[check].questions);
+    if (cookies.ans) {
+      setCookieAnswer(cookies.ans);
+    }
   }, [check]);
 
   useEffect(() => {
@@ -53,15 +54,6 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
           break;
       }
     }
-    setFormatAns(formatedAns);
-    setCookies("ans", cookieAnswer, { maxAge: 60 * 60 * 24 });
-  }, [ans, questions, cookieAnswer]);
-
-  function handleAns(value) {
-    setAns((prevValue) => ({
-      ...prevValue,
-      [value.target.name]: value.target.value,
-    }));
 
     setCookieAnswer((prevValue) => ({
       ...prevValue,
@@ -69,15 +61,26 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
         [check]: ans,
       },
     }));
+
+    setFormatAns(formatedAns);
+  }, [ans, questions]);
+
+  useEffect(() => {
     setCookies("ans", cookieAnswer, { maxAge: 60 * 60 * 24 });
-    console.log(cookieAnswer)
+  }, [cookieAnswer]);
+
+  function handleAns(value) {
+    setAns((prevValue) => ({
+      ...prevValue,
+      [value.target.name]: value.target.value,
+    }));
   }
 
   function resetForm() {
     for (const i in questions) {
       document.getElementById(`idInp${i}`).value = "";
     }
-    setCookies("ans", "", { path: "/", maxAge: 60 * 60 *24 });
+    setCookies("ans", "", { path: "/", maxAge: 60 * 60 * 24 });
   }
 
   const copied = () => {
@@ -143,7 +146,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
         <span className={styles.span}> {msg} </span>
         <button
           className={styles.button}
-          onClick={() => console.log(cookies.ans)}
+          onClick={() => console.log(cookieAnswer)}
         >
           Debug
         </button>
