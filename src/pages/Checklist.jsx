@@ -33,6 +33,17 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
     setQuestions(checklists[type].checks[check].questions);
     if (cookies.ans) {
       setCookieAnswer(cookies.ans);
+
+      if (cookies.ans[type]) {
+        if (cookies.ans[type][check]) {
+          //cookies.ans[type][check]
+          for (const value in questions) {
+            const inpAns = document.getElementById(`idInp${value}`);
+            let valueCookie = cookies.ans[type][check][value];
+            valueCookie ? (inpAns.value = valueCookie) : (inpAns.value = "");
+          }
+        }
+      }
     }
     if (check !== "") {
       for (const value in questions) {
@@ -44,7 +55,6 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
             [inpAns.name]: inpAns.value,
           },
         }));
-
         //end's for
       }
     }
