@@ -4,13 +4,13 @@ import checklists from "../components/Checklists";
 import CopyToClipboard from "react-copy-to-clipboard";
 
 const Checklist = ({ type, check, cookies, setCookies }) => {
+  const [cookieAnswer, setCookieAnswer] = useState({});
   const [questions, setQuestions] = useState(
     checklists[type].checks[check].questions
   );
   const [ans, setAns] = useState({});
   const [formatAns, setFormatAns] = useState();
   const [msg, setMsg] = useState("");
-  const [cookieAnswer, setCookieAnswer] = useState({});
 
   useEffect(() => {
     if (cookies.ans) {
@@ -23,17 +23,9 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
             const inpAns = document.getElementById(`idInp${value}`);
             let valueCookie = cookies.ans[type][check][value];
             valueCookie ? (inpAns.value = valueCookie) : (inpAns.value = "");
-
-            //end's for
           }
-
-          //third if
         }
-
-        //second if
       }
-
-      //first if
     }
   }, []);
 
@@ -65,24 +57,30 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
         case "schedulling":
           if (questions[i].includes("CAIXA")) {
             formatedAns =
-              formatedAns + `¶ ${questions[i]} ${ans[i] ? ans[i] : ""}`;
+              formatedAns +
+              `¶ ${questions[i]} ${ans[check][i] ? ans[check][i] : ""}`;
             continue;
           }
 
           if (questions[i].includes("PORTA")) {
             formatedAns =
-              formatedAns + ` ${questions[i]} ${ans[i] ? ans[i] : ""}\n`;
+              formatedAns +
+              ` ${questions[i]} ${ans[check][i] ? ans[check][i] : ""}\n`;
             continue;
           }
 
           formatedAns =
-            formatedAns + `¶ ${questions[i]} ${ans[i] ? ans[i] : ""}\n`;
+            formatedAns +
+            `¶ ${questions[i]} ${ans[check][i] ? ans[check][i] : ""}\n`;
 
           break;
 
         default:
-          formatedAns =
-            formatedAns + `${questions[i]} \n${ans[i] ? ans[i] : ""} \n\n`;
+          ans[check]
+            ? (formatedAns =
+                formatedAns +
+                `${questions[i]} \n${ans[check][i] ? ans[check][i] : ""} \n\n`)
+            : "";
           break;
       }
     }
@@ -177,12 +175,12 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
           ))}
       <div className={styles.divButton}>
         <span className={styles.span}> {msg} </span>
-        {/* <button
+        <button
           className={styles.button}
-          onClick={() => console.log("Cookies Ans: ", cookies.ans)}
+          onClick={() => console.log("cookieAnswer: ", cookieAnswer)}
         >
           Debug
-        </button> */}
+        </button>
         <button className={styles.button} onClick={resetForm}>
           Reset Form
         </button>
