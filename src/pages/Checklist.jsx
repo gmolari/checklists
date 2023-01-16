@@ -13,7 +13,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
   const [cookieAnswer, setCookieAnswer] = useState({});
 
   useEffect(() => {
-    setCookieAnswer(cookies.ans);
+    cookies.ans ? setCookieAnswer(cookies.ans) : '';
     for (const i in questions) {
       if (cookies.ans) {
         if (cookies.ans[type] && cookies.ans[type][check])
@@ -34,6 +34,15 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
 
   useEffect(() => {
     setQuestions(checklists[type].checks[check].questions);
+    for (const i in questions) {
+      if (cookies.ans) {
+        if (cookies.ans[type] && cookies.ans[type][check])
+          cookies.ans[type][check][i]
+            ? (document.getElementById(`idInp${i}`).value =
+                cookies.ans[type][check][i])
+            : (document.getElementById(`idInp${i}`).value = "");
+      } else setCookies("ans", ans, { path: "/", maxAge: 60 * 60 *24});
+    }
   }, [check]);
 
   useEffect(() => {
@@ -80,6 +89,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
         [check]: ans,
       },
     }));
+    setCookies("ans", cookieAnswer, { maxAge: 60 * 60 * 24 });
   }
 
   const copied = () => {
@@ -147,12 +157,10 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
           className={styles.button}
           onClick={() => console.log(cookies.ans)}
         >
-          {" "}
-          Debug{" "}
+          Debug
         </button>
         <button className={styles.button} onClick={resetForm}>
-          {" "}
-          Reset Form{" "}
+          Reset Form
         </button>
         <CopyToClipboard onCopy={copied} text={formatAns}>
           <button className={styles.button}> Copy </button>

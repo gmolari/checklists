@@ -5,6 +5,14 @@ import Checklist from "./Checklist"
 import ChooseChecklist from './ChooseChecklist'
 
 const Home = ({cookies, setCookies}) => {
+    const [type, setType] = useState('');
+    const [check, setCheck] = useState('');
+
+    useEffect(()=>{
+        cookies.type ? setType(cookies.type) : '';
+        cookies.check ? setCheck(cookies.check) : '';
+    }, [])
+
     const [typeOfChecklists, setTypeOfChecklists] = useState([
         {value: 'attendance', label: 'Attendance'},
         {value: 'maintenance', label: 'Maintenance'},
@@ -18,12 +26,15 @@ const Home = ({cookies, setCookies}) => {
     
 
     function setInfos(e) {
-        setCookies('check', '', {path: '/', maxAge: 60*10})
-        setCookies('type', e.value, {path: '/', maxAge: 60*10})
+        setCheck('')
+        setCookies('check', check, {path: '/', maxAge: 60*10})
+        setType(e.value)
+        setCookies('type', type, {path: '/', maxAge: 60*10})
     }
 
-    function setCheck(valor) {
-        setCookies('check', valor, {path: '/', maxAge: 60*10})
+    function setCookieCheck(valor) {
+        setCheck(valor)
+        setCookies('check', check, {path: '/', maxAge: 60*10})
     }
 
     // ATENDIMENTO, MANUTENÇÃO, ATIVAÇÃO, 
@@ -35,8 +46,8 @@ const Home = ({cookies, setCookies}) => {
 
             <div className={styles.divContainerChecklist}>
                 {
-                    cookies.check ?
-                        <Checklist type={cookies.type} check={cookies.check} cookies={cookies} setCookies={setCookies} />
+                    check !== '' ?
+                        <Checklist type={type} check={check} cookies={cookies} setCookies={setCookies} />
                     : ''
                 }
             </div>
@@ -54,8 +65,8 @@ const Home = ({cookies, setCookies}) => {
 
             <div className={styles.divContainerChoose}>
                 {
-                    cookies.type ?
-                        <ChooseChecklist setCheck={setCheck} type={cookies.type} />
+                    type !== '' ?
+                        <ChooseChecklist setCheck={setCookieCheck} type={type} />
                     : ''
                 }
             </div>
