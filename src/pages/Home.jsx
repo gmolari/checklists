@@ -27,14 +27,14 @@ const Home = ({cookies, setCookies}) => {
 
     function setInfos(e) {
         setCheck('')
-        setCookies('check', check, {path: '/', maxAge: 60*10})
+        setCookies('check', check, {path: '/'})
         setType(e.value)
-        setCookies('type', type, {path: '/', maxAge: 60*10})
+        setCookies('type', e.value, {path: '/'})
     }
 
     function setCookieCheck(valor) {
         setCheck(valor)
-        setCookies('check', check, {path: '/', maxAge: 60*10})
+        setCookies('check', valor, {path: '/'})
     }
 
     // ATENDIMENTO, MANUTENÇÃO, ATIVAÇÃO, 

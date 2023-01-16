@@ -12,37 +12,17 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
   const [msg, setMsg] = useState("");
   const [cookieAnswer, setCookieAnswer] = useState({});
 
-  useEffect(() => {
-    cookies.ans ? setCookieAnswer(cookies.ans) : '';
-    for (const i in questions) {
+    useEffect(() => {
       if (cookies.ans) {
-        if (cookies.ans[type] && cookies.ans[type][check])
-          cookies.ans[type][check][i]
-            ? (document.getElementById(`idInp${i}`).value =
-                cookies.ans[type][check][i])
-            : (document.getElementById(`idInp${i}`).value = "");
-      } else setCookies("ans", ans, { path: "/", maxAge: 60 * 60 *24});
-    }
-  }, []);
+        setCookieAnswer(cookies.ans)
 
-  function resetForm() {
-    for (const i in questions) {
-      document.getElementById(`idInp${i}`).value = "";
-    }
-    setCookies("ans", "", { path: "/", maxAge: 60 * 60 *24 });
-  }
+        
+      }
+
+    }, [])
 
   useEffect(() => {
     setQuestions(checklists[type].checks[check].questions);
-    for (const i in questions) {
-      if (cookies.ans) {
-        if (cookies.ans[type] && cookies.ans[type][check])
-          cookies.ans[type][check][i]
-            ? (document.getElementById(`idInp${i}`).value =
-                cookies.ans[type][check][i])
-            : (document.getElementById(`idInp${i}`).value = "");
-      } else setCookies("ans", ans, { path: "/", maxAge: 60 * 60 *24});
-    }
   }, [check]);
 
   useEffect(() => {
@@ -90,6 +70,14 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
       },
     }));
     setCookies("ans", cookieAnswer, { maxAge: 60 * 60 * 24 });
+    console.log(cookieAnswer)
+  }
+
+  function resetForm() {
+    for (const i in questions) {
+      document.getElementById(`idInp${i}`).value = "";
+    }
+    setCookies("ans", "", { path: "/", maxAge: 60 * 60 *24 });
   }
 
   const copied = () => {
