@@ -111,7 +111,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
     for (const i in questions) {
       document.getElementById(`idInp${i}`).value = "";
     }
-    setCookies("ans", "", { path: "/", maxAge: 60 * 60 * 24 });
+    cookies.ans ? delete cookies.ans[type][check] : "";
   }
 
   const copied = () => {
@@ -175,12 +175,12 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
           ))}
       <div className={styles.divButton}>
         <span className={styles.span}> {msg} </span>
-        <button
+        {/* <button
           className={styles.button}
-          onClick={() => console.log("cookieAnswer: ", cookieAnswer)}
+          onClick={() => console.log("Cookies Ans: ", cookies.ans)}
         >
           Debug
-        </button>
+        </button> */}
         <button className={styles.button} onClick={resetForm}>
           Reset Form
         </button>
