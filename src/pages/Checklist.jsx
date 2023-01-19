@@ -33,17 +33,6 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
     setQuestions(checklists[type].checks[check].questions);
     if (cookies.ans) {
       setCookieAnswer(cookies.ans);
-
-      if (cookies.ans[type]) {
-        if (cookies.ans[type][check]) {
-          //cookies.ans[type][check]
-          for (const value in questions) {
-            const inpAns = document.getElementById(`idInp${value}`);
-            let valueCookie = cookies.ans[type][check][value];
-            valueCookie ? (inpAns.value = valueCookie) : (inpAns.value = "");
-          }
-        }
-      }
     }
     if (check !== "") {
       for (const value in questions) {
@@ -104,8 +93,24 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
   }, [ans, questions]);
 
   useEffect(() => {
-    setCookies("ans", cookieAnswer, { maxAge: 60 * 60 * 24 });
+    setCookies("ans", cookieAnswer);
   }, [cookieAnswer]);
+
+  function anss() {
+    if (cookies.ans) {
+      if (cookies.ans[type]) {
+        if (cookies.ans[type][check]) {
+          //cookies.ans[type][check]
+          for (const value in questions) {
+            const inpAns = document.getElementById(`idInp${value}`);
+            let valueCookie = cookies.ans[type][check][value];
+            console.log(cookies.ans[type]);
+            valueCookie !== "" ? "" : (inpAns.value = valueCookie);
+          }
+        }
+      }
+    }
+  }
 
   function handleAns(value) {
     setAns((prevValue) => ({
@@ -185,12 +190,9 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
           ))}
       <div className={styles.divButton}>
         <span className={styles.span}> {msg} </span>
-        {/* <button
-          className={styles.button}
-          onClick={() => console.log("Cookies Ans: ", cookies.ans)}
-        >
+        <button className={styles.button} onClick={anss}>
           Debug
-        </button> */}
+        </button>
         <button className={styles.button} onClick={resetForm}>
           Reset Form
         </button>
