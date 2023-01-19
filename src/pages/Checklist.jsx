@@ -93,7 +93,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
   }, [ans, questions]);
 
   useEffect(() => {
-    setCookies("ans", cookieAnswer, { maxAge: 60 * 60 * 24 });
+    setCookies("ans", cookieAnswer);
   }, [cookieAnswer]);
 
   function anss() {
