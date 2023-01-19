@@ -190,7 +190,7 @@ const checklists = {
     name: "Manutenção Persis",
     checks: {
       huawei_zte: {
-        name: ["Manutenção Huawei", "huawei_zte"],
+        name: ["Manutenção Huawei/ZTE", "huawei_zte"],
         questions: [
           "Técnico Externo:",
           "Técnico Interno:",
