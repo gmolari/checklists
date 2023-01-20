@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import checklists from '../components/Checklists'
 
-const ChooseChecklist = ({type, setCheck}) => {
+const ChooseChecklist = ({type, setCheck, cookies}) => {
     const [arrayChecklist, setArrayChecklist] = useState([]);
 
     for (const check in checklists[type].checks){
@@ -31,6 +31,9 @@ const ChooseChecklist = ({type, setCheck}) => {
                             {index[0].toUpperCase()} 
                         </button> 
                     )}
+                    <button className={styles.button} onClick={() => console.log(cookies.ans)}>
+                        Debug
+                    </button>
                 </div>
             </section>
 

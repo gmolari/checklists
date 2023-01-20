@@ -65,7 +65,7 @@ const Home = ({ cookies, setCookies }) => {
 
       <div className={styles.divContainerChoose}>
         {type !== "" ? (
-          <ChooseChecklist setCheck={setCookieCheck} type={type} />
+          <ChooseChecklist setCheck={setCookieCheck} cookies={cookies} type={type} />
         ) : (
           ""
         )}

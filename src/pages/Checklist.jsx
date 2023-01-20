@@ -12,44 +12,22 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
   const [formatAns, setFormatAns] = useState();
   const [msg, setMsg] = useState("");
   const [checkChangeCheck, setCheckChange] = useState();
+  let teste = 0;
 
   useEffect(() => {
     if (cookies.ans) {
       setCookieAnswer(cookies.ans);
-      if (cookies.ans[type]){
-        if (cookies.ans[type][check]){
-          for (const value in questions) {
-            const inpAns = document.getElementById(`idInp${value}`);
-            let valueCookie = cookies.ans[type][check][value];
-            valueCookie ? (inpAns.value = valueCookie) : (inpAns.value = "");
-          }
-        
-        //end thirty if
-        }
-      
-      //end second if
-      }
     }
+    
   }, []);
 
   useEffect(() => {
     setQuestions(checklists[type].checks[check].questions);
-    if (cookies.ans) setCookieAnswer(cookies.ans);
-
-    if (check !== "") {
-      for (const value in questions) {
-        const inpAns = document.getElementById(`idInp${value}`);
-        setAns((prevValue) => ({
-          ...prevValue,
-          [check]: {
-            ...prevValue[check],
-            [inpAns.name]: inpAns.value,
-          },
-        }));
-        //end's for
-      }
+    if (cookies.ans) {
+      setCookieAnswer(cookies.ans);
     }
-    setCheckChange(Math.random() * 999999)
+      setCheckChange(Math.random() * 999999)
+      teste = 0;
   }, [check]);
 
   useEffect(() => {
@@ -68,21 +46,25 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
             },
           }));
         }
-    }else {
-      for (const value in questions) {
-        const inpAns = document.getElementById(`idInp${value}`);
-        inpAns.value = ""
-        setAns((prevValue) => ({
-          ...prevValue,
-          [check]: {
-            ...prevValue[check],
-            [value]: inpAns.value,
-          },
-        }));
-      }
-    }
+    }//else {
+    //   console.log('Cookie ANS: FALSE',cookies.ans);
+    //   for (const value in questions) { 
+    //     const inpAns = document.getElementById(`idInp${value}`);
+    //     inpAns.value = ""
+    //     setAns((prevValue) => ({
+    //       ...prevValue,
+    //       [check]: {
+    //         ...prevValue[check],
+    //         [value]: inpAns.value,
+    //       },
+    //     }));
+    //   }
+    //   console.log('Answer setado, validação FALSE: ', ans)
+    // }
   }, [checkChangeCheck])
 
+
+  // WHEN ANS AND QUESTIONS CHANGE
   useEffect(() => {
     let formatedAns = "";
     for (const i in questions) {
