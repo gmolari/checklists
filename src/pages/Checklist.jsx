@@ -18,8 +18,8 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
     if (cookies.ans) {
       setCookieAnswer(cookies.ans);
     }
-    
-  }, []);
+    console.log('teste')
+  },[]);
 
   useEffect(() => {
     setQuestions(checklists[type].checks[check].questions);
