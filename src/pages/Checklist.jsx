@@ -11,29 +11,31 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
   const [ans, setAns] = useState({});
   const [formatAns, setFormatAns] = useState();
   const [msg, setMsg] = useState("");
+  const [checkChangeCheck, setCheckChange] = useState();
 
   useEffect(() => {
     if (cookies.ans) {
       setCookieAnswer(cookies.ans);
-
-      if (cookies.ans[type]) {
-        if (cookies.ans[type][check]) {
-          //cookies.ans[type][check]
+      if (cookies.ans[type]){
+        if (cookies.ans[type][check]){
           for (const value in questions) {
             const inpAns = document.getElementById(`idInp${value}`);
             let valueCookie = cookies.ans[type][check][value];
             valueCookie ? (inpAns.value = valueCookie) : (inpAns.value = "");
           }
+        
+        //end thirty if
         }
+      
+      //end second if
       }
     }
   }, []);
 
   useEffect(() => {
     setQuestions(checklists[type].checks[check].questions);
-    if (cookies.ans) {
-      setCookieAnswer(cookies.ans);
-    }
+    if (cookies.ans) setCookieAnswer(cookies.ans);
+
     if (check !== "") {
       for (const value in questions) {
         const inpAns = document.getElementById(`idInp${value}`);
@@ -47,7 +49,39 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
         //end's for
       }
     }
+    setCheckChange(Math.random() * 999999)
   }, [check]);
+
+  useEffect(() => {
+    if (cookies.ans && cookies.ans[type] && cookies.ans[type][check]){
+        for (const value in questions) {
+          const inpAns = document.getElementById(`idInp${value}`);
+          let valueCookie = cookies.ans[type][check][value];
+          if (valueCookie) {
+            inpAns.value = valueCookie
+          }else inpAns.value = ""
+          setAns((prevValue) => ({
+            ...prevValue,
+            [check]: {
+              ...prevValue[check],
+              [value]: inpAns.value,
+            },
+          }));
+        }
+    }else {
+      for (const value in questions) {
+        const inpAns = document.getElementById(`idInp${value}`);
+        inpAns.value = ""
+        setAns((prevValue) => ({
+          ...prevValue,
+          [check]: {
+            ...prevValue[check],
+            [value]: inpAns.value,
+          },
+        }));
+      }
+    }
+  }, [checkChangeCheck])
 
   useEffect(() => {
     let formatedAns = "";
@@ -55,22 +89,25 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
       switch (type) {
         case "schedulling":
           if (questions[i].includes("CAIXA")) {
+            ans[check] ?
             formatedAns =
               formatedAns +
-              `¶ ${questions[i]} ${ans[check][i] ? ans[check][i] : ""}`;
+              `¶ ${questions[i]} ${ans[check][i] ? ans[check][i] : ""}` : '';
             continue;
           }
 
           if (questions[i].includes("PORTA")) {
+            ans[check] ?
             formatedAns =
               formatedAns +
-              ` ${questions[i]} ${ans[check][i] ? ans[check][i] : ""}\n`;
+              ` ${questions[i]} ${ans[check][i] ? ans[check][i] : ""}\n` : '';
             continue;
           }
 
           formatedAns =
+          ans[check] ?
             formatedAns +
-            `¶ ${questions[i]} ${ans[check][i] ? ans[check][i] : ""}\n`;
+            `¶ ${questions[i]} ${ans[check][i] ? ans[check][i] : ""}\n` : '';
 
           break;
 
@@ -96,22 +133,6 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
     setCookies("ans", cookieAnswer);
   }, [cookieAnswer]);
 
-  function anss() {
-    if (cookies.ans) {
-      if (cookies.ans[type]) {
-        if (cookies.ans[type][check]) {
-          //cookies.ans[type][check]
-          for (const value in questions) {
-            const inpAns = document.getElementById(`idInp${value}`);
-            let valueCookie = cookies.ans[type][check][value];
-            console.log(cookies.ans[type]);
-            valueCookie !== "" ? "" : (inpAns.value = valueCookie);
-          }
-        }
-      }
-    }
-  }
-
   function handleAns(value) {
     setAns((prevValue) => ({
       ...prevValue,
@@ -124,9 +145,17 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
 
   function resetForm() {
     for (const i in questions) {
-      document.getElementById(`idInp${i}`).value = "";
+      const inpAns = document.getElementById(`idInp${i}`)
+      inpAns.value = '';
+      setAns((prevValue) => ({
+        ...prevValue,
+        [check]: {
+          ...prevValue[check],
+          [i]: inpAns.value,
+        },
+      }));
+      cookies.ans ? delete cookies.ans[type][check][i] : "";
     }
-    cookies.ans ? delete cookies.ans[type][check] : "";
   }
 
   const copied = () => {
@@ -190,7 +219,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
           ))}
       <div className={styles.divButton}>
         <span className={styles.span}> {msg} </span>
-        <button className={styles.button} onClick={anss}>
+        <button className={styles.button} onClick={() => console.log(cookies.ans)}>
           Debug
         </button>
         <button className={styles.button} onClick={resetForm}>
