@@ -9,7 +9,7 @@ const Home = ({ cookies, setCookies }) => {
   const [check, setCheck] = useState("");
 
   useEffect(() => {
-    setCookies('ans', '');
+    setCookies("ans", "", { maxAge: 9999999 });
     cookies.type ? setType(cookies.type) : "";
     cookies.check ? setCheck(cookies.check) : "";
   }, []);
@@ -66,7 +66,11 @@ const Home = ({ cookies, setCookies }) => {
 
       <div className={styles.divContainerChoose}>
         {type !== "" ? (
-          <ChooseChecklist setCheck={setCookieCheck} cookies={cookies} type={type} />
+          <ChooseChecklist
+            setCheck={setCookieCheck}
+            cookies={cookies}
+            type={type}
+          />
         ) : (
           ""
         )}
