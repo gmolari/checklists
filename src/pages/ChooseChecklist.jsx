@@ -36,12 +36,12 @@ const ChooseChecklist = ({ type, setCheck, cookies }) => {
               {index[0].toUpperCase()}
             </button>
           ))}
-          <button
+          {/* <button
             className={styles.button}
             onClick={() => console.log(cookies.ans)}
           >
             Debug
-          </button>
+          </button> */}
         </div>
       </section>
     </div>

@@ -200,7 +200,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
           ))}
       <div className={styles.divButton}>
         <span className={styles.span}> {msg} </span>
-        <button onClick={() => console.log("CookieAnswer: ", cookieAnswer)}>
+        {/* <button onClick={() => console.log("CookieAnswer: ", cookieAnswer)}>
           CookieAnswer
         </button>
         <button onClick={() => console.log("Answer: ", ans)}>Ans</button>
@@ -209,7 +209,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
         </button>
         <button className={styles.button} onClick={resetForm}>
           Reset Form
-        </button>
+        </button> */}
         <CopyToClipboard onCopy={copied} text={formatAns}>
           <button className={styles.button}> Copy </button>
         </CopyToClipboard>
