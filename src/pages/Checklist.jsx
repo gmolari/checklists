@@ -206,10 +206,10 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
         <button onClick={() => console.log("Answer: ", ans)}>Ans</button>
         <button onClick={() => console.log("Cookies.ans: ", cookies.ans)}>
           cookies.ans
-        </button>
+        </button>*/}
         <button className={styles.button} onClick={resetForm}>
           Reset Form
-        </button> */}
+        </button>
         <CopyToClipboard onCopy={copied} text={formatAns}>
           <button className={styles.button}> Copy </button>
         </CopyToClipboard>
