@@ -4,7 +4,7 @@ import checklists from "../components/Checklists";
 import CopyToClipboard from "react-copy-to-clipboard";
 
 const Checklist = ({ type, check, cookies, setCookies }) => {
-  const [cookieAnswer, setCookieAnswer] = useState({});
+  const [cookieAnswer, setCookieAnswer] = useState(cookies.ans);
   const [questions, setQuestions] = useState(
     checklists[type].checks[check].questions
   );
@@ -18,7 +18,6 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
     if (cookies.ans) {
       setCookieAnswer(cookies.ans);
     }
-    console.log('teste')
   },[]);
 
   useEffect(() => {
@@ -31,6 +30,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
   }, [check]);
 
   useEffect(() => {
+    console.log(cookies.ans)
     if (cookies.ans && cookies.ans[type] && cookies.ans[type][check]){
         for (const value in questions) {
           const inpAns = document.getElementById(`idInp${value}`);
@@ -46,21 +46,20 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
             },
           }));
         }
-    }//else {
-    //   console.log('Cookie ANS: FALSE',cookies.ans);
-    //   for (const value in questions) { 
-    //     const inpAns = document.getElementById(`idInp${value}`);
-    //     inpAns.value = ""
-    //     setAns((prevValue) => ({
-    //       ...prevValue,
-    //       [check]: {
-    //         ...prevValue[check],
-    //         [value]: inpAns.value,
-    //       },
-    //     }));
-    //   }
-    //   console.log('Answer setado, validação FALSE: ', ans)
-    // }
+    }else {
+      for (const value in questions) { 
+        const inpAns = document.getElementById(`idInp${value}`);
+        inpAns.value = ""
+        setAns((prevValue) => ({
+          ...prevValue,
+          [check]: {
+            ...prevValue[check],
+            [value]: inpAns.value,
+          },
+        }));
+      } 
+    }
+    
   }, [checkChangeCheck])
 
 
