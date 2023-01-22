@@ -111,7 +111,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
   }, [ans, questions]);
 
   useEffect(() => {
-    setCookies("ans", cookieAnswer, { maxAge: 9999999 });
+    setCookies("ans", cookieAnswer);
   }, [cookieAnswer]);
 
   function handleAns(value) {
@@ -206,7 +206,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
         <button onClick={() => console.log("Answer: ", ans)}>Ans</button>
         <button onClick={() => console.log("Cookies.ans: ", cookies.ans)}>
           cookies.ans
-        </button>*/}
+        </button> */}
         <button className={styles.button} onClick={resetForm}>
           Reset Form
         </button>

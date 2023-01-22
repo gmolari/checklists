@@ -9,7 +9,9 @@ const Home = ({ cookies, setCookies }) => {
   const [check, setCheck] = useState("");
 
   useEffect(() => {
-    setCookies("ans", "", { maxAge: 9999999 });
+    if (!cookies.ans) {
+      setCookies("ans", "");
+    }
     cookies.type ? setType(cookies.type) : "";
     cookies.check ? setCheck(cookies.check) : "";
   }, []);
