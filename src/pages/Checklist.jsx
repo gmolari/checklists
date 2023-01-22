@@ -12,44 +12,32 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
   const [formatAns, setFormatAns] = useState();
   const [msg, setMsg] = useState("");
   const [checkChangeCheck, setCheckChange] = useState();
-  let teste = 0;
 
   useEffect(() => {
     if (cookies.ans) {
       setCookieAnswer(cookies.ans);
+      if (cookies.ans[type]) {
+        setAns(cookies.ans[type]);
+      }
     }
-  },[]);
+  }, []);
 
   useEffect(() => {
     setQuestions(checklists[type].checks[check].questions);
     if (cookies.ans) {
       setCookieAnswer(cookies.ans);
     }
-      setCheckChange(Math.random() * 999999)
-      teste = 0;
+    setCheckChange(Math.random() * 999999);
   }, [check]);
 
   useEffect(() => {
-    console.log(cookies.ans)
-    if (cookies.ans && cookies.ans[type] && cookies.ans[type][check]){
-        for (const value in questions) {
-          const inpAns = document.getElementById(`idInp${value}`);
-          let valueCookie = cookies.ans[type][check][value];
-          if (valueCookie) {
-            inpAns.value = valueCookie
-          }else inpAns.value = ""
-          setAns((prevValue) => ({
-            ...prevValue,
-            [check]: {
-              ...prevValue[check],
-              [value]: inpAns.value,
-            },
-          }));
-        }
-    }else {
-      for (const value in questions) { 
+    if (cookies.ans && cookies.ans[type] && cookies.ans[type][check]) {
+      for (const value in questions) {
         const inpAns = document.getElementById(`idInp${value}`);
-        inpAns.value = ""
+        let valueCookie = cookies.ans[type][check][value];
+        if (valueCookie) {
+          inpAns.value = valueCookie;
+        } else inpAns.value = "";
         setAns((prevValue) => ({
           ...prevValue,
           [check]: {
@@ -57,11 +45,21 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
             [value]: inpAns.value,
           },
         }));
-      } 
+      }
+    } else {
+      for (const value in questions) {
+        const inpAns = document.getElementById(`idInp${value}`);
+        inpAns.value = "";
+        setAns((prevValue) => ({
+          ...prevValue,
+          [check]: {
+            ...prevValue[check],
+            [value]: inpAns.value,
+          },
+        }));
+      }
     }
-    
-  }, [checkChangeCheck])
-
+  }, [checkChangeCheck]);
 
   // WHEN ANS AND QUESTIONS CHANGE
   useEffect(() => {
@@ -70,25 +68,27 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
       switch (type) {
         case "schedulling":
           if (questions[i].includes("CAIXA")) {
-            ans[check] ?
-            formatedAns =
-              formatedAns +
-              `¶ ${questions[i]} ${ans[check][i] ? ans[check][i] : ""}` : '';
+            ans[check]
+              ? (formatedAns =
+                  formatedAns +
+                  `¶ ${questions[i]} ${ans[check][i] ? ans[check][i] : ""}`)
+              : "";
             continue;
           }
 
           if (questions[i].includes("PORTA")) {
-            ans[check] ?
-            formatedAns =
-              formatedAns +
-              ` ${questions[i]} ${ans[check][i] ? ans[check][i] : ""}\n` : '';
+            ans[check]
+              ? (formatedAns =
+                  formatedAns +
+                  ` ${questions[i]} ${ans[check][i] ? ans[check][i] : ""}\n`)
+              : "";
             continue;
           }
 
-          formatedAns =
-          ans[check] ?
-            formatedAns +
-            `¶ ${questions[i]} ${ans[check][i] ? ans[check][i] : ""}\n` : '';
+          formatedAns = ans[check]
+            ? formatedAns +
+              `¶ ${questions[i]} ${ans[check][i] ? ans[check][i] : ""}\n`
+            : "";
 
           break;
 
@@ -126,8 +126,8 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
 
   function resetForm() {
     for (const i in questions) {
-      const inpAns = document.getElementById(`idInp${i}`)
-      inpAns.value = '';
+      const inpAns = document.getElementById(`idInp${i}`);
+      inpAns.value = "";
       setAns((prevValue) => ({
         ...prevValue,
         [check]: {
@@ -200,8 +200,12 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
           ))}
       <div className={styles.divButton}>
         <span className={styles.span}> {msg} </span>
-        <button className={styles.button} onClick={() => console.log(cookies.ans)}>
-          Debug
+        <button onClick={() => console.log("CookieAnswer: ", cookieAnswer)}>
+          CookieAnswer
+        </button>
+        <button onClick={() => console.log("Answer: ", ans)}>Ans</button>
+        <button onClick={() => console.log("Cookies.ans: ", cookies.ans)}>
+          cookies.ans
         </button>
         <button className={styles.button} onClick={resetForm}>
           Reset Form
