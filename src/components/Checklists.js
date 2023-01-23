@@ -335,6 +335,7 @@ const checklists = {
       fiber: {
         name: ["Fibra", "fiber"],
         questions: [
+          "NOME: ",
           "CONTATO:",
           "PERÍODO:",
           "REFERÊNCIA:",
@@ -350,6 +351,7 @@ const checklists = {
       building: {
         name: ["Prédio/condomínio", "building"],
         questions: [
+          "NOME: ",
           "CONTATO:",
           "PERÍODO:",
           "REFERÊNCIA:",
@@ -361,6 +363,7 @@ const checklists = {
       los: {
         name: ["LOS VERMELHO", "los"],
         questions: [
+          "NOME: ",
           "CONTATO:",
           "PERÍODO:",
           "REFERÊNCIA:",
