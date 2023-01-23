@@ -1,54 +1,51 @@
 .divContainerMain {
-    display: grid;
-    max-width: 100%;
-    overflow-x: hidden;
-    grid-template-areas: 
+  display: grid;
+  max-width: 100%;
+  overflow-x: hidden;
+  grid-template-areas:
     "checklist home"
-    "checklist choose"
-    ;
-    grid-template-columns: 50% 50%;
-    height: 100%;
-    gap: 1em;
+    "checklist choose";
+  grid-template-columns: 50% 50%;
+  height: 100%;
+  gap: 1em;
 }
 
 .divContainerChecklist {
-    grid-area: checklist;
-    overflow-y: scroll;
+  grid-area: checklist;
+  overflow-y: scroll;
 }
 
 .divContainerSelect {
-    grid-area: home;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  grid-area: home;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-
 .divContainerChoose {
-    grid-area: choose;
+  grid-area: choose;
 }
 
 .section {
-    display: flex;
-    flex-direction: column;
-    gap: .5em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
 }
 
 .button {
-    border: none;
-    width: 50%;
-    background: #259cfd;
-    color: white;
-    padding: 1em;
-    align-self: center;
-    border-radius: 100px;
-    text-decoration: none;
-    text-align: center;
+  border: none;
+  width: 50%;
+  background: #259cfd;
+  color: white;
+  padding: 1em;
+  align-self: center;
+  border-radius: 100px;
+  text-decoration: none;
+  text-align: center;
 }
 
 .button:hover {
-    cursor: pointer;
-    background: #259cfd7e;
+  cursor: pointer;
+  background: #259cfd7e;
 }
-
