@@ -68,36 +68,41 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
       switch (type) {
         case "schedulling":
           if (questions[i].includes("CAIXA")) {
-            ans[check]
-              ? (formatedAns =
-                  formatedAns +
-                  `¶ ${questions[i]} ${ans[check][i] ? ans[check][i] : ""}`)
-              : "";
-            continue;
+            if (ans[check]) {
+              if (ans[check][i]) {
+                formatedAns =
+                  formatedAns + `¶ ${questions[i]} ${ans[check][i]}`;
+                continue;
+              }
+            }
           }
 
           if (questions[i].includes("PORTA")) {
-            ans[check]
-              ? (formatedAns =
-                  formatedAns +
-                  ` ${questions[i]} ${ans[check][i] ? ans[check][i] : ""}\n`)
-              : "";
-            continue;
+            if (ans[check]) {
+              if (ans[check][i]) {
+                formatedAns =
+                  formatedAns + ` ${questions[i]} ${ans[check][i]}\n`;
+                continue;
+              }
+            }
           }
 
-          formatedAns = ans[check]
-            ? formatedAns +
-              `¶ ${questions[i]} ${ans[check][i] ? ans[check][i] : ""}\n`
-            : "";
+          if (ans[check]) {
+            if (ans[check][i]) {
+              formatedAns =
+                formatedAns + `¶ ${questions[i]} ${ans[check][i]}\n`;
+            }
+          }
 
           break;
 
         default:
-          ans[check]
-            ? (formatedAns =
-                formatedAns +
-                `${questions[i]} \n${ans[check][i] ? ans[check][i] : ""} \n\n`)
-            : "";
+          if (ans[check]) {
+            if (ans[check][i]) {
+              formatedAns =
+                formatedAns + `>> ${questions[i]}\nR: ${ans[check][i]}\n\n`;
+            }
+          }
           break;
       }
     }
@@ -187,7 +192,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
                 ¶ {e}
               </label>
 
-              <input
+              <textarea
                 name={`${questions.indexOf(e)}`}
                 id={`idInp${questions.indexOf(e)}`}
                 key={`inp${questions.indexOf(e)}`}
