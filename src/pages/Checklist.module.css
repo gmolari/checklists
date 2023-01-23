@@ -47,8 +47,8 @@
   flex-direction: column;
   position: fixed;
   bottom: 0;
+  right: 0;
   text-align: end;
-  width: 100%;
 }
 
 .button {
@@ -61,6 +61,7 @@
   border-radius: 100px;
   font-weight: bold;
   text-transform: uppercase;
+  outline: none;
 }
 
 .button:hover {
