@@ -65,45 +65,43 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
   useEffect(() => {
     let formatedAns = "";
     for (const i in questions) {
-      switch (type) {
-        case "schedulling":
-          if (questions[i].includes("CAIXA")) {
-            if (ans[check]) {
-              if (ans[check][i]) {
+      if (ans[check]) {
+        if (ans[check][i]) {
+          switch (type) {
+            case "schedulling":
+              if (questions[i].includes("CAIXA")) {
                 formatedAns =
                   formatedAns + `¶ ${questions[i]} ${ans[check][i]}`;
                 continue;
               }
-            }
-          }
 
-          if (questions[i].includes("PORTA")) {
-            if (ans[check]) {
-              if (ans[check][i]) {
+              if (questions[i].includes("PORTA")) {
                 formatedAns =
                   formatedAns + ` ${questions[i]} ${ans[check][i]}\n`;
                 continue;
               }
-            }
-          }
 
-          if (ans[check]) {
-            if (ans[check][i]) {
               formatedAns =
                 formatedAns + `¶ ${questions[i]} ${ans[check][i]}\n`;
-            }
-          }
 
-          break;
+              break;
 
-        default:
-          if (ans[check]) {
-            if (ans[check][i]) {
+            case "maintenance" || "activation" || "migration":
+              if (i <= 3) {
+                formatedAns =
+                  formatedAns + `${questions[i]} ${ans[check][i]}\n`;
+                continue;
+              }
               formatedAns =
-                formatedAns + `>> ${questions[i]}\nR: ${ans[check][i]}\n\n`;
-            }
+                formatedAns + `»» ${questions[i]}\nR: ${ans[check][i]}\n\n`;
+              break;
+
+            default:
+              formatedAns =
+                formatedAns + `»» ${questions[i]}\nR: ${ans[check][i]}\n\n`;
+              break;
           }
-          break;
+        }
       }
     }
 
@@ -192,7 +190,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
                 ¶ {e}
               </label>
 
-              <textarea
+              <input
                 name={`${questions.indexOf(e)}`}
                 id={`idInp${questions.indexOf(e)}`}
                 key={`inp${questions.indexOf(e)}`}
