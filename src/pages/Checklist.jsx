@@ -84,6 +84,17 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
               formatedAns =
                 formatedAns + `¶ ${questions[i]} ${ans[check][i]}\n`;
 
+              if (check == "los") {
+                if (i >= 7) {
+                  formatedAns =
+                    formatedAns +
+                    "¶ DBM: Inativa\n" +
+                    "¶ MOTIVO: LOS VERMELHO\n" +
+                    "¶ OBS: Verificar infra, ONU, conectores...";
+                  continue;
+                }
+              }
+
               break;
 
             case "activation":
