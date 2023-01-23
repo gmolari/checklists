@@ -86,19 +86,26 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
 
               break;
 
-            case "maintenance" || "activation" || "migration":
+            case "activation":
+            case "maintenance":
+            case "migration":
               if (i <= 3) {
+                if (i == 3) {
+                  formatedAns =
+                    formatedAns + `${questions[i]} ${ans[check][i]}\n\n\n`;
+                  continue;
+                }
                 formatedAns =
                   formatedAns + `${questions[i]} ${ans[check][i]}\n`;
                 continue;
               }
               formatedAns =
-                formatedAns + `»» ${questions[i]}\nR: ${ans[check][i]}\n\n`;
+                formatedAns + `${questions[i]}\n${ans[check][i]}\n\n`;
               break;
 
             default:
               formatedAns =
-                formatedAns + `»» ${questions[i]}\nR: ${ans[check][i]}\n\n`;
+                formatedAns + `${questions[i]}\n${ans[check][i]}\n\n`;
               break;
           }
         }
@@ -205,11 +212,9 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
         <span className={styles.span}> {msg} </span>
         {/* <button onClick={() => console.log("CookieAnswer: ", cookieAnswer)}>
           CookieAnswer
-        </button>
-        <button onClick={() => console.log("Answer: ", ans)}>Ans</button>
-        <button onClick={() => console.log("Cookies.ans: ", cookies.ans)}>
-          cookies.ans
-        </button> */}
+        </button>*/}
+        {/* <button onClick={() => console.log("Answer: ", ans)}>Ans</button> */}
+        <button onClick={() => console.log("Type:", type)}>Type</button>
         <button className={styles.button} onClick={resetForm}>
           Reset Form
         </button>
