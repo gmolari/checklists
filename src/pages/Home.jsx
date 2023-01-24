@@ -15,6 +15,7 @@ const Home = ({ cookies, setCookies }) => {
 
   const [typeOfChecklists, setTypeOfChecklists] = useState([
     { value: "attendance", label: "Atendimento" },
+    { value: "smartzap", label: "Smartzap" },
     { value: "maintenance", label: "Manutenção" },
     { value: "activation", label: "Ativação" },
     { value: "migration", label: "Migração NSLINK" },

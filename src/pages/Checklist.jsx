@@ -42,14 +42,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
     } else {
       for (const value in questions) {
         const inpAns = document.getElementById(`idInp${value}`);
-        inpAns.value = "";
-        setAns((prevValue) => ({
-          ...prevValue,
-          [check]: {
-            ...prevValue[check],
-            [value]: inpAns.value,
-          },
-        }));
+        inpAns.value = null;
       }
     }
   }, [checkChangeCheck]);
@@ -207,15 +200,6 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
           ))}
       <div className={styles.divButton}>
         <span className={styles.span}> {msg} </span>
-        {/* <button onClick={() => console.log("CookieAnswer: ", cookieAnswer)}>
-          CookieAnswer
-        </button>*/}
-        {/* <button onClick={() => console.log("Answer: ", ans)}>Ans</button> */}
-        {/* <button
-          onClick={() => console.log("Cookies[", type, "]:", cookies[type])}
-        >
-          Cookies[{type}]
-        </button> */}
         <button className={styles.button} onClick={resetForm}>
           Reset Form
         </button>

@@ -30,18 +30,12 @@ const ChooseChecklist = ({ type, setCheck, cookies }) => {
           {arrayChecklist.map((index) => (
             <button
               className={styles.button}
-              key={index[0] + type}
+              key={index[1] + type}
               onClick={() => setCheck(index[1])}
             >
               {index[0].toUpperCase()}
             </button>
           ))}
-          {/* <button
-            className={styles.button}
-            onClick={() => console.log(cookies.ans)}
-          >
-            Debug
-          </button> */}
         </div>
       </section>
     </div>

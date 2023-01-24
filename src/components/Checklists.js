@@ -1,4 +1,79 @@
 const checklists = {
+  smartzap: {
+    name: "Smartzap",
+    checks: {
+      fibersz: {
+        name: ["Fibra", "fibersz"],
+        questions: [
+          'Responsável pela realização dos procedimentos (Cliente):',
+          'Telefone utilizado para contato (Número do WhatsApp):',
+          'Confirmado Endereço e telefone do cliente? Qual (is) número (s) foi (ram) confirmado (s)?',
+          'Cliente foi identificado no sistema?',
+          'Foi necessário entrar em contato com o cliente? Se sim, qual o telefone utilizado?',
+          'Horário de início do atendimento: ',
+          'Protocolo do atendimento no Painel Smartzap: ',
+          'Cliente utiliza Roteador? Adquirido na empresa Persis?',
+          'Qual o motivo do contato do cliente?',
+          'Qual o login e senha de acesso ao roteador?',
+          'Conexão com Roteador está OK?',
+          'Alterado ponto de ACESSO no integrator? Cliente com Referência?',
+          'Necessário teste com cabo direto? Conexão  OK?',
+          'Apresentado algum Erro? Qual o número do Erro?',
+          'Qual o procedimento realizado no atendimento? (Detalhado)',
+          'Qual o melhor período para um agendamento de O.S.?',
+          'Foi alterado o tipo do atendimento?',
+        ],
+      },
+      buildingsz: {
+        name: ["Prédio/Condomínio", "buildingsz"],
+        questions: [
+          'Responsável pela realização dos procedimentos (Cliente):',
+          'Telefone utilizado para contato (Número do WhatsApp):',
+          'Confirmado Endereço e telefone do cliente? Qual (is) número (s) foi (ram) confirmado (s)?',
+          'Cliente foi identificado no sistema?',
+          'Foi necessário entrar em contato com o cliente? Se sim, qual o telefone utilizado?',
+          'Horário de início do atendimento: ',
+          'Protocolo do atendimento no Painel Smartzap: ',
+          'Cliente utiliza Roteador? Adquirido na empresa Persis?',
+          'Qual o motivo do contato do cliente?',
+          'Qual o login e senha de acesso ao roteador?',
+          'Conexão com Roteador está OK?',
+          'Alterado ponto de ACESSO no integrator? Cliente com Referência?',
+          'Necessário teste com cabo direto? Conexão  OK?',
+          'Apresentado algum Erro? Qual o número do Erro?',
+          'Qual o procedimento realizado no atendimento? (Detalhado)',
+          'Qual o melhor período para um agendamento de O.S.?',
+          'Foi alterado o tipo do atendimento?',
+        ],
+      },
+      radiosz: {
+        name: ["Rádio", "radiosz"],
+        questions: [
+          'Responsável pela realização dos procedimentos (Cliente):',
+          'Telefone utilizado para contato (Número do WhatsApp):',
+          'Confirmado Endereço e telefone do cliente? Qual (is) número (s) foi (ram) confirmado (s)?',
+          'Cliente foi identificado no sistema?',
+          'Foi necessário entrar em contato com o cliente? Se sim, qual o telefone utilizado?',
+          'Horário de início do atendimento: ',
+          'Protocolo do atendimento no Painel Smartzap: ',
+          'Cliente utiliza Roteador? Adquirido na empresa Persis?',
+          'Qual o motivo do contato do cliente?',
+          'Qual o login e senha de acesso ao roteador?',
+          'Conexão com Roteador está OK?',
+          'Alterado ponto de ACESSO no integrator? Cliente com Referência?',
+          'Qual AP que cliente se conecta?',
+          'Rádio Intelbras? Teste Iperf realizado e anexado print no Atendimento?',
+          'Rádio padronizado?',
+          'Necessário teste com cabo direto? Conexão  OK?',
+          'Apresentado algum Erro? Qual o número do Erro?',
+          'Qual o procedimento realizado no atendimento? (Detalhado)',
+          'Qual o melhor período para um agendamento de O.S.?',
+          'Foi alterado o tipo do atendimento?',
+        ],
+      },
+    },
+  },
+  
   out_point: {
     name: "Ponto Fora",
     checks: {
@@ -262,8 +337,8 @@ const checklists = {
           "Foi alterado o tipo do atendimento?",
         ],
       },
-      building: {
-        name: ["Manutenção Pŕedio/Condomínio", "building"],
+      buildingm: {
+        name: ["Manutenção Pŕedio/Condomínio", "buildingm"],
         questions: [
           "Tecnico Externo:",
           "Tecnico Interno:",
@@ -293,8 +368,8 @@ const checklists = {
           "2-Foi alterado o tipo do atendimento?",
         ],
       },
-      radio: {
-        name: ["Manutenção Rádio", "radio"],
+      radiom: {
+        name: ["Manutenção Rádio", "radiom"],
         questions: [
           "Técnico Externo:",
           "Técnico Interno:",
@@ -332,8 +407,8 @@ const checklists = {
   schedulling: {
     name: "Agendamento",
     checks: {
-      fiber: {
-        name: ["Fibra", "fiber"],
+      fibersc: {
+        name: ["Fibra", "fibersc"],
         questions: [
           "NOME: ",
           "CONTATO:",
@@ -348,8 +423,8 @@ const checklists = {
           "OBS:",
         ],
       },
-      building: {
-        name: ["Prédio/condomínio", "building"],
+      buildingsc: {
+        name: ["Prédio/condomínio", "buildingsc"],
         questions: [
           "NOME: ",
           "CONTATO:",
@@ -378,8 +453,8 @@ const checklists = {
   activation: {
     name: "Ativação Persis",
     checks: {
-      fiber: {
-        name: ["Ativação Fibra", "fiber"],
+      fiberac: {
+        name: ["Ativação Fibra", "fiberac"],
         questions: [
           "Técnico Externo:",
           "Técnico Interno:",
@@ -413,8 +488,8 @@ const checklists = {
           "Técnico foi informado para tirar foto novamente em caso da troca de equipamento durante a ativação ?",
         ],
       },
-      huawei_zte: {
-        name: ["Ativação Huawei/ZTE", "huawei_zte"],
+      huawei_zteac: {
+        name: ["Ativação Huawei/ZTE", "huawei_zteac"],
         questions: [
           "Técnico Externo:",
           "Técnico Interno:",
@@ -449,8 +524,8 @@ const checklists = {
           "Técnico foi informado para tirar foto novamente em caso da troca de equipamento durante a ativação ?",
         ],
       },
-      building: {
-        name: ["Ativação Pŕedio/Condomínio", "building"],
+      buildingac: {
+        name: ["Ativação Pŕedio/Condomínio", "buildingac"],
         questions: [
           "Técnico Externo:",
           "Técnico Interno:",
