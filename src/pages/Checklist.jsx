@@ -211,11 +211,11 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
           CookieAnswer
         </button>*/}
         {/* <button onClick={() => console.log("Answer: ", ans)}>Ans</button> */}
-        <button
+        {/* <button
           onClick={() => console.log("Cookies[", type, "]:", cookies[type])}
         >
           Cookies[{type}]
-        </button>
+        </button> */}
         <button className={styles.button} onClick={resetForm}>
           Reset Form
         </button>
