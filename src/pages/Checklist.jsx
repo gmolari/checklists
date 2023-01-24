@@ -194,7 +194,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
                 ¶ {e}
               </label>
 
-              <input
+              <textarea
                 name={`${questions.indexOf(e)}`}
                 id={`idInp${questions.indexOf(e)}`}
                 key={`inp${questions.indexOf(e)}`}
