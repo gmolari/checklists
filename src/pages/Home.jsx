@@ -9,9 +9,6 @@ const Home = ({ cookies, setCookies }) => {
   const [check, setCheck] = useState("");
 
   useEffect(() => {
-    if (!cookies.ans) {
-      setCookies("ans", "");
-    }
     cookies.type ? setType(cookies.type) : "";
     cookies.check ? setCheck(cookies.check) : "";
   }, []);

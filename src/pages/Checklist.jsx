@@ -4,7 +4,6 @@ import checklists from "../components/Checklists";
 import CopyToClipboard from "react-copy-to-clipboard";
 
 const Checklist = ({ type, check, cookies, setCookies }) => {
-  const [cookieAnswer, setCookieAnswer] = useState(cookies.ans);
   const [questions, setQuestions] = useState(
     checklists[type].checks[check].questions
   );
@@ -14,27 +13,21 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
   const [checkChangeCheck, setCheckChange] = useState();
 
   useEffect(() => {
-    if (cookies.ans) {
-      setCookieAnswer(cookies.ans);
-      if (cookies.ans[type]) {
-        setAns(cookies.ans[type]);
-      }
-    }
+    if (cookies[type]) {
+      setAns(cookies[type]);
+    } else setCookies(type, "");
   }, []);
 
   useEffect(() => {
     setQuestions(checklists[type].checks[check].questions);
-    if (cookies.ans) {
-      setCookieAnswer(cookies.ans);
-    }
     setCheckChange(Math.random() * 999999);
   }, [check]);
 
   useEffect(() => {
-    if (cookies.ans && cookies.ans[type] && cookies.ans[type][check]) {
+    if (cookies[type] && cookies[type][check]) {
       for (const value in questions) {
         const inpAns = document.getElementById(`idInp${value}`);
-        let valueCookie = cookies.ans[type][check][value];
+        let valueCookie = cookies[type][check][value];
         if (valueCookie) {
           inpAns.value = valueCookie;
         } else inpAns.value = "";
@@ -123,17 +116,10 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
       }
     }
 
-    setCookieAnswer((prevValue) => ({
-      ...prevValue,
-      [type]: ans,
-    }));
+    setCookies(type, ans);
 
     setFormatAns(formatedAns);
   }, [ans, questions]);
-
-  useEffect(() => {
-    setCookies("ans", cookieAnswer);
-  }, [cookieAnswer]);
 
   function handleAns(value) {
     setAns((prevValue) => ({
@@ -156,7 +142,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
           [i]: inpAns.value,
         },
       }));
-      cookies.ans ? delete cookies.ans[type][check][i] : "";
+      cookies[type] ? delete cookies[type][check][i] : "";
     }
   }
 
@@ -225,7 +211,11 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
           CookieAnswer
         </button>*/}
         {/* <button onClick={() => console.log("Answer: ", ans)}>Ans</button> */}
-        {/* <button onClick={() => console.log("Type:", type)}>Type</button> */}
+        <button
+          onClick={() => console.log("Cookies[", type, "]:", cookies[type])}
+        >
+          Cookies[{type}]
+        </button>
         <button className={styles.button} onClick={resetForm}>
           Reset Form
         </button>
