@@ -134,6 +134,9 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
   }
 
   function resetForm() {
+    if (cookies[type]) {
+      cookies[type][check] ? delete cookies[type][check] : "";
+    }
     for (const i in questions) {
       const inpAns = document.getElementById(`idInp${i}`);
       inpAns.value = "";
@@ -141,10 +144,9 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
         ...prevValue,
         [check]: {
           ...prevValue[check],
-          [i]: inpAns.value,
+          [i]: null,
         },
       }));
-      cookies[type] ? delete cookies[type][check][i] : "";
     }
   }
 
