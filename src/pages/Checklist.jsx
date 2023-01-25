@@ -164,6 +164,8 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
     if (cookies[type]) {
       cookies[type][check] ? delete cookies[type][check] : "";
     }
+    const inpFocus = document.getElementById("idInpFocus");
+    inpFocus ? (inpFocus.value = null) : "";
     for (const i in questions) {
       const inpAns = document.getElementById(`idInp${i}`);
       inpAns.value = "";
