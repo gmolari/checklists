@@ -2,11 +2,13 @@ import styles from "./Checklist.module.css";
 import { useState, useEffect } from "react";
 import checklists from "../components/Checklists";
 import CopyToClipboard from "react-copy-to-clipboard";
+import { motion } from "framer-motion";
 
 const Checklist = ({ type, check, cookies, setCookies }) => {
   const [questions, setQuestions] = useState(
     checklists[type].checks[check].questions
   );
+  const [copy, setCopy] = useState(false);
   const [ans, setAns] = useState({});
   const [formatAns, setFormatAns] = useState();
   const [msg, setMsg] = useState("");
@@ -140,10 +142,10 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
   }
 
   const copied = () => {
-    setMsg("Copiado com sucesso!");
+    setCopy(true)
     setTimeout(() => {
-      setMsg("");
-    }, 5000);
+      setCopy(false);
+    }, 3000);
   };
 
   return (
@@ -199,12 +201,16 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
             </div>
           ))}
       <div className={styles.divButton}>
-        <span className={styles.span}> {msg} </span>
+          <motion.span
+          transition={{type: 'spring', damping: 25, stiffness: 500}}
+            animate={{top: copy ? 0 : -100}}
+            className={styles.span}> Copiado com Sucesso!
+          </motion.span>
         <button className={styles.button} onClick={resetForm}>
-          Reset Form
+          Resetar
         </button>
         <CopyToClipboard onCopy={copied} text={formatAns}>
-          <button className={styles.button}> Copy </button>
+          <button className={styles.button}> Copiar </button>
         </CopyToClipboard>
       </div>
     </div>

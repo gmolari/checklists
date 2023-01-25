@@ -37,10 +37,6 @@ const Home = ({ cookies, setCookies }) => {
     setCookies("check", valor, { path: "/" });
   }
 
-  // ATENDIMENTO, MANUTENÇÃO, ATIVAÇÃO,
-  // MIGRAÇÃO NS, CORPORATIVO/EMPRESARIAL,
-  // RETENÇÃO, SMARTZAP, PONTO FORA
-
   return (
     <div className={styles.divContainerMain}>
       <div className={styles.divContainerChecklist}>
@@ -57,9 +53,9 @@ const Home = ({ cookies, setCookies }) => {
       </div>
 
       <div className={styles.divContainerSelect}>
-        <h2> A page for your Checklists! </h2>
+        <h2> Página para os Checklists da Persis! </h2>
         <section className={styles.section}>
-          <h3> Choose the type of Checklist: </h3>
+          <h3> Escolha o tipo do checklist: </h3>
           <Select options={typeOfChecklists} onChange={setInfos} />
         </section>
       </div>
