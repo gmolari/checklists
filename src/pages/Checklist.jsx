@@ -202,7 +202,8 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
           ))}
       <div className={styles.divButton}>
           <motion.span
-          transition={{type: 'spring', damping: 25, stiffness: 500}}
+            initial={{top: -100}}
+            transition={{type: 'spring', damping: 25, stiffness: 500}}
             animate={{top: copy ? 0 : -100}}
             className={styles.span}> Copiado com Sucesso!
           </motion.span>
