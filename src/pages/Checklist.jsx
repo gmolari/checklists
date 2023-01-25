@@ -82,8 +82,11 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
 
               formatedAns =
                 formatedAns + `¶ ${questions[i]} ${ans[check][i]}\n`;
+            } else if (questions[i].includes("PORTA")) {
+              formatedAns = formatedAns + `\n`;
+              continue;
             }
-            ans[check].inpFocus && i >= questions.length - 1
+            ans[check].inpFocus && i >= questions.length - 1 && check !== "los"
               ? (formatedAns =
                   formatedAns +
                   `.·.·.·.·.·.·${ans[
@@ -92,12 +95,19 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
               : "";
           }
           if (check == "los") {
-            if (i >= 7) {
-              formatedAns =
-                formatedAns +
+            if (i >= questions.length - 1) {
+              formatedAns +=
                 "¶ DBM: Inativa\n" +
                 "¶ MOTIVO: LOS VERMELHO\n" +
                 "¶ OBS: Verificar infra, ONU, conectores...";
+
+              ans[check]
+                ? ans[check].inpFocus
+                  ? (formatedAns += `\n.·.·.·.·.·.·${ans[
+                      check
+                    ].inpFocus.toUpperCase()}·.·.·.·.·.·.`)
+                  : ""
+                : "";
               continue;
             }
           }
