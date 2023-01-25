@@ -11,7 +11,6 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
   const [copy, setCopy] = useState(false);
   const [ans, setAns] = useState({});
   const [formatAns, setFormatAns] = useState();
-  const [msg, setMsg] = useState("");
   const [checkChangeCheck, setCheckChange] = useState();
 
   useEffect(() => {
@@ -26,6 +25,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
   }, [check]);
 
   useEffect(() => {
+    const inpFocus = document.getElementById(`idInpFocus`);
     if (cookies[type] && cookies[type][check]) {
       for (const value in questions) {
         const inpAns = document.getElementById(`idInp${value}`);
@@ -41,11 +41,17 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
           },
         }));
       }
+      inpFocus
+        ? cookies[type][check].inpFocus
+          ? (inpFocus.value = cookies[type][check].inpFocus)
+          : ""
+        : "";
     } else {
       for (const value in questions) {
         const inpAns = document.getElementById(`idInp${value}`);
         inpAns.value = null;
       }
+      inpFocus.value = null;
     }
   }, [checkChangeCheck]);
 
@@ -56,6 +62,11 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
       switch (type) {
         case "schedulling":
           if (ans[check]) {
+            ans[check].inpFocus && i == 0
+              ? (formatedAns = `.·.·.·.·.·.·${ans[
+                  check
+                ].inpFocus.toUpperCase()}·.·.·.·.·.·.\n`)
+              : "";
             if (ans[check][i]) {
               if (questions[i].includes("PORTA")) {
                 formatedAns =
@@ -72,6 +83,13 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
               formatedAns =
                 formatedAns + `¶ ${questions[i]} ${ans[check][i]}\n`;
             }
+            ans[check].inpFocus && i >= questions.length - 1
+              ? (formatedAns =
+                  formatedAns +
+                  `.·.·.·.·.·.·${ans[
+                    check
+                  ].inpFocus.toUpperCase()}·.·.·.·.·.·.`)
+              : "";
           }
           if (check == "los") {
             if (i >= 7) {
@@ -83,7 +101,6 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
               continue;
             }
           }
-
           break;
 
         case "activation":
@@ -209,14 +226,36 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
               />
             </div>
           ))}
+      {type === "schedulling" ? (
+        <div className={styles.divQuestionSche}>
+          <label htmlFor={`idInpFocus`} className={styles.p}>
+            ¶ Destaque:
+          </label>
+          <textarea
+            name={`inpFocus`}
+            id={`idInpFocus`}
+            type="text"
+            className={styles.inputText}
+            rows="10"
+            autoComplete="off"
+            onChange={handleAns}
+            placeholder={`LIGAR ANTES, DEPOIS DAS, RETENÇÃO...\n\nFicará:\n\n\n·.·.·.·.·.·.·.·.LIGAR ANTES·.·.·.·.·.·.·.·.·`}
+          />
+        </div>
+      ) : (
+        ""
+      )}
       <div className={styles.divButton}>
+        <button className={styles.button} onClick={() => console.log(ans)}>
+          Teste
+        </button>
+
         <motion.span
           initial={{ top: -100 }}
           transition={{ type: "spring", damping: 25, stiffness: 500 }}
           animate={{ top: copy ? 0 : -100 }}
           className={styles.span}
         >
-          {" "}
           Copiado com Sucesso!
         </motion.span>
         <button className={styles.button} onClick={resetForm}>
