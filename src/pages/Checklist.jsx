@@ -256,10 +256,6 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
         ""
       )}
       <div className={styles.divButton}>
-        <button className={styles.button} onClick={() => console.log(ans)}>
-          Teste
-        </button>
-
         <motion.span
           initial={{ top: -100 }}
           transition={{ type: "spring", damping: 25, stiffness: 500 }}
