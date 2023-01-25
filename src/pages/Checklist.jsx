@@ -174,6 +174,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
         [check]: {
           ...prevValue[check],
           [i]: null,
+          inpFocus: null,
         },
       }));
     }
