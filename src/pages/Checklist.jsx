@@ -53,41 +53,44 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
   useEffect(() => {
     let formatedAns = "";
     for (const i in questions) {
-      if (ans[check]) {
-        if (ans[check][i]) {
-          switch (type) {
-            case "schedulling":
-              if (questions[i].includes("CAIXA")) {
-                formatedAns =
-                  formatedAns + `¶ ${questions[i]} ${ans[check][i]}`;
-                continue;
-              }
-
+      switch (type) {
+        case "schedulling":
+          if (ans[check]) {
+            if (ans[check][i]) {
               if (questions[i].includes("PORTA")) {
                 formatedAns =
                   formatedAns + ` ${questions[i]} ${ans[check][i]}\n`;
                 continue;
               }
 
-              formatedAns =
-                formatedAns + `¶ ${questions[i]} ${ans[check][i]}\n`;
-
-              if (check == "los") {
-                if (i >= 7) {
-                  formatedAns =
-                    formatedAns +
-                    "¶ DBM: Inativa\n" +
-                    "¶ MOTIVO: LOS VERMELHO\n" +
-                    "¶ OBS: Verificar infra, ONU, conectores...";
-                  continue;
-                }
+              if (questions[i].includes("CAIXA")) {
+                formatedAns =
+                  formatedAns + `¶ ${questions[i]} ${ans[check][i]}`;
+                continue;
               }
 
-              break;
+              formatedAns =
+                formatedAns + `¶ ${questions[i]} ${ans[check][i]}\n`;
+            }
+          }
+          if (check == "los") {
+            if (i >= 7) {
+              formatedAns =
+                formatedAns +
+                "¶ DBM: Inativa\n" +
+                "¶ MOTIVO: LOS VERMELHO\n" +
+                "¶ OBS: Verificar infra, ONU, conectores...";
+              continue;
+            }
+          }
 
-            case "activation":
-            case "maintenance":
-            case "migration":
+          break;
+
+        case "activation":
+        case "maintenance":
+        case "migration":
+          if (ans[check]) {
+            if (ans[check][i]) {
               if (i <= 3) {
                 if (i == 3) {
                   formatedAns =
@@ -100,14 +103,18 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
               }
               formatedAns =
                 formatedAns + `${questions[i]}\n${ans[check][i]}\n\n`;
-              break;
+            }
+          }
+          break;
 
-            default:
+        default:
+          if (ans[check]) {
+            if (ans[check][i]) {
               formatedAns =
                 formatedAns + `${questions[i]}\n${ans[check][i]}\n\n`;
-              break;
+            }
           }
-        }
+          break;
       }
     }
 
@@ -142,7 +149,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
   }
 
   const copied = () => {
-    setCopy(true)
+    setCopy(true);
     setTimeout(() => {
       setCopy(false);
     }, 3000);
@@ -201,12 +208,15 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
             </div>
           ))}
       <div className={styles.divButton}>
-          <motion.span
-            initial={{top: -100}}
-            transition={{type: 'spring', damping: 25, stiffness: 500}}
-            animate={{top: copy ? 0 : -100}}
-            className={styles.span}> Copiado com Sucesso!
-          </motion.span>
+        <motion.span
+          initial={{ top: -100 }}
+          transition={{ type: "spring", damping: 25, stiffness: 500 }}
+          animate={{ top: copy ? 0 : -100 }}
+          className={styles.span}
+        >
+          {" "}
+          Copiado com Sucesso!
+        </motion.span>
         <button className={styles.button} onClick={resetForm}>
           Resetar
         </button>
