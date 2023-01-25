@@ -51,7 +51,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
         const inpAns = document.getElementById(`idInp${value}`);
         inpAns.value = null;
       }
-      inpFocus.value = null;
+      inpFocus ? (inpFocus.value = null) : "";
     }
   }, [checkChangeCheck]);
 
