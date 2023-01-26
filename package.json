@@ -1,7 +1,7 @@
 {
   "name": "checklists-persis",
   "private": true,
-  "version": "1.2",
+  "version": "1.0.3",
   "type": "module",
   "scripts": {
     "dev": "vite",

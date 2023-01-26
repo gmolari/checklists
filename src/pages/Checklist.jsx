@@ -44,14 +44,13 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
       inpFocus
         ? cookies[type][check].inpFocus
           ? (inpFocus.value = cookies[type][check].inpFocus)
-          : ""
+          : inpFocus.value = null
         : "";
     } else {
       for (const value in questions) {
         const inpAns = document.getElementById(`idInp${value}`);
         inpAns.value = null;
       }
-      inpFocus ? (inpFocus.value = null) : "";
     }
   }, [checkChangeCheck]);
 
@@ -165,7 +164,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
       cookies[type][check] ? delete cookies[type][check] : "";
     }
     const inpFocus = document.getElementById("idInpFocus");
-    inpFocus ? (inpFocus.value = null) : "";
+    inpFocus ? (inpFocus.value = '') : "";
     for (const i in questions) {
       const inpAns = document.getElementById(`idInp${i}`);
       inpAns.value = "";
@@ -242,17 +241,16 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
       {type === "schedulling" ? (
         <div className={styles.divQuestionSche}>
           <label htmlFor={`idInpFocus`} className={styles.p}>
-            ¶ Destaque:
+            ¶ DESTAQUE:
           </label>
           <textarea
             name={`inpFocus`}
             id={`idInpFocus`}
             type="text"
             className={styles.inputText}
-            rows="10"
             autoComplete="off"
             onChange={handleAns}
-            placeholder={`LIGAR ANTES, DEPOIS DAS, RETENÇÃO...\n\nFicará:\n\n\n·.·.·.·.·.·.·.·.LIGAR ANTES·.·.·.·.·.·.·.·.·`}
+            placeholder={`LIGAR ANTES, DEPOIS DAS..., RETENÇÃO...`}
           />
         </div>
       ) : (
