@@ -109,7 +109,7 @@ const Home = ({ cookies, setCookies }) => {
             check={check}
             cookies={cookies}
             setCookies={setCookies}
-            atualTab
+            atualTab={atualTab}
           />
         ) : (
           ""

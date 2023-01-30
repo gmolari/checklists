@@ -9,7 +9,7 @@ const Checklist = ({ type, check, cookies, setCookies, atualTab }) => {
     checklists[type].checks[check].questions
   );
   const [copy, setCopy] = useState(false);
-  const [ans, setAns] = useState(cookies[type] ? cookies[type] : "");
+  const [ans, setAns] = useState(cookies[atualTab] ? cookies[atualTab] : "");
   const [formatAns, setFormatAns] = useState();
   const [checkChangeCheck, setCheckChange] = useState();
 
@@ -20,10 +20,10 @@ const Checklist = ({ type, check, cookies, setCookies, atualTab }) => {
 
   useEffect(() => {
     const inpFocus = document.getElementById(`idInpFocus`);
-    if (cookies[type] && cookies[type][check]) {
+    if (cookies[atualTab] && cookies[atualTab][check]) {
       for (const value in questions) {
         const inpAns = document.getElementById(`idInp${value}`);
-        let valueCookie = cookies[type][check][value];
+        let valueCookie = cookies[atualTab][check][value];
         if (valueCookie) {
           inpAns.value = valueCookie;
         } else inpAns.value = "";
@@ -36,8 +36,8 @@ const Checklist = ({ type, check, cookies, setCookies, atualTab }) => {
         }));
       }
       inpFocus
-        ? cookies[type][check].inpFocus
-          ? (inpFocus.value = cookies[type][check].inpFocus)
+        ? cookies[atualTab][check].inpFocus
+          ? (inpFocus.value = cookies[atualTab][check].inpFocus)
           : (inpFocus.value = null)
         : "";
     } else {
@@ -138,7 +138,7 @@ const Checklist = ({ type, check, cookies, setCookies, atualTab }) => {
       }
     }
 
-    setCookies(type, ans);
+    atualTab ? setCookies(atualTab, ans) : "";
 
     setFormatAns(formatedAns);
   }, [ans, questions]);
@@ -154,8 +154,8 @@ const Checklist = ({ type, check, cookies, setCookies, atualTab }) => {
   }
 
   function resetForm() {
-    if (cookies[type]) {
-      cookies[type][check] ? delete cookies[type][check] : "";
+    if (cookies[atualTab]) {
+      cookies[atualTab][check] ? delete cookies[atualTab][check] : "";
     }
     const inpFocus = document.getElementById("idInpFocus");
     inpFocus ? (inpFocus.value = "") : "";
