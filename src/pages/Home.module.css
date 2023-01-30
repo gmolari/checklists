@@ -3,11 +3,12 @@
   max-width: 100%;
   overflow-x: hidden;
   grid-template-areas:
+    "tabs tabs"
     "checklist home"
     "checklist choose";
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 65% 35%;
+  grid-template-rows: 5% 30% 65%;
   height: 100%;
-  gap: 1em;
 }
 
 .divContainerChecklist {
@@ -15,12 +16,39 @@
   overflow-y: scroll;
 }
 
+.divContainerTabs {
+  grid-area: tabs;
+  display: flex;
+  border-bottom: 2px solid hsla(207, 67%, 49%, 0.39);
+}
+
+.divTab {
+  padding: 0.2em 0.5em;
+  background: #2985cfea;
+  color: white;
+  border-radius: 0.4em 1em 0 0;
+  width: 100px;
+  outline: none;
+  border: 2px solid #1d7ed3;
+}
+
+.divTab:hover {
+  cursor: pointer;
+  background: #2b5980ea;
+  border: 2px solid #13518671;
+}
+
 .divContainerSelect {
+  width: 100%;
   grid-area: home;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  padding: 2em 0;
+}
+
+.divContainerSelect h2 {
+  text-align: center;
 }
 
 .divContainerChoose {

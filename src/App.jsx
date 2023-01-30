@@ -4,7 +4,13 @@ import Home from "./pages/Home";
 import { useCookies } from "react-cookie";
 
 function App() {
-  const [cookies, setCookies] = useCookies(["type", "check"]);
+  const [cookies, setCookies] = useCookies([
+    "type",
+    "check",
+    "tabs",
+    "atual_tab",
+    "count",
+  ]);
 
   return (
     <main id="main">

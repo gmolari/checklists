@@ -4,20 +4,14 @@ import checklists from "../components/Checklists";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { motion } from "framer-motion";
 
-const Checklist = ({ type, check, cookies, setCookies }) => {
+const Checklist = ({ type, check, cookies, setCookies, atualTab }) => {
   const [questions, setQuestions] = useState(
     checklists[type].checks[check].questions
   );
   const [copy, setCopy] = useState(false);
-  const [ans, setAns] = useState({});
+  const [ans, setAns] = useState(cookies[type] ? cookies[type] : "");
   const [formatAns, setFormatAns] = useState();
   const [checkChangeCheck, setCheckChange] = useState();
-
-  useEffect(() => {
-    if (cookies[type]) {
-      setAns(cookies[type]);
-    } else setCookies(type, "");
-  }, []);
 
   useEffect(() => {
     setQuestions(checklists[type].checks[check].questions);
@@ -44,7 +38,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
       inpFocus
         ? cookies[type][check].inpFocus
           ? (inpFocus.value = cookies[type][check].inpFocus)
-          : inpFocus.value = null
+          : (inpFocus.value = null)
         : "";
     } else {
       for (const value in questions) {
@@ -164,7 +158,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
       cookies[type][check] ? delete cookies[type][check] : "";
     }
     const inpFocus = document.getElementById("idInpFocus");
-    inpFocus ? (inpFocus.value = '') : "";
+    inpFocus ? (inpFocus.value = "") : "";
     for (const i in questions) {
       const inpAns = document.getElementById(`idInp${i}`);
       inpAns.value = "";

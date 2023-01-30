@@ -7,10 +7,16 @@ import ChooseChecklist from "./ChooseChecklist";
 const Home = ({ cookies, setCookies }) => {
   const [type, setType] = useState("");
   const [check, setCheck] = useState("");
+  const [tabs, setTabs] = useState([]);
+  const [count, setCount] = useState(0);
+  const [atualTab, setAtualTab] = useState("");
 
   useEffect(() => {
     cookies.type ? setType(cookies.type) : "";
     cookies.check ? setCheck(cookies.check) : "";
+    cookies.tabs ? setTabs(cookies.tabs) : "";
+    cookies.atual_tab ? setAtualTab(cookies.atual_tab) : "";
+    cookies.count ? setCount(parseInt(cookies.count)) : "";
   }, []);
 
   const [typeOfChecklists, setTypeOfChecklists] = useState([
@@ -32,13 +38,70 @@ const Home = ({ cookies, setCookies }) => {
     setCookies("type", e.value, { path: "/" });
   }
 
-  function setCookieCheck(valor) {
-    setCheck(valor);
-    setCookies("check", valor, { path: "/" });
+  function setCookieCheck(check) {
+    console.log(type);
+    setCount(count + 1);
+    tabs.push({
+      value: `tab_${check}_${count}`,
+      name: `New tab ${check}`,
+      check,
+      type,
+    });
+    setAtualTab(`tab_${check}_${count}`);
+    setCheck(check);
+    setCookies("check", check);
+    setCookies("count", count);
+    setCookies("atual_tab", atualTab);
+    setCookies("tabs", tabs);
   }
+
+  function setName(e) {
+    for (const i in tabs) {
+      if (tabs[i].value == e.target.id) {
+        tabs[i].name = e.target.value;
+      }
+    }
+    setCookies("tabs", tabs);
+  }
+
+  function nodeDelete(e) {
+    e.preventDefault();
+    const idTab = e.target.id.split(" ");
+    console.log(idTab);
+    for (const i in tabs) {
+      if (tabs[i].value == idTab[0]) {
+        tabs.splice(i, 1);
+      }
+    }
+    setCookies("tabs", tabs);
+  }
+
+  const handleAtualTab = (e) => {
+    const idTab = e.target.id.split(" ");
+    setAtualTab(idTab[0]);
+    setCheck(idTab[1]);
+    setType(idTab[2]);
+  };
 
   return (
     <div className={styles.divContainerMain}>
+      <div className={styles.divContainerTabs}>
+        {tabs
+          ? tabs.map((index) => (
+              <input
+                key={index.value}
+                onChange={setName}
+                onClick={handleAtualTab}
+                onContextMenu={nodeDelete}
+                id={`${index.value} ${index.check} ${index.type}`}
+                name="tabs"
+                value={index.name}
+                className={styles.divTab}
+              />
+            ))
+          : ""}
+      </div>
+
       <div className={styles.divContainerChecklist}>
         {check !== "" ? (
           <Checklist
@@ -46,6 +109,7 @@ const Home = ({ cookies, setCookies }) => {
             check={check}
             cookies={cookies}
             setCookies={setCookies}
+            atualTab
           />
         ) : (
           ""
