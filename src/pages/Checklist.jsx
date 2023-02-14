@@ -44,7 +44,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
       inpFocus
         ? cookies[type][check].inpFocus
           ? (inpFocus.value = cookies[type][check].inpFocus)
-          : inpFocus.value = null
+          : (inpFocus.value = null)
         : "";
     } else {
       for (const value in questions) {
@@ -160,22 +160,25 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
   }
 
   function resetForm() {
-    if (cookies[type]) {
-      cookies[type][check] ? delete cookies[type][check] : "";
-    }
-    const inpFocus = document.getElementById("idInpFocus");
-    inpFocus ? (inpFocus.value = '') : "";
-    for (const i in questions) {
-      const inpAns = document.getElementById(`idInp${i}`);
-      inpAns.value = "";
-      setAns((prevValue) => ({
-        ...prevValue,
-        [check]: {
-          ...prevValue[check],
-          [i]: null,
-          inpFocus: null,
-        },
-      }));
+    let reset = confirm("RESETAR A PÁGINA?");
+    if (reset) {
+      if (cookies[type]) {
+        cookies[type][check] ? delete cookies[type][check] : "";
+      }
+      const inpFocus = document.getElementById("idInpFocus");
+      inpFocus ? (inpFocus.value = "") : "";
+      for (const i in questions) {
+        const inpAns = document.getElementById(`idInp${i}`);
+        inpAns.value = "";
+        setAns((prevValue) => ({
+          ...prevValue,
+          [check]: {
+            ...prevValue[check],
+            [i]: null,
+            inpFocus: null,
+          },
+        }));
+      }
     }
   }
 
