@@ -2,13 +2,24 @@ import styles from "./Checklist.module.css";
 import { useState, useEffect } from "react";
 import checklists from "../components/Checklists";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { motion } from "framer-motion";
+import { toast } from "react-toastify";
 
 const Checklist = ({ type, check, cookies, setCookies }) => {
   const [questions, setQuestions] = useState(
     checklists[type].checks[check].questions
   );
-  const [copy, setCopy] = useState(false);
+
+  const bodyToast = {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+    }
+
   const [ans, setAns] = useState({});
   const [formatAns, setFormatAns] = useState();
   const [checkChangeCheck, setCheckChange] = useState();
@@ -183,10 +194,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
   }
 
   const copied = () => {
-    setCopy(true);
-    setTimeout(() => {
-      setCopy(false);
-    }, 3000);
+    toast.info("Copiado com sucesso!", bodyToast)
   };
 
   return (
@@ -260,14 +268,6 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
         ""
       )}
       <div className={styles.divButton}>
-        <motion.span
-          initial={{ top: -100 }}
-          transition={{ type: "spring", damping: 25, stiffness: 500 }}
-          animate={{ top: copy ? 0 : -100 }}
-          className={styles.span}
-        >
-          Copiado com Sucesso!
-        </motion.span>
         <button className={styles.button} onClick={resetForm}>
           Resetar
         </button>

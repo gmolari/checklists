@@ -3,6 +3,8 @@ import Select from "react-select";
 import styles from "./Home.module.css";
 import Checklist from "./Checklist";
 import ChooseChecklist from "./ChooseChecklist";
+import {ToastContainer, toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const Home = ({ cookies, setCookies }) => {
   const [type, setType] = useState("");
@@ -71,6 +73,18 @@ const Home = ({ cookies, setCookies }) => {
           ""
         )}
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 };
