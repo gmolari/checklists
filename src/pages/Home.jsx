@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Home = ({ cookies, setCookies }) => {
   const [type, setType] = useState("");
   const [check, setCheck] = useState("");
+  const [randomKey, setRandomKey] = useState(Math.random());
 
   useEffect(() => {
     cookies.type ? setType(cookies.type) : "";
@@ -44,6 +45,8 @@ const Home = ({ cookies, setCookies }) => {
       <div className={styles.divContainerChecklist}>
         {check !== "" ? (
           <Checklist
+            setRandomKey={setRandomKey}
+            key={randomKey}
             type={type}
             check={check}
             cookies={cookies}

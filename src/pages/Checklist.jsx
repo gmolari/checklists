@@ -4,7 +4,7 @@ import checklists from "../components/Checklists";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { toast } from "react-toastify";
 
-const Checklist = ({ type, check, cookies, setCookies }) => {
+const Checklist = ({ setRandomKey, type, check, cookies, setCookies }) => {
   const [questions, setQuestions] = useState(
     checklists[type].checks[check].questions
   );
@@ -176,20 +176,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
       if (cookies[type]) {
         cookies[type][check] ? delete cookies[type][check] : "";
       }
-      const inpFocus = document.getElementById("idInpFocus");
-      inpFocus ? (inpFocus.value = "") : "";
-      for (const i in questions) {
-        const inpAns = document.getElementById(`idInp${i}`);
-        inpAns.value = "";
-        setAns((prevValue) => ({
-          ...prevValue,
-          [check]: {
-            ...prevValue[check],
-            [i]: null,
-            inpFocus: null,
-          },
-        }));
-      }
+      setRandomKey(Math.random());
     }
   }
 
