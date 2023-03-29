@@ -4,7 +4,7 @@ import checklists from "../components/Checklists";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { toast } from "react-toastify";
 
-const Checklist = ({ type, check, cookies, setCookies }) => {
+const Checklist = ({ setRandomKey, type, check, cookies, setCookies }) => {
   const [questions, setQuestions] = useState(
     checklists[type].checks[check].questions
   );
@@ -90,6 +90,20 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
                 continue;
               }
 
+              if (check == 'messagesc'){
+                let question = questions[i].slice(0, questions[i].length-1)
+                if (i == 0 || i == 3 || i == 1) {
+                  formatedAns = 
+                  formatedAns + `${question}....: ${ans[check][i]}\n`;
+                }else if (i == 2){
+                  formatedAns = 
+                  formatedAns + `${question}...........: ${ans[check][i]}\n`;
+                }else if (questions.length - 2){
+                  formatedAns = 
+                  formatedAns + `${question}: ${ans[check][i]}\n\n`;
+                }
+                continue
+              }
               formatedAns =
                 formatedAns + `¶ ${questions[i]} ${ans[check][i]}\n`;
             } else if (questions[i].includes("PORTA")) {
@@ -176,20 +190,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
       if (cookies[type]) {
         cookies[type][check] ? delete cookies[type][check] : "";
       }
-      const inpFocus = document.getElementById("idInpFocus");
-      inpFocus ? (inpFocus.value = "") : "";
-      for (const i in questions) {
-        const inpAns = document.getElementById(`idInp${i}`);
-        inpAns.value = "";
-        setAns((prevValue) => ({
-          ...prevValue,
-          [check]: {
-            ...prevValue[check],
-            [i]: null,
-            inpFocus: null,
-          },
-        }));
-      }
+      setRandomKey(Math.random());
     }
   }
 
@@ -235,7 +236,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
                 key={`p${questions.indexOf(e)}`}
                 className={styles.p}
               >
-                ¶ {e}
+                ¶ {e.toUpperCase()}
               </label>
 
               <textarea
@@ -249,7 +250,7 @@ const Checklist = ({ type, check, cookies, setCookies }) => {
               />
             </div>
           ))}
-      {type === "schedulling" ? (
+      {type === "schedulling" && check !== 'messagesc' ? (
         <div className={styles.divQuestionSche}>
           <label htmlFor={`idInpFocus`} className={styles.p}>
             ¶ DESTAQUE:

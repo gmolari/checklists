@@ -5,27 +5,32 @@ import Checklist from "./Checklist";
 import ChooseChecklist from "./ChooseChecklist";
 import {ToastContainer, toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import checklists from "../components/Checklists";
 
 const Home = ({ cookies, setCookies }) => {
   const [type, setType] = useState("");
   const [check, setCheck] = useState("");
+  const [randomKey, setRandomKey] = useState(Math.random());
 
   useEffect(() => {
     cookies.type ? setType(cookies.type) : "";
     cookies.check ? setCheck(cookies.check) : "";
+    setTypes();
   }, []);
 
-  const [typeOfChecklists, setTypeOfChecklists] = useState([
-    { value: "attendance", label: "Atendimento" },
-    { value: "smartzap", label: "Smartzap" },
-    { value: "maintenance", label: "Manutenção" },
-    { value: "activation", label: "Ativação" },
-    { value: "migration", label: "Migração NSLINK" },
-    { value: "corp_emp", label: "Corporativo e Empresrial" },
-    { value: "retention", label: "Retenção" },
-    { value: "out_point", label: "Ponto fora" },
-    { value: "schedulling", label: "Agendamento" },
-  ]);
+  function setTypes(){
+    let types = [];
+    for(const i in checklists){
+      types.push({value: checklists[i].src, label: checklists[i].name})
+    }
+
+    return types.sort((a, b) => {
+      if (a.label.toUpperCase() < b.label.toUpperCase()) return -1
+      else return 1
+    })
+  }
+
+  const [typeOfChecklists, setTypeOfChecklists] = useState(setTypes);
 
   function setInfos(e) {
     setCheck("");
@@ -44,6 +49,8 @@ const Home = ({ cookies, setCookies }) => {
       <div className={styles.divContainerChecklist}>
         {check !== "" ? (
           <Checklist
+            setRandomKey={setRandomKey}
+            key={randomKey}
             type={type}
             check={check}
             cookies={cookies}
