@@ -98,9 +98,12 @@ const Checklist = ({ setRandomKey, type, check, cookies, setCookies }) => {
                 }else if (i == 2){
                   formatedAns = 
                   formatedAns + `${question}...........: ${ans[check][i]}\n`;
-                }else if (questions.length - 2){
+                }else if (i == questions.length - 1){
                   formatedAns = 
-                  formatedAns + `${question}: ${ans[check][i]}\n\n`;
+                  formatedAns + `\n${question}: ${ans[check][i]}`
+                }else {
+                  formatedAns = 
+                  formatedAns + `${question}: ${ans[check][i]}\n`
                 }
                 continue
               }
