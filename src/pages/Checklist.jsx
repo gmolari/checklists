@@ -90,6 +90,20 @@ const Checklist = ({ setRandomKey, type, check, cookies, setCookies }) => {
                 continue;
               }
 
+              if (check == 'messagesc'){
+                let question = questions[i].slice(0, questions[i].length-1)
+                if (i == 0 || i == 3 || i == 1) {
+                  formatedAns = 
+                  formatedAns + `${question}....: ${ans[check][i]}\n`;
+                }else if (i == 2){
+                  formatedAns = 
+                  formatedAns + `${question}...........: ${ans[check][i]}\n`;
+                }else if (questions.length - 2){
+                  formatedAns = 
+                  formatedAns + `${question}: ${ans[check][i]}\n\n`;
+                }
+                continue
+              }
               formatedAns =
                 formatedAns + `¶ ${questions[i]} ${ans[check][i]}\n`;
             } else if (questions[i].includes("PORTA")) {
@@ -222,7 +236,7 @@ const Checklist = ({ setRandomKey, type, check, cookies, setCookies }) => {
                 key={`p${questions.indexOf(e)}`}
                 className={styles.p}
               >
-                ¶ {e}
+                ¶ {e.toUpperCase()}
               </label>
 
               <textarea
@@ -236,7 +250,7 @@ const Checklist = ({ setRandomKey, type, check, cookies, setCookies }) => {
               />
             </div>
           ))}
-      {type === "schedulling" ? (
+      {type === "schedulling" && check !== 'messagesc' ? (
         <div className={styles.divQuestionSche}>
           <label htmlFor={`idInpFocus`} className={styles.p}>
             ¶ DESTAQUE:

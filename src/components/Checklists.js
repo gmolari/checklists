@@ -1,6 +1,7 @@
 const checklists = {
   smartzap: {
     name: "Smartzap",
+    src: 'smartzap',
     checks: {
       fibersz: {
         name: ["Fibra", "fibersz"],
@@ -76,6 +77,7 @@ const checklists = {
 
   out_point: {
     name: "Ponto Fora",
+    src: 'out_point',
     checks: {
       out_point: {
         name: ["Ponto fora", "out_point"],
@@ -94,6 +96,7 @@ const checklists = {
 
   retention: {
     name: "Retenção",
+    src: 'retention',
     checks: {
       retention: {
         name: ["Retenção", "retention"],
@@ -112,6 +115,7 @@ const checklists = {
 
   corp_emp: {
     name: "Corporativo e Empresarial",
+    src: 'corp_emp',
     checks: {
       corporative: {
         name: ["Corporativo", "corporative"],
@@ -174,6 +178,7 @@ const checklists = {
 
   attendance: {
     name: "Atendimento",
+    src: 'attendance',
     checks: {
       fiber: {
         name: ["Fibra", "fiber"],
@@ -261,8 +266,10 @@ const checklists = {
       },
     },
   },
+  
   maintenance: {
     name: "Manutenção Persis",
+    src: 'maintenance',
     checks: {
       huawei_zte: {
         name: ["Manutenção Huawei/ZTE", "huawei_zte"],
@@ -406,9 +413,22 @@ const checklists = {
       },
     },
   },
+  
   schedulling: {
     name: "Agendamento",
+    src: 'schedulling',
     checks: {
+      messagesc: {
+        name: ["Mensagem", "messagesc"],
+        questions: [
+          'Cliente:',
+          'Código:' ,
+          'OS:' ,
+          'Cidade:' ,
+          'Endereço:',
+          'Motivo:'
+        ],
+      },
       fibersc: {
         name: ["Fibra", "fibersc"],
         questions: [
@@ -452,8 +472,10 @@ const checklists = {
       },
     },
   },
+  
   activation: {
     name: "Ativação Persis",
+    src: 'activation',
     checks: {
       fiberac: {
         name: ["Ativação Fibra", "fiberac"],
@@ -557,8 +579,10 @@ const checklists = {
       },
     },
   },
+  
   migration: {
     name: "Migração NSLINK",
+    src: 'migration',
     checks: {
       migration: {
         name: ["Migração NLINK", "migration"],
