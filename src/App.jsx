@@ -15,6 +15,7 @@ function App() {
             element={<Home cookies={cookies} setCookies={setCookies} />}
           />
         </Routes>
+        <footer className="Footer" >DEVELOPED BY G. MOLARI</footer>
       </Router>
     </main>
   );
