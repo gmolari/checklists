@@ -13,15 +13,18 @@ class Tab {
 
 function useTabs() {
     const [cookies, setCookies] = useCookies();
-    const [tabs, setTabs] = useState({});
+    const [tabs, setTabs] = useState([]);
 
     function attTabs(){
         for(let i in cookies){
-            setTabs((prevValue) => ({
-                ...prevValue,
-                [i]: cookies[i]
-            }))
+            // setTabs((prevValue) => ({
+            //     ...prevValue,
+            //     [i]: cookies[i]
+            // }))
+            if (tabs[cookies[i]]) tabs[cookies[i]] = tabs[cookies[i]]
+            else tabs.push({cookie: i, content: cookies[i]})
         }
+        console.log(tabs)
     }
 
     function attCookies(){
