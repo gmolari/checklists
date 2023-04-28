@@ -13,7 +13,7 @@
 .divContainerChecklist {
   grid-area: checklist;
   overflow-y: scroll;
-  min-height: 100vh;
+  min-height: 98vh;
 }
 
 .divContainerSelect {
