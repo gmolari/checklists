@@ -13,8 +13,8 @@ const Home = ({ cookies, setCookies }) => {
   const [randomKey, setRandomKey] = useState(Math.random());
 
   useEffect(() => {
-    cookies.type ? setType(cookies.type) : "";
-    cookies.check ? setCheck(cookies.check) : "";
+    cookies.cType ? setType(cookies.cType) : "";
+    cookies.cCheck ? setCheck(cookies.cCheck) : "";
     setTypes();
   }, []);
 
@@ -34,14 +34,14 @@ const Home = ({ cookies, setCookies }) => {
 
   function setInfos(e) {
     setCheck("");
-    setCookies("check", check, { path: "/" });
+    setCookies("cCheck", check, { path: "/" });
     setType(e.value);
-    setCookies("type", e.value, { path: "/" });
+    setCookies("cType", e.value, { path: "/" });
   }
 
   function setCookieCheck(valor) {
     setCheck(valor);
-    setCookies("check", valor, { path: "/" });
+    setCookies("cCheck", valor, { path: "/" });
   }
 
   return (

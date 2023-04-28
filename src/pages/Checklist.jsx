@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import checklists from "../components/Checklists";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { toast } from "react-toastify";
+import { useTabs, Tab } from "../hooks/Tabs";
 
 const Checklist = ({ setRandomKey, type, check, cookies, setCookies }) => {
   const [questions, setQuestions] = useState(
@@ -23,6 +24,7 @@ const Checklist = ({ setRandomKey, type, check, cookies, setCookies }) => {
   const [ans, setAns] = useState({});
   const [formatAns, setFormatAns] = useState();
   const [checkChangeCheck, setCheckChange] = useState();
+  const {newTab, tabs, attTabs} = useTabs({name: 'teste', index: 'teste', content: 'teste'});
 
   useEffect(() => {
     if (cookies[type]) {
@@ -272,6 +274,10 @@ const Checklist = ({ setRandomKey, type, check, cookies, setCookies }) => {
         ""
       )}
       <div className={styles.divButton}>
+      <button onClick={() => {
+        // setCookies('tabbbb',teste)
+        console.log(tabs)
+      }}>COOKIEs</button>
         <button className={styles.button} onClick={resetForm}>
           Resetar
         </button>
