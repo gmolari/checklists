@@ -5,7 +5,7 @@ import { useCookies } from "react-cookie";
 import { UserProvider } from "./context/Context";
 
 function App() {
-  const [cookies, setCookies] = useCookies(["cType", "cCheck"]);
+  const [cookies, setCookies] = useCookies(["cType", "cCheck", "cIndex"]);
 
   return (
     <main id="main">

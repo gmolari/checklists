@@ -6,12 +6,10 @@ import ChooseChecklist from "./ChooseChecklist";
 import {ToastContainer, toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import checklists from "../components/Checklists";
-import Tabs from "../components/Tabs";
 import { Context } from "../context/Context";
 
 const Home = ({ cookies, setCookies }) => {
-  const [type, setType] = useState("");
-  const [check, setCheck] = useState("");
+  const {type, check, setType, setCheck} = useContext(Context)
   const [randomKey, setRandomKey] = useState(Math.random());
   const {tabs} = useContext(Context)
 
@@ -50,17 +48,17 @@ const Home = ({ cookies, setCookies }) => {
   return (
     <div className={styles.divContainerMain}>
       <div className={styles.divContainerChecklist}>
-        {
-          tabs && tabs.map(i => (
-            <Tabs name={'teste'} type={'teste'} index={'teste'} check={'teste'} />
-          ))
-        }
+        <div className={styles.tabsContainer}>
+          {
+            // tabs && tabs.map(i => (
+            //   <Tabs key={tabs.indexOf(i)} name={'teste'} type={'teste'} index={'teste'} check={'teste'} />
+            // ))
+          }
+        </div>
         {check !== "" ? (
           <Checklist
             setRandomKey={setRandomKey}
             key={randomKey}
-            type={type}
-            check={check}
             cookies={cookies}
             setCookies={setCookies}
           />
@@ -82,6 +80,7 @@ const Home = ({ cookies, setCookies }) => {
           <ChooseChecklist
             setCheck={setCookieCheck}
             cookies={cookies}
+            setCookies={setCookies}
             type={type}
           />
         ) : (

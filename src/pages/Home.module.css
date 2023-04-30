@@ -16,6 +16,10 @@
   min-height: 98vh;
 }
 
+.tabsContainer{
+  display: flex;
+}
+
 .divContainerSelect {
   grid-area: home;
   display: flex;

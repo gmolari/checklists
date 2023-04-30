@@ -1,13 +1,14 @@
 import styles from "./Checklist.module.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import checklists from "../components/Checklists";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { toast } from "react-toastify";
-import { useTabs, Tab } from "../hooks/Tabs";
+import { Context } from "../context/Context";
 
-const Checklist = ({ setRandomKey, type, check, cookies, setCookies }) => {
+const Checklist = ({ setRandomKey, cookies, setCookies }) => {
+  const {type, check, ans, setAns} = useContext(Context)
   const [questions, setQuestions] = useState(
-    checklists[type].checks[check].questions
+    checklists[type]?.checks[check]?.questions
   );
 
   const bodyToast = {
@@ -19,12 +20,10 @@ const Checklist = ({ setRandomKey, type, check, cookies, setCookies }) => {
     draggable: true,
     progress: undefined,
     theme: "colored",
-    }
+  }
 
-  const [ans, setAns] = useState({});
   const [formatAns, setFormatAns] = useState();
   const [checkChangeCheck, setCheckChange] = useState();
-  const {newTab, tabs, attTabs} = useTabs({name: 'teste', index: 'teste', content: 'teste'});
 
   useEffect(() => {
     if (cookies[type]) {
@@ -33,7 +32,7 @@ const Checklist = ({ setRandomKey, type, check, cookies, setCookies }) => {
   }, []);
 
   useEffect(() => {
-    setQuestions(checklists[type].checks[check].questions);
+    setQuestions(checklists[type]?.checks[check]?.questions);
     setCheckChange(Math.random() * 999999);
   }, [check]);
 
@@ -274,10 +273,6 @@ const Checklist = ({ setRandomKey, type, check, cookies, setCookies }) => {
         ""
       )}
       <div className={styles.divButton}>
-      <button onClick={() => {
-        // setCookies('tabbbb',teste)
-        console.log(tabs)
-      }}>COOKIEs</button>
         <button className={styles.button} onClick={resetForm}>
           Resetar
         </button>
