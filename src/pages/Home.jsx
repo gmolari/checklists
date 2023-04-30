@@ -9,9 +9,8 @@ import checklists from "../components/Checklists";
 import { Context } from "../context/Context";
 
 const Home = ({ cookies, setCookies }) => {
-  const {type, check, setType, setCheck} = useContext(Context)
+  const {type, check, setType, setCheck, tabs} = useContext(Context)
   const [randomKey, setRandomKey] = useState(Math.random());
-  const {tabs} = useContext(Context)
 
   useEffect(() => {
     cookies.cType ? setType(cookies.cType) : "";

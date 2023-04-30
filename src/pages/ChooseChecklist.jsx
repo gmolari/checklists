@@ -5,7 +5,7 @@ import { Context } from "../context/Context";
 
 const ChooseChecklist = ({ type, setCheck, cookies, setCookies }) => {
   const [arrayChecklist, setArrayChecklist] = useState([]);
-  const {tabs, ans} = useContext(Context)
+  const {tabs, ans, setIndex, index} = useContext(Context)
 
   for (const check in checklists[type].checks) {
     arrayChecklist.length < Object.keys(checklists[type].checks).length
@@ -42,6 +42,7 @@ const ChooseChecklist = ({ type, setCheck, cookies, setCookies }) => {
                       check: index[1],
                       ans
                   })
+                  setIndex(tabs.length)
                   setCookies('cIndex', tabs.length)
                   localStorage.setItem('tabs', JSON.stringify(tabs))
                 }

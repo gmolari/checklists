@@ -14,24 +14,14 @@ class Tab {
 function useTabs() {
     const [cookies, setCookies] = useCookies();
     const [tabs, setTabs] = useState([]);
-    const localTabs = localStorage.getItem('tabs')
+    const localTabs = JSON.parse(localStorage.getItem('tabs'))
 
     function attTabs(){
         if (localTabs){
-            for(let i in localTabs){
-                // setTabs((prevValue) => ({
-                //     ...prevValue,
-                //     [i]: cookies[i]
-                // }))
-                if (tabs[cookies[i]]) tabs[cookies[i]] = tabs[cookies[i]]
-                else tabs.push({cookie: i, content: cookies[i]})
-            }
+            setTabs(localTabs)
         }
     }
 
-    function attCookies(){
-        for(let i in tabs) setCookies(i, tabs[i])
-    }
 
     useEffect(attTabs, [])
 
@@ -45,7 +35,6 @@ function useTabs() {
 
     return {
         newTab,
-        attCookies,
         tabs
     }
 }
