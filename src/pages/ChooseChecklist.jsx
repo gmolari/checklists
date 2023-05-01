@@ -41,6 +41,7 @@ const ChooseChecklist = ({ type, setCheck, cookies, setCookies }) => {
                       type,
                       check: index[1],
                   })
+                  
                   setIndex(tabs.length)
                   setCookies('cIndex', tabs.length)
                   localStorage.setItem('tabs', JSON.stringify(tabs))

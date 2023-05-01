@@ -26,9 +26,7 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
   const [checkChangeCheck, setCheckChange] = useState();
 
   useEffect(() => {
-    if (cookies[index]) {
-      setAns(cookies[index]);
-    } else setCookies(index, "");
+
   }, []);
 
   useEffect(() => {
@@ -38,24 +36,21 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
 
   useEffect(() => {
     const inpFocus = document.getElementById(`idInpFocus`);
-    if (cookies[index] && cookies[index][check]) {
+    if (cookies[index]) {
       for (const value in questions) {
         const inpAns = document.getElementById(`idInp${value}`);
-        let valueCookie = cookies[index][check][value];
+        let valueCookie = cookies[index][value];
         if (valueCookie) {
           inpAns.value = valueCookie;
         } else inpAns.value = "";
         setAns((prevValue) => ({
-          ...prevValue,
-          [check]: {
-            ...prevValue[check],
+            ...prevValue,
             [value]: inpAns.value,
-          },
         }));
       }
       inpFocus
-        ? cookies[index][check].inpFocus
-          ? (inpFocus.value = cookies[index][check].inpFocus)
+        ? cookies[index].inpFocus
+          ? (inpFocus.value = cookies[index].inpFocus)
           : (inpFocus.value = null)
         : "";
     } else {
@@ -64,7 +59,7 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
         inpAns.value = null;
       }
     }
-  }, [checkChangeCheck, index]);
+  }, [checkChangeCheck /*index*/]);
 
   // WHEN ANS AND QUESTIONS CHANGE
   useEffect(() => {
@@ -180,12 +175,9 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
 
   function handleAns(value) {
     setAns((prevValue) => ({
-      ...prevValue,
-      [check]: {
-        ...prevValue[check],
+        ...prevValue,
         [value.target.name]: value.target.value,
-      },
-    }));
+      }));
   }
 
   function resetForm() {
