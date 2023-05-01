@@ -7,13 +7,25 @@ const Context = createContext();
 
 
 function UserProvider({children}){
-    const {tabs, attLocalTabs} = useTabs()
+    const {tabs, attLocalTabs, attTabs} = useTabs()
     const [type, setType] = useState("");
     const [check, setCheck] = useState("");
     const [index, setIndex] = useState();
     const [ans, setAns] = useState({});
     const [cookies, setCookies] = useCookies();
     const localTabs = JSON.parse(localStorage.getItem('tabs'))
+
+    function verifyLocalTabs(){
+        if ( !localTabs || localTabs.length <= 0){
+            console.log(localTabs)
+            setType('')
+            setCheck('')
+            setCookies('cCheck', '')
+            setCookies('cType', '')
+            setCookies('cIndex', '')
+        }
+        setIndex('');
+    }
 
     useEffect(() => {
         if ( !localTabs || localTabs.length <= 0){
@@ -53,7 +65,8 @@ function UserProvider({children}){
                 setAns,
                 index,
                 setIndex,
-                attLocalTabs
+                attLocalTabs,
+                verifyLocalTabs
             }
         }>
             {children}

@@ -17,8 +17,18 @@
 }
 
 .containerTab{
+  position: relative;
+  display: flex;
   padding: .5em 1.5em;
   background: #259cfd;
+  border: 1px solid blue
+}
+
+.containerTabDel{
+  position: absolute;
+  right: 0;
+  padding: .5em;
+  background: #ff0000;
 }
 
 .containerTab:hover {

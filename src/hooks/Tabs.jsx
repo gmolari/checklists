@@ -6,27 +6,24 @@ function useTabs() {
     const [tabs, setTabs] = useState([]);
     const localTabs = JSON.parse(localStorage.getItem('tabs'))
 
+
     function attTabs(){
         if (localTabs){
             setTabs(localTabs)
         }
     }
 
-    function attLocalTabs(ans, index){
-        for(const i in tabs){
-            if (tabs[i]?.index == index) tabs[i].ans = ans
-            return
+    function attLocalTabs(){
+        if (tabs) {
+            localStorage.setItem('tabs', JSON.stringify(tabs))
         }
-
-        // if (tabs) {
-        //     localStorage.setItem('tabs', ans);
-        // }
     }
 
 
     useEffect(attTabs, [])
 
     return {
+        attTabs,
         attLocalTabs,
         tabs
     }

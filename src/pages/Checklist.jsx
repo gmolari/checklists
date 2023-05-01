@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { Context } from "../context/Context";
 
 const Checklist = ({ setRandomKey, cookies, setCookies }) => {
-  const {type, check, ans, setAns, index, attLocalTabs} = useContext(Context)
+  const {type, check, ans, setAns, index} = useContext(Context)
   const [questions, setQuestions] = useState(
     checklists[type]?.checks[check]?.questions
   );
@@ -24,10 +24,6 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
 
   const [formatAns, setFormatAns] = useState();
   const [checkChangeCheck, setCheckChange] = useState();
-
-  useEffect(() => {
-
-  }, []);
 
   useEffect(() => {
     setQuestions(checklists[type]?.checks[check]?.questions);

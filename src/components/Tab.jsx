@@ -4,15 +4,32 @@ import { Context } from '../context/Context'
 import { useCookies } from 'react-cookie'
 
 export default function Tab({index, check, type}){
-    const {setIndex, setCheck, setType} = useContext(Context)
+    const {setIndex, setCheck, setType,tabs, attLocalTabs, verifyLocalTabs} = useContext(Context)
     const allIndex = useContext(Context).index
-    const [cookies, setCookies] = useCookies()
+    const [cookies, setCookies, removeCookie] = useCookies()
 
     function setInfos(e){
         setIndex(index)
         setType(type)
         setCheck(check)
-        console.log(cookies[index], index)
+    }
+
+    function deleteTab(){
+        console.log(tabs)
+
+        const item = tabs.filter(item => item.index == index)[0]
+        
+        const localItem = tabs.indexOf(item)
+
+        tabs.splice(localItem, 1)
+
+        console.log(tabs)
+
+        attLocalTabs();
+
+        removeCookie(index)
+
+        verifyLocalTabs()
     }
 
     return (
@@ -20,6 +37,9 @@ export default function Tab({index, check, type}){
             {
                 'TAB (' + index + ')'
             }
+            <div onClick={deleteTab} className={styles.containerTabDel}>
+                
+            </div>
         </div>
     )
 }
