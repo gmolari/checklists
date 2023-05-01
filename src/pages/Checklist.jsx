@@ -35,6 +35,7 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
   }, [check]);
 
   useEffect(() => {
+    setAns({})
     const inpFocus = document.getElementById(`idInpFocus`);
     if (cookies[index]) {
       for (const value in questions) {
@@ -59,7 +60,7 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
         inpAns.value = null;
       }
     }
-  }, [checkChangeCheck /*index*/]);
+  }, [checkChangeCheck, index]);
 
   // WHEN ANS AND QUESTIONS CHANGE
   useEffect(() => {
