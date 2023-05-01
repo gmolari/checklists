@@ -40,7 +40,6 @@ const ChooseChecklist = ({ type, setCheck, cookies, setCookies }) => {
                       index: tabs.length+1,
                       type,
                       check: index[1],
-                      ans
                   })
                   setIndex(tabs.length)
                   setCookies('cIndex', tabs.length)
@@ -52,7 +51,7 @@ const ChooseChecklist = ({ type, setCheck, cookies, setCookies }) => {
             </button>
           ))}
           <button onClick={() => {
-            console.log(JSON.parse(localStorage.getItem('tabs')))
+            console.log('LocalTabs:',JSON.parse(localStorage.getItem('tabs')), 'Tabs:', tabs)
           }} className={styles.button}>TESTE</button>
         </div>
       </section>

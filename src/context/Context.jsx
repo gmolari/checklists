@@ -7,7 +7,7 @@ const Context = createContext();
 
 
 function UserProvider({children}){
-    const {newTab, tabs} = useTabs()
+    const {newTab, tabs, attLocalTabs} = useTabs()
     const [type, setType] = useState("");
     const [check, setCheck] = useState("");
     const [index, setIndex] = useState();
@@ -16,7 +16,7 @@ function UserProvider({children}){
     const localTabs = JSON.parse(localStorage.getItem('tabs'))
 
     useEffect(() => {
-        if ( localTabs.length <= 0){
+        if ( !localTabs || localTabs.length <= 0){
             console.log(localTabs)
             setType('')
             setCheck('')
@@ -24,7 +24,8 @@ function UserProvider({children}){
             setCookies('cType', '')
             setCookies('cIndex', '')
         }
-        console.log(localTabs)
+        if (!index) setIndex(cookies.cIndex);
+        console.log('CONTEXT FIRST')
     }, [])
 
     return (
@@ -41,7 +42,8 @@ function UserProvider({children}){
                 ans,
                 setAns,
                 index,
-                setIndex
+                setIndex,
+                attLocalTabs
             }
         }>
             {children}

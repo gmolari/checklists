@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { Context } from "../context/Context";
 
 const Checklist = ({ setRandomKey, cookies, setCookies }) => {
-  const {type, check, ans, setAns, index} = useContext(Context)
+  const {type, check, ans, setAns, index, attLocalTabs} = useContext(Context)
   const [questions, setQuestions] = useState(
     checklists[type]?.checks[check]?.questions
   );
@@ -26,9 +26,9 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
   const [checkChangeCheck, setCheckChange] = useState();
 
   useEffect(() => {
-    if (cookies[type]) {
-      setAns(cookies[type]);
-    } else setCookies(type, "");
+    if (cookies[index]) {
+      setAns(cookies[index]);
+    } else setCookies(index, "");
   }, []);
 
   useEffect(() => {
@@ -38,10 +38,10 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
 
   useEffect(() => {
     const inpFocus = document.getElementById(`idInpFocus`);
-    if (cookies[type] && cookies[type][check]) {
+    if (cookies[index] && cookies[index][check]) {
       for (const value in questions) {
         const inpAns = document.getElementById(`idInp${value}`);
-        let valueCookie = cookies[type][check][value];
+        let valueCookie = cookies[index][check][value];
         if (valueCookie) {
           inpAns.value = valueCookie;
         } else inpAns.value = "";
@@ -54,8 +54,8 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
         }));
       }
       inpFocus
-        ? cookies[type][check].inpFocus
-          ? (inpFocus.value = cookies[type][check].inpFocus)
+        ? cookies[index][check].inpFocus
+          ? (inpFocus.value = cookies[index][check].inpFocus)
           : (inpFocus.value = null)
         : "";
     } else {
@@ -173,7 +173,7 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
       }
     }
 
-    setCookies(type, ans);
+    setCookies(index, ans);
 
     setFormatAns(formatedAns);
   }, [ans, questions]);

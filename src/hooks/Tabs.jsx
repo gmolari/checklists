@@ -22,6 +22,17 @@ function useTabs() {
         }
     }
 
+    function attLocalTabs(ans, index){
+        for(const i in tabs){
+            if (tabs[i]?.index == index) tabs[i].ans = ans
+            return
+        }
+
+        // if (tabs) {
+        //     localStorage.setItem('tabs', ans);
+        // }
+    }
+
 
     useEffect(attTabs, [])
 
@@ -35,6 +46,7 @@ function useTabs() {
 
     return {
         newTab,
+        attLocalTabs,
         tabs
     }
 }
