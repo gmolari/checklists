@@ -3,10 +3,11 @@ import Select from "react-select";
 import styles from "./Home.module.css";
 import Checklist from "./Checklist";
 import ChooseChecklist from "./ChooseChecklist";
-import {ToastContainer, toast} from 'react-toastify'
+import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import checklists from "../components/Checklists";
 import { Context } from "../context/Context";
+import Tab from "../components/Tab";
 
 const Home = ({ cookies, setCookies }) => {
   const {type, check, setType, setCheck, tabs} = useContext(Context)
@@ -49,9 +50,9 @@ const Home = ({ cookies, setCookies }) => {
       <div className={styles.divContainerChecklist}>
         <div className={styles.tabsContainer}>
           {
-            // tabs && tabs.map(i => (
-            //   <Tabs key={tabs.indexOf(i)} name={'teste'} type={'teste'} index={'teste'} check={'teste'} />
-            // ))
+            tabs && tabs.map(i => (
+              <Tab key={tabs.indexOf(i)} index={i.index} check={i.check} type={i.type} />
+            ))
           }
         </div>
         {check !== "" ? (

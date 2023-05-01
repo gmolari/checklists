@@ -51,7 +51,11 @@ const ChooseChecklist = ({ type, setCheck, cookies, setCookies }) => {
             </button>
           ))}
           <button onClick={() => {
-            console.log('LocalTabs:',JSON.parse(localStorage.getItem('tabs')), 'Tabs:', tabs)
+            console.log(
+              'LocalTabs:',JSON.parse(localStorage.getItem('tabs'))
+              , 'Tabs:', tabs,
+              'Index:',index,
+              'cIndex:',cookies.cIndex)
           }} className={styles.button}>TESTE</button>
         </div>
       </section>

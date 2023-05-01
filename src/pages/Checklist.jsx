@@ -64,7 +64,7 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
         inpAns.value = null;
       }
     }
-  }, [checkChangeCheck]);
+  }, [checkChangeCheck, index]);
 
   // WHEN ANS AND QUESTIONS CHANGE
   useEffect(() => {

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { createContext } from "react";
-import { useTabs, Tab } from "../hooks/Tabs";
+import { useTabs } from "../hooks/Tabs";
 import { useCookies } from "react-cookie";
 
 const Context = createContext();
 
 
 function UserProvider({children}){
-    const {newTab, tabs, attLocalTabs} = useTabs()
+    const {tabs, attLocalTabs} = useTabs()
     const [type, setType] = useState("");
     const [check, setCheck] = useState("");
     const [index, setIndex] = useState();
@@ -28,12 +28,22 @@ function UserProvider({children}){
         console.log('CONTEXT FIRST')
     }, [])
 
+    useEffect(() => {
+        index ? setCookies('cIndex', index) : ''
+    }, [index])
+
+    useEffect(() => {
+        type ? setCookies('cType', type) : ''
+    }, [type])
+
+    useEffect(() => {
+        check ? setCookies('cCheck', check) : ''
+    }, [check])
+
     return (
         <Context.Provider 
         value={
             {
-                Tab, 
-                newTab, 
                 tabs, 
                 type, 
                 check, 

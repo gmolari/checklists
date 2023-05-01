@@ -16,6 +16,16 @@
   min-height: 98vh;
 }
 
+.containerTab{
+  padding: .5em 1.5em;
+  background: #259cfd;
+}
+
+.containerTab:hover {
+  cursor: pointer;
+  background: #175e99;
+}
+
 .tabsContainer{
   display: flex;
 }
