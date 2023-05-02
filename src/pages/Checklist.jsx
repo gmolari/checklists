@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { Context } from "../context/Context";
 
 const Checklist = ({ setRandomKey, cookies, setCookies }) => {
-  const {type, check, ans, setAns, index} = useContext(Context)
+  const {type, check, ans, setAns, index, infos} = useContext(Context)
   const [questions, setQuestions] = useState(
     checklists[type]?.checks[check]?.questions
   );
@@ -31,7 +31,6 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
   }, [check]);
 
   useEffect(() => {
-    setAns({})
     const inpFocus = document.getElementById(`idInpFocus`);
     if (cookies[index]) {
       for (const value in questions) {
@@ -40,6 +39,7 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
         if (valueCookie) {
           inpAns.value = valueCookie;
         } else inpAns.value = "";
+        console.log('PINX')
         setAns((prevValue) => ({
             ...prevValue,
             [value]: inpAns.value,
@@ -56,7 +56,7 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
         inpAns.value = null;
       }
     }
-  }, [checkChangeCheck, index]);
+  }, [checkChangeCheck]);
 
   // WHEN ANS AND QUESTIONS CHANGE
   useEffect(() => {
@@ -165,7 +165,8 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
       }
     }
 
-    setCookies(index, ans);
+    ans ? setCookies(index, ans) : ''
+    console.log('COOKIE INDEX: ', cookies[index])
 
     setFormatAns(formatedAns);
   }, [ans, questions]);

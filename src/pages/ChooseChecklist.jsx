@@ -34,16 +34,25 @@ const ChooseChecklist = ({ type, setCheck, cookies, setCookies }) => {
               className={styles.button}
               key={index[1] + type}
               onClick={() => {
-                const protocolo = prompt('Digite um nome para a aba (tem que ser diferente das outras)')
+                const protocolo = prompt('Digite um nome para a aba (único, protocolo, por exemplo)')
+
+                for (const i in tabs){
+                  if (tabs.length+1+protocolo == tabs[i].index) {
+                    alert('Já existe')
+                    return
+                  }
+                }
+
                 setCheck(index[1])
                 if (index[1] && type){
                   tabs.push({
-                      index: tabs.length+1+index[1],
+                      index: tabs.length+1+' '+'('+protocolo+')',
                       type,
                       check: index[1],
                   })
                   
-                  setIndex(tabs.length+index[1])
+                  setIndex(tabs.length+' '+'('+protocolo+')')
+                  setCookies('cIndex', tabs.length+' '+'('+protocolo+')')
                   localStorage.setItem('tabs', JSON.stringify(tabs))
                 }
               }}
@@ -55,9 +64,9 @@ const ChooseChecklist = ({ type, setCheck, cookies, setCookies }) => {
             console.log(
               'LocalTabs:',JSON.parse(localStorage.getItem('tabs'))
               , 'Tabs:', tabs,
-              'Index:',index,
+              'Var Index:',index,
               'cIndex:',cookies.cIndex,
-              'Index:', cookies[index])
+              'Index Cookie (ans):', cookies[index])
           }} className={styles.button}>TESTE</button>
         </div>
       </section>

@@ -7,16 +7,17 @@ const Context = createContext();
 
 
 function UserProvider({children}){
-    const {tabs, attLocalTabs, attTabs} = useTabs()
+    const {tabs, attLocalTabs} = useTabs()
     const [type, setType] = useState("");
     const [check, setCheck] = useState("");
-    const [index, setIndex] = useState();
-    const [ans, setAns] = useState({});
     const [cookies, setCookies] = useCookies();
+    const [index, setIndex] = useState(cookies.cIndex ? cookies.cIndex : '');
     const localTabs = JSON.parse(localStorage.getItem('tabs'))
+    const [ans, setAns] = useState(index ? cookies[index] : '');
+    const [infos, setInfos] = useState();
 
     function verifyLocalTabs(){
-        if ( !localTabs || localTabs.length <= 1){
+        if ( !localTabs || localTabs.length < 1){
             setCheck('')
         }
     }
@@ -25,19 +26,21 @@ function UserProvider({children}){
         if ( !localTabs || localTabs.length <= 0){
             setCheck('')
         }
-        if (!index) setIndex(cookies.cIndex);
+        // setInfos(cookies[index])
     }, [])
 
-    useEffect(() => {
-        index || index == '' ? setCookies('cIndex', index) : ''
-    }, [index])
+    // useEffect(() => {
+    //     index || index == '' ? setCookies('cIndex', index) : ''
+    // }, [index])
 
     useEffect(() => {
         type || type == '' ? setCookies('cType', type) : ''
+        // setInfos(cookies[index])
     }, [type])
 
     useEffect(() => {
         check || check == '' ? setCookies('cCheck', check) : ''
+        // setInfos(cookies[index])
     }, [check])
 
     return (
@@ -55,6 +58,7 @@ function UserProvider({children}){
                 setIndex,
                 attLocalTabs,
                 verifyLocalTabs,
+                infos,
             }
         }>
             {children}

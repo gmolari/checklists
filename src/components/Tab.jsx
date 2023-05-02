@@ -5,7 +5,7 @@ import { useCookies } from 'react-cookie'
 import svgCross from '../public/assets/x.svg'
 
 export default function Tab({index, check, type}){
-    const {setIndex, setCheck, setType,tabs, attLocalTabs, verifyLocalTabs} = useContext(Context)
+    const {setIndex, setCheck, setType,tabs, attLocalTabs, verifyLocalTabs, setAns} = useContext(Context)
     const [cookies, setCookies, removeCookie] = useCookies()
 
     function setInfos(e){
@@ -29,7 +29,7 @@ export default function Tab({index, check, type}){
         <div  onClick={setInfos} className={styles.containerTab} >
             <div className={styles.divNameTab}>
                 {
-                    'TAB (' + index + ')'
+                    index
                 }
             </div>
             <div onClick={deleteTab} className={styles.containerTabDel}>
