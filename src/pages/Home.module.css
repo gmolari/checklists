@@ -19,16 +19,23 @@
 .containerTab{
   position: relative;
   display: flex;
-  padding: .5em 1.5em;
   background: #259cfd;
-  border: 1px solid blue
+  border-top-left-radius: 1em;
+  margin: 0 .1em;
+  color: white;
+  font-weight: bolder;
+}
+
+.divNameTab {
+  padding: .5em 1.5em;
 }
 
 .containerTabDel{
   position: absolute;
   right: 0;
-  padding: .5em;
-  background: #ff0000;
+}
+.containerTabDel img:hover {
+  opacity: .2;
 }
 
 .containerTab:hover {

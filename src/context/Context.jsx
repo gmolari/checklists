@@ -16,40 +16,28 @@ function UserProvider({children}){
     const localTabs = JSON.parse(localStorage.getItem('tabs'))
 
     function verifyLocalTabs(){
-        if ( !localTabs || localTabs.length <= 0){
-            console.log(localTabs)
-            setType('')
+        if ( !localTabs || localTabs.length <= 1){
             setCheck('')
-            setCookies('cCheck', '')
-            setCookies('cType', '')
-            setCookies('cIndex', '')
         }
-        setIndex('');
     }
 
     useEffect(() => {
         if ( !localTabs || localTabs.length <= 0){
-            console.log(localTabs)
-            setType('')
             setCheck('')
-            setCookies('cCheck', '')
-            setCookies('cType', '')
-            setCookies('cIndex', '')
         }
         if (!index) setIndex(cookies.cIndex);
-        console.log('CONTEXT FIRST')
     }, [])
 
     useEffect(() => {
-        index ? setCookies('cIndex', index) : ''
+        index || index == '' ? setCookies('cIndex', index) : ''
     }, [index])
 
     useEffect(() => {
-        type ? setCookies('cType', type) : ''
+        type || type == '' ? setCookies('cType', type) : ''
     }, [type])
 
     useEffect(() => {
-        check ? setCookies('cCheck', check) : ''
+        check || check == '' ? setCookies('cCheck', check) : ''
     }, [check])
 
     return (
@@ -66,7 +54,7 @@ function UserProvider({children}){
                 index,
                 setIndex,
                 attLocalTabs,
-                verifyLocalTabs
+                verifyLocalTabs,
             }
         }>
             {children}

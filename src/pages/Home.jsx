@@ -8,9 +8,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import checklists from "../components/Checklists";
 import { Context } from "../context/Context";
 import Tab from "../components/Tab";
+import svgCross from '../public/assets/x.svg'
 
 const Home = ({ cookies, setCookies }) => {
-  const {type, check, setType, setCheck, tabs} = useContext(Context)
+  const {type, check, setType, setCheck, tabs, index} = useContext(Context)
   const [randomKey, setRandomKey] = useState(Math.random());
 
   useEffect(() => {
@@ -55,7 +56,7 @@ const Home = ({ cookies, setCookies }) => {
             ))
           }
         </div>
-        {check !== "" ? (
+        {check !== "" && index ? (
           <Checklist
             setRandomKey={setRandomKey}
             key={randomKey}

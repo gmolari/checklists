@@ -34,16 +34,16 @@ const ChooseChecklist = ({ type, setCheck, cookies, setCookies }) => {
               className={styles.button}
               key={index[1] + type}
               onClick={() => {
+                const protocolo = prompt('Digite um nome para a aba (tem que ser diferente das outras)')
                 setCheck(index[1])
                 if (index[1] && type){
                   tabs.push({
-                      index: tabs.length+1,
+                      index: tabs.length+1+index[1],
                       type,
                       check: index[1],
                   })
                   
-                  setIndex(tabs.length)
-                  setCookies('cIndex', tabs.length)
+                  setIndex(tabs.length+index[1])
                   localStorage.setItem('tabs', JSON.stringify(tabs))
                 }
               }}
@@ -56,7 +56,8 @@ const ChooseChecklist = ({ type, setCheck, cookies, setCookies }) => {
               'LocalTabs:',JSON.parse(localStorage.getItem('tabs'))
               , 'Tabs:', tabs,
               'Index:',index,
-              'cIndex:',cookies.cIndex)
+              'cIndex:',cookies.cIndex,
+              'Index:', cookies[index])
           }} className={styles.button}>TESTE</button>
         </div>
       </section>
