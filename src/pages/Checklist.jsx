@@ -39,7 +39,6 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
         if (valueCookie) {
           inpAns.value = valueCookie;
         } else inpAns.value = "";
-        console.log('PINX')
         setAns((prevValue) => ({
             ...prevValue,
             [value]: inpAns.value,
@@ -56,7 +55,7 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
         inpAns.value = null;
       }
     }
-  }, [checkChangeCheck]);
+  }, [checkChangeCheck, index]);
 
   // WHEN ANS AND QUESTIONS CHANGE
   useEffect(() => {
@@ -64,22 +63,20 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
     for (const i in questions) {
       switch (type) {
         case "schedulling":
-          if (ans[check]) {
-            ans[check].inpFocus && i == 0
-              ? (formatedAns = `.·.·.·.·.·.·${ans[
-                  check
-                ].inpFocus.toUpperCase()}·.·.·.·.·.·.\n`)
+          if (ans) {
+            ans.inpFocus && i == 0
+              ? (formatedAns = `.·.·.·.·.·.·${ans.inpFocus.toUpperCase()}·.·.·.·.·.·.\n`)
               : "";
-            if (ans[check][i]) {
+            if (ans[i]) {
               if (questions[i].includes("PORTA")) {
                 formatedAns =
-                  formatedAns + ` ${questions[i]} ${ans[check][i]}\n`;
+                  formatedAns + ` ${questions[i]} ${ans[i]}\n`;
                 continue;
               }
 
               if (questions[i].includes("CAIXA")) {
                 formatedAns =
-                  formatedAns + `¶ ${questions[i]} ${ans[check][i]}`;
+                  formatedAns + `¶ ${questions[i]} ${ans[i]}`;
                 continue;
               }
 
@@ -87,31 +84,29 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
                 let question = questions[i].slice(0, questions[i].length-1)
                 if (i == 0 || i == 3 || i == 1) {
                   formatedAns = 
-                  formatedAns + `${question}....: ${ans[check][i]}\n`;
+                  formatedAns + `${question}....: ${ans[i]}\n`;
                 }else if (i == 2){
                   formatedAns = 
-                  formatedAns + `${question}...........: ${ans[check][i]}\n`;
+                  formatedAns + `${question}...........: ${ans[i]}\n`;
                 }else if (i == questions.length - 1){
                   formatedAns = 
-                  formatedAns + `\n${question}: ${ans[check][i]}`
+                  formatedAns + `\n${question}: ${ans[i]}`
                 }else {
                   formatedAns = 
-                  formatedAns + `${question}: ${ans[check][i]}\n`
+                  formatedAns + `${question}: ${ans[i]}\n`
                 }
                 continue
               }
               formatedAns =
-                formatedAns + `¶ ${questions[i]} ${ans[check][i]}\n`;
+                formatedAns + `¶ ${questions[i]} ${ans[i]}\n`;
             } else if (questions[i].includes("PORTA")) {
               formatedAns = formatedAns + `\n`;
               continue;
             }
-            ans[check].inpFocus && i >= questions.length - 1 && check !== "los"
+            ans.inpFocus && i >= questions.length - 1 && check !== "los"
               ? (formatedAns =
                   formatedAns +
-                  `.·.·.·.·.·.·${ans[
-                    check
-                  ].inpFocus.toUpperCase()}·.·.·.·.·.·.`)
+                  `.·.·.·.·.·.·${ans.inpFocus.toUpperCase()}·.·.·.·.·.·.`)
               : "";
           }
           if (check == "los") {
@@ -121,8 +116,8 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
                 "¶ MOTIVO: LOS VERMELHO\n" +
                 "¶ OBS: Verificar infra, ONU, conectores...";
 
-              ans[check]
-                ? ans[check].inpFocus
+              ans
+                ? ans.inpFocus
                   ? (formatedAns += `\n.·.·.·.·.·.·${ans[
                       check
                     ].inpFocus.toUpperCase()}·.·.·.·.·.·.`)
@@ -136,29 +131,29 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
         case "activation":
         case "maintenance":
         case "migration":
-          if (ans[check]) {
-            if (ans[check][i]) {
+          if (ans) {
+            if (ans[i]) {
               if (i <= 3) {
                 if (i == 3) {
                   formatedAns =
-                    formatedAns + `${questions[i]} ${ans[check][i]}\n\n\n`;
+                    formatedAns + `${questions[i]} ${ans[i]}\n\n\n`;
                   continue;
                 }
                 formatedAns =
-                  formatedAns + `${questions[i]} ${ans[check][i]}\n`;
+                  formatedAns + `${questions[i]} ${ans[i]}\n`;
                 continue;
               }
               formatedAns =
-                formatedAns + `${questions[i]}\n${ans[check][i]}\n\n`;
+                formatedAns + `${questions[i]}\n${ans[i]}\n\n`;
             }
           }
           break;
 
         default:
-          if (ans[check]) {
-            if (ans[check][i]) {
+          if (ans) {
+            if (ans[i]) {
               formatedAns =
-                formatedAns + `${questions[i]}\n${ans[check][i]}\n\n`;
+                formatedAns + `${questions[i]}\n${ans[i]}\n\n`;
             }
           }
           break;
@@ -166,7 +161,6 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
     }
 
     ans ? setCookies(index, ans) : ''
-    console.log('COOKIE INDEX: ', cookies[index])
 
     setFormatAns(formatedAns);
   }, [ans, questions]);

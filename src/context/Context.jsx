@@ -16,7 +16,7 @@ function UserProvider({children}){
     const [ans, setAns] = useState(index ? cookies[index] : '');
     const [infos, setInfos] = useState();
 
-    function verifyLocalTabs(){
+    function verifyLocalTabs(data){
         if ( !localTabs || localTabs.length < 1){
             setCheck('')
         }

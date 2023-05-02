@@ -12,7 +12,7 @@ export default function Tab({index, check, type}){
         setIndex(index)
         setType(type)
         setCheck(check)
-        verifyLocalTabs()
+        console.log(localStorage.getItem('tabs'))
     }
 
 
@@ -20,9 +20,8 @@ export default function Tab({index, check, type}){
         const item = tabs.filter(item => item.index == index)[0]
         const localItem = tabs.indexOf(item)
         tabs.splice(localItem, 1)
-        attLocalTabs();
+        attLocalTabs();        
         removeCookie(index)
-        console.log('DELETE')
     }
 
     return (
