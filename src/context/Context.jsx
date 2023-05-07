@@ -10,15 +10,20 @@ function UserProvider({children}){
     const {tabs, attLocalTabs} = useTabs()
     const [type, setType] = useState("");
     const [check, setCheck] = useState("");
-    const [cookies, setCookies] = useCookies();
+    const [cookies, setCookies, removeCookie] = useCookies();
     const [index, setIndex] = useState(cookies.cIndex ? cookies.cIndex : '');
     const localTabs = JSON.parse(localStorage.getItem('tabs'))
     const [ans, setAns] = useState(index ? cookies[index] : '');
     const [infos, setInfos] = useState();
 
-    function verifyLocalTabs(data){
-        if ( !localTabs || localTabs.length < 1){
-            setCheck('')
+    function deleteCookie(cookie){
+        console.log(cookie, index, cookies.cIndex)
+        removeCookie(cookie)
+    }
+
+    function verifyLocalTabs(){
+        if ( !localTabs || localTabs.length <= 1){
+            setCheck('los')
         }
     }
 
@@ -40,7 +45,6 @@ function UserProvider({children}){
 
     useEffect(() => {
         check || check == '' ? setCookies('cCheck', check) : ''
-        // setInfos(cookies[index])
     }, [check])
 
     return (
@@ -59,6 +63,7 @@ function UserProvider({children}){
                 attLocalTabs,
                 verifyLocalTabs,
                 infos,
+                deleteCookie
             }
         }>
             {children}

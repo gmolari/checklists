@@ -6,9 +6,10 @@ import { useCookies } from 'react-cookie'
 import svgCross from '../public/assets/x.svg'
 
 export default function Tab({indexx, check, type}){
-    const {setIndex, setCheck, setType,tabs, attLocalTabs, index} = useContext(Context)
+    const {setIndex, setCheck, setType,tabs, attLocalTabs, index, deleteCookie} = useContext(Context)
     const [cookies, setCookies, removeCookie] = useCookies()
     const [active, setActive] = useState(false);
+    let del = false
 
     useEffect(() => {
         if (indexx == index) setActive(true)
@@ -16,17 +17,24 @@ export default function Tab({indexx, check, type}){
     }, [index])
 
     function setInfos(e){
-        setIndex(indexx)
-        setType(type)
         setCheck(check)
+        setIndex(indexx)
+        setType(type) 
+        if (del) {
+            deleteCookie(indexx)
+        }  
+        del = false
+        if (tabs.length <= 0) {
+            setIndex('')
+        };
     }
 
     function deleteTab(){
         const item = tabs.filter(item => item.index == indexx)[0]
         const localItem = tabs.indexOf(item)
-        tabs.splice(localItem, 1)
-        attLocalTabs();        
-        removeCookie(indexx)
+        tabs.splice(localItem, 1)        
+        attLocalTabs();
+        del = true
     }
 
     return (

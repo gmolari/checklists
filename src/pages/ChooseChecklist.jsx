@@ -60,14 +60,14 @@ const ChooseChecklist = ({ type, setCheck, cookies, setCookies }) => {
               {index[0].toUpperCase()}
             </button>
           ))}
-          <button onClick={() => {
+          {/* <button onClick={() => {
             console.log(
               'LocalTabs:',JSON.parse(localStorage.getItem('tabs'))
               , 'Tabs:', tabs,
               'Var Index:',index,
               'cIndex:',cookies.cIndex,
               'Index Cookie (ans):', cookies[index])
-          }} className={styles.button}>TESTE</button>
+          }} className={styles.button}>TESTE</button> */}
         </div>
       </section>
     </div>
