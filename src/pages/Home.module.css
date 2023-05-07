@@ -16,31 +16,17 @@
   min-height: 98vh;
 }
 
-.containerTab{
-  position: relative;
-  display: flex;
-  background: #259cfd;
-  border-top-left-radius: 1em;
-  margin: 0 .1em;
-  color: white;
-  font-weight: bolder;
-}
-
 .divNameTab {
   padding: .5em 1.5em;
 }
 
 .containerTabDel{
   position: absolute;
+  margin-right: .1rem;
   right: 0;
 }
 .containerTabDel img:hover {
   opacity: .2;
-}
-
-.containerTab:hover {
-  cursor: pointer;
-  background: #175e99;
 }
 
 .tabsContainer{

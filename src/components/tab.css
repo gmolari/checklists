@@ -1,0 +1,19 @@
+.containerTab{
+    position: relative;
+    display: flex;
+    background: #259cfd;
+    border-top-left-radius: 1em;
+    margin: 0 .1em;
+    color: white;
+    font-weight: bolder;
+}
+
+.containerTab:hover {
+    cursor: pointer;
+    background: #175e99;
+}
+
+.active {
+    background: #b4dcff;
+    color: #353535
+}

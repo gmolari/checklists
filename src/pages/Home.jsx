@@ -52,7 +52,7 @@ const Home = ({ cookies, setCookies }) => {
         <div className={styles.tabsContainer}>
           {
             tabs && tabs.map(i => (
-              <Tab key={tabs.indexOf(i)} index={i.index} check={i.check} type={i.type} />
+              <Tab key={tabs.indexOf(i)} indexx={i.index} check={i.check} type={i.type} />
             ))
           }
         </div>
