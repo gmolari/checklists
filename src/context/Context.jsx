@@ -29,9 +29,9 @@ function UserProvider({children}){
         // setInfos(cookies[index])
     }, [])
 
-    // useEffect(() => {
-    //     index || index == '' ? setCookies('cIndex', index) : ''
-    // }, [index])
+    useEffect(() => {
+        index || index == '' ? setCookies('cIndex', index) : ''
+    }, [index])
 
     useEffect(() => {
         type || type == '' ? setCookies('cType', type) : ''

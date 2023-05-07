@@ -31,6 +31,7 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
   }, [check]);
 
   useEffect(() => {
+    setAns({})
     const inpFocus = document.getElementById(`idInpFocus`);
     if (cookies[index]) {
       for (const value in questions) {
@@ -160,7 +161,7 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
       }
     }
 
-    ans ? setCookies(index, ans) : ''
+    setCookies(index, ans ? ans : '')
 
     setFormatAns(formatedAns);
   }, [ans, questions]);
