@@ -119,9 +119,7 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
 
               ans
                 ? ans.inpFocus
-                  ? (formatedAns += `\n.·.·.·.·.·.·${ans[
-                      check
-                    ].inpFocus.toUpperCase()}·.·.·.·.·.·.`)
+                  ? (formatedAns += `\n.·.·.·.·.·.·${ans.inpFocus.toUpperCase()}·.·.·.·.·.·.`)
                   : ""
                 : "";
               continue;
