@@ -13,7 +13,7 @@ function UserProvider({children}){
     const [cookies, setCookies, removeCookie] = useCookies();
     const [index, setIndex] = useState(cookies.cIndex ? cookies.cIndex : '');
     const localTabs = JSON.parse(localStorage.getItem('tabs'))
-    const [ans, setAns] = useState(index ? cookies[index] : '');
+    const [ans, setAns] = useState(localStorage.getItem(index) ? localStorage.getItem(index) : '');
     const [infos, setInfos] = useState();
 
     function deleteCookie(cookie){

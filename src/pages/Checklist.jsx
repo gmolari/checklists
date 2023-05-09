@@ -5,8 +5,8 @@ import CopyToClipboard from "react-copy-to-clipboard";
 import { toast } from "react-toastify";
 import { Context } from "../context/Context";
 
-const Checklist = ({ setRandomKey, cookies, setCookies }) => {
-  const {type, check, ans, setAns, index, infos} = useContext(Context)
+const Checklist = ({ setRandomKey }) => {
+  const {type, check, ans, setAns, index} = useContext(Context)
   const [questions, setQuestions] = useState(
     checklists[type]?.checks[check]?.questions
   );
@@ -24,6 +24,7 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
 
   const [formatAns, setFormatAns] = useState();
   const [checkChangeCheck, setCheckChange] = useState();
+  const thisIndex = localStorage.getItem(index)
 
   useEffect(() => {
     setQuestions(checklists[type]?.checks[check]?.questions);
@@ -31,25 +32,27 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
   }, [check]);
 
   useEffect(() => {
-    setAns({})
+    setAns()
     const inpFocus = document.getElementById(`idInpFocus`);
-    if (cookies[index]) {
-      for (const value in questions) {
-        const inpAns = document.getElementById(`idInp${value}`);
-        let valueCookie = cookies[index][value];
-        if (valueCookie) {
-          inpAns.value = valueCookie;
-        } else inpAns.value = "";
-        setAns((prevValue) => ({
-            ...prevValue,
-            [value]: inpAns.value,
-        }));
+    if (thisIndex) {
+      if (typeof JSON.parse(thisIndex) == 'object'){
+        for (const value in questions) {
+          const inpAns = document.getElementById(`idInp${value}`);
+          let valueCookie = JSON.parse(thisIndex)[value];
+          if (valueCookie) {
+            inpAns.value = valueCookie;
+          } else inpAns.value = "";
+          setAns((prevValue) => ({
+              ...prevValue,
+              [value]: inpAns.value,
+          }));
+        }
+        inpFocus
+          ? JSON.parse(thisIndex).inpFocus
+            ? (inpFocus.value = JSON.parse(thisIndex).inpFocus)
+            : (inpFocus.value = null)
+          : "";
       }
-      inpFocus
-        ? cookies[index].inpFocus
-          ? (inpFocus.value = cookies[index].inpFocus)
-          : (inpFocus.value = null)
-        : "";
     } else {
       for (const value in questions) {
         const inpAns = document.getElementById(`idInp${value}`);
@@ -159,7 +162,7 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
       }
     }
 
-    setCookies(index, ans ? ans : '')
+    ans ? localStorage.setItem(index, JSON.stringify(ans)) : ''
 
     setFormatAns(formatedAns);
   }, [ans, questions]);
@@ -174,9 +177,7 @@ const Checklist = ({ setRandomKey, cookies, setCookies }) => {
   function resetForm() {
     let reset = confirm("RESETAR A PÁGINA?");
     if (reset) {
-      if (cookies[type]) {
-        cookies[type][check] ? delete cookies[type][check] : "";
-      }
+      localStorage.removeItem(index)
       setRandomKey(Math.random());
     }
   }

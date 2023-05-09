@@ -22,6 +22,7 @@ export default function Tab({indexx, check, type}){
         setType(type) 
         if (del) {
             deleteCookie(indexx)
+            localStorage.removeItem(indexx)
         }  
         del = false
         if (tabs.length <= 0) {
