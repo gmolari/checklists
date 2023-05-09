@@ -32,7 +32,9 @@ const Checklist = ({ setRandomKey }) => {
   }, [check]);
 
   useEffect(() => {
-    setAns()
+    setAns({})
+    console.log(index)
+    console.log(JSON.parse(thisIndex))
     const inpFocus = document.getElementById(`idInpFocus`);
     if (thisIndex) {
       if (typeof JSON.parse(thisIndex) == 'object'){
@@ -177,8 +179,14 @@ const Checklist = ({ setRandomKey }) => {
   function resetForm() {
     let reset = confirm("RESETAR A PÁGINA?");
     if (reset) {
-      localStorage.removeItem(index)
-      setRandomKey(Math.random());
+      for (const value in questions) {
+        const inpAns = document.getElementById(`idInp${value}`);
+        let valueCookie = JSON.parse(thisIndex)[value];
+        if (valueCookie) {
+          inpAns.value = ''
+        }
+      }
+      setAns('{}')
     }
   }
 
