@@ -43,6 +43,8 @@ const ChooseChecklist = ({ type, setCheck, cookies, setCookies }) => {
                   }
                 }
 
+                if (!protocolo) return
+
                 setCheck(index[1])
                 if (index[1] && type){
                   tabs.push({
@@ -53,6 +55,7 @@ const ChooseChecklist = ({ type, setCheck, cookies, setCookies }) => {
                   
                   setIndex(tabs.length+' '+'('+protocolo+')')
                   setCookies('cIndex', tabs.length+' '+'('+protocolo+')')
+                  localStorage.setItem(tabs.length+' '+'('+protocolo+')', '')
                   localStorage.setItem('tabs', JSON.stringify(tabs))
                 }
               }}
@@ -60,10 +63,11 @@ const ChooseChecklist = ({ type, setCheck, cookies, setCookies }) => {
               {index[0].toUpperCase()}
             </button>
           ))}
-          {/* <button onClick={() => {
+          <button onClick={() => {
             console.log(
-              'LocalStorage:', localStorage)
-          }} className={styles.button}>TESTE</button> */}
+              'LocalStorage:', localStorage,
+              'Index:', index)
+          }} className={styles.button}>TESTE</button>
         </div>
       </section>
     </div>

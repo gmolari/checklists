@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { Context } from "../context/Context";
 
 const Checklist = ({ setRandomKey }) => {
-  const {type, check, ans, setAns, index} = useContext(Context)
+  const {type, check, ans, setAns, index, answers} = useContext(Context)
   const [questions, setQuestions] = useState(
     checklists[type]?.checks[check]?.questions
   );
@@ -24,7 +24,6 @@ const Checklist = ({ setRandomKey }) => {
 
   const [formatAns, setFormatAns] = useState();
   const [checkChangeCheck, setCheckChange] = useState();
-  const thisIndex = localStorage.getItem(index)
 
   useEffect(() => {
     setQuestions(checklists[type]?.checks[check]?.questions);
@@ -32,26 +31,27 @@ const Checklist = ({ setRandomKey }) => {
   }, [check]);
 
   useEffect(() => {
-    setAns({})
+    console.log('rodei')
     console.log(index)
-    console.log(JSON.parse(thisIndex))
     const inpFocus = document.getElementById(`idInpFocus`);
-    if (thisIndex) {
-      if (typeof JSON.parse(thisIndex) == 'object'){
+    if (answers) {
+      if (typeof JSON.parse(answers) == 'object'){
         for (const value in questions) {
           const inpAns = document.getElementById(`idInp${value}`);
-          let valueCookie = JSON.parse(thisIndex)[value];
+          let valueCookie = JSON.parse(answers)[value];
           if (valueCookie) {
             inpAns.value = valueCookie;
-          } else inpAns.value = "";
+          } else {
+            inpAns.value = "";
+          }
           setAns((prevValue) => ({
               ...prevValue,
               [value]: inpAns.value,
           }));
         }
         inpFocus
-          ? JSON.parse(thisIndex).inpFocus
-            ? (inpFocus.value = JSON.parse(thisIndex).inpFocus)
+          ? JSON.parse(answers).inpFocus
+            ? (inpFocus.value = JSON.parse(answers).inpFocus)
             : (inpFocus.value = null)
           : "";
       }
@@ -61,7 +61,7 @@ const Checklist = ({ setRandomKey }) => {
         inpAns.value = null;
       }
     }
-  }, [checkChangeCheck, index]);
+  }, [checkChangeCheck, answers]);
 
   // WHEN ANS AND QUESTIONS CHANGE
   useEffect(() => {
@@ -181,7 +181,7 @@ const Checklist = ({ setRandomKey }) => {
     if (reset) {
       for (const value in questions) {
         const inpAns = document.getElementById(`idInp${value}`);
-        let valueCookie = JSON.parse(thisIndex)[value];
+        let valueCookie = answers[value];
         if (valueCookie) {
           inpAns.value = ''
         }

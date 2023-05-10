@@ -15,6 +15,7 @@ function UserProvider({children}){
     const localTabs = JSON.parse(localStorage.getItem('tabs'))
     const [ans, setAns] = useState({});
     const [infos, setInfos] = useState();
+    const [answers, setAnswers] = useState(localStorage.getItem(index));
 
     function deleteCookie(cookie){
         removeCookie(cookie)
@@ -35,6 +36,8 @@ function UserProvider({children}){
 
     useEffect(() => {
         index || index == '' ? setCookies('cIndex', index) : ''
+        setAnswers(localStorage.getItem(index))
+        setAns('')
     }, [index])
 
     useEffect(() => {
@@ -44,6 +47,7 @@ function UserProvider({children}){
 
     useEffect(() => {
         check || check == '' ? setCookies('cCheck', check) : ''
+        setAns('')
     }, [check])
 
     return (
@@ -62,7 +66,8 @@ function UserProvider({children}){
                 attLocalTabs,
                 verifyLocalTabs,
                 infos,
-                deleteCookie
+                deleteCookie,
+                answers
             }
         }>
             {children}
