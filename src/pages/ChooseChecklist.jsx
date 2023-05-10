@@ -63,11 +63,11 @@ const ChooseChecklist = ({ type, setCheck, cookies, setCookies }) => {
               {index[0].toUpperCase()}
             </button>
           ))}
-          <button onClick={() => {
+          {/* <button onClick={() => {
             console.log(
               'LocalStorage:', localStorage,
               'Index:', index)
-          }} className={styles.button}>TESTE</button>
+          }} className={styles.button}>TESTE</button> */}
         </div>
       </section>
     </div>
