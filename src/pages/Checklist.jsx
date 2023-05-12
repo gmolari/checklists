@@ -31,8 +31,6 @@ const Checklist = ({ setRandomKey }) => {
   }, [check]);
 
   useEffect(() => {
-    console.log('rodei')
-    console.log(index)
     const inpFocus = document.getElementById(`idInpFocus`);
     if (answers) {
       if (typeof JSON.parse(answers) == 'object'){
@@ -40,8 +38,10 @@ const Checklist = ({ setRandomKey }) => {
           const inpAns = document.getElementById(`idInp${value}`);
           let valueCookie = JSON.parse(answers)[value];
           if (valueCookie) {
+            console.log('Tenho algo para colocar')
             inpAns.value = valueCookie;
           } else {
+            console.log('Não tenho nada para colocar')
             inpAns.value = "";
           }
           setAns((prevValue) => ({
@@ -61,7 +61,7 @@ const Checklist = ({ setRandomKey }) => {
         inpAns.value = null;
       }
     }
-  }, [checkChangeCheck, answers]);
+  }, [checkChangeCheck, answers, index]);
 
   // WHEN ANS AND QUESTIONS CHANGE
   useEffect(() => {
@@ -182,12 +182,10 @@ const Checklist = ({ setRandomKey }) => {
     if (reset) {
       const inpFocus = document.getElementById('idInpFocus');
       for (const value in questions) {
-        console.log('to resetano')
         const inpAns = document.getElementById(`idInp${value}`);
         inpAns.value = ''
       }
       inpFocus ? inpFocus.value = '' : ''
-      console.log(inpFocus)
       setAns('{}')
     }
   }

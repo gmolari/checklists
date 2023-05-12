@@ -47,6 +47,7 @@ function UserProvider({children}){
 
     useEffect(() => {
         check || check == '' ? setCookies('cCheck', check) : ''
+        setAnswers(localStorage.getItem(index))
         setAns('')
     }, [check])
 

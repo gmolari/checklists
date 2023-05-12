@@ -43,7 +43,10 @@ const ChooseChecklist = ({ type, setCheck, cookies, setCookies }) => {
                   }
                 }
 
-                if (!protocolo) return
+                if (!protocolo) {
+                  alert('Digite algum nome')
+                  return
+                }
 
                 setCheck(index[1])
                 if (index[1] && type){
