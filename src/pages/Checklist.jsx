@@ -180,11 +180,14 @@ const Checklist = ({ setRandomKey }) => {
   function resetForm() {
     let reset = confirm("RESETAR A PÁGINA?");
     if (reset) {
+      const inpFocus = document.getElementById('idInpFocus');
       for (const value in questions) {
         console.log('to resetano')
         const inpAns = document.getElementById(`idInp${value}`);
         inpAns.value = ''
       }
+      inpFocus ? inpFocus.value = '' : ''
+      console.log(inpFocus)
       setAns('{}')
     }
   }
