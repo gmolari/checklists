@@ -151,6 +151,7 @@ const Checklist = ({ setRandomKey }) => {
                 formatedAns + `${questions[i]}\n${ans[i]}\n\n`;
             }
           }
+          
           break;
 
         default:
@@ -180,11 +181,9 @@ const Checklist = ({ setRandomKey }) => {
     let reset = confirm("RESETAR A PÁGINA?");
     if (reset) {
       for (const value in questions) {
+        console.log('to resetano')
         const inpAns = document.getElementById(`idInp${value}`);
-        let valueCookie = answers[value];
-        if (valueCookie) {
-          inpAns.value = ''
-        }
+        inpAns.value = ''
       }
       setAns('{}')
     }

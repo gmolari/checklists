@@ -8,7 +8,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import checklists from "../components/Checklists";
 import { Context } from "../context/Context";
 import Tab from "../components/Tab";
-import svgCross from '../public/assets/x.svg'
 
 const Home = ({ cookies, setCookies }) => {
   const {type, check, setType, setCheck, tabs, index} = useContext(Context)
