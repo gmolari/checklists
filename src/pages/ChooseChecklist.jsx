@@ -37,7 +37,7 @@ const ChooseChecklist = ({ type, setCheck, cookies, setCookies }) => {
                 const protocolo = prompt('Digite um nome para a aba (único, protocolo, por exemplo)')
 
                 for (const i in tabs){
-                  if (tabs.length+1+protocolo == tabs[i].index) {
+                  if (tabs.length+1+' '+'('+protocolo+')' == tabs[i].index) {
                     alert('Já existe')
                     return
                   }

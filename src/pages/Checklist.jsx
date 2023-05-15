@@ -38,10 +38,8 @@ const Checklist = ({ setRandomKey }) => {
           const inpAns = document.getElementById(`idInp${value}`);
           let valueCookie = JSON.parse(answers)[value];
           if (valueCookie) {
-            console.log('Tenho algo para colocar')
             inpAns.value = valueCookie;
           } else {
-            console.log('Não tenho nada para colocar')
             inpAns.value = "";
           }
           setAns((prevValue) => ({
