@@ -31,6 +31,7 @@
 
 .tabsContainer{
   display: flex;
+  overflow-x: scroll;
 }
 
 .divContainerSelect {
