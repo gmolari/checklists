@@ -16,6 +16,24 @@
   min-height: 98vh;
 }
 
+.divNameTab {
+  padding: .5em 1.5em;
+}
+
+.containerTabDel{
+  position: absolute;
+  margin-right: .1rem;
+  right: 0;
+}
+.containerTabDel img:hover {
+  opacity: .2;
+}
+
+.tabsContainer{
+  display: flex;
+  overflow-x: scroll;
+}
+
 .divContainerSelect {
   grid-area: home;
   display: flex;

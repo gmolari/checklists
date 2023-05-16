@@ -1,9 +1,11 @@
 import styles from "./ChooseChecklist.module.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import checklists from "../components/Checklists";
+import { Context } from "../context/Context";
 
-const ChooseChecklist = ({ type, setCheck, cookies }) => {
+const ChooseChecklist = ({ type, setCheck, cookies, setCookies }) => {
   const [arrayChecklist, setArrayChecklist] = useState([]);
+  const {tabs, ans, setIndex, index} = useContext(Context)
 
   for (const check in checklists[type].checks) {
     arrayChecklist.length < Object.keys(checklists[type].checks).length
@@ -31,11 +33,44 @@ const ChooseChecklist = ({ type, setCheck, cookies }) => {
             <button
               className={styles.button}
               key={index[1] + type}
-              onClick={() => setCheck(index[1])}
+              onClick={() => {
+                const protocolo = prompt('Digite um nome para a aba (único, protocolo, por exemplo)')
+
+                for (const i in tabs){
+                  if (tabs.length+1+' '+'('+protocolo+')' == tabs[i].index) {
+                    alert('Já existe')
+                    return
+                  }
+                }
+
+                if (!protocolo) {
+                  alert('Digite algum nome')
+                  return
+                }
+
+                setCheck(index[1])
+                if (index[1] && type){
+                  tabs.push({
+                      index: tabs.length+1+' '+'('+protocolo+')',
+                      type,
+                      check: index[1],
+                  })
+                  
+                  setIndex(tabs.length+' '+'('+protocolo+')')
+                  setCookies('cIndex', tabs.length+' '+'('+protocolo+')')
+                  localStorage.setItem(tabs.length+' '+'('+protocolo+')', '')
+                  localStorage.setItem('tabs', JSON.stringify(tabs))
+                }
+              }}
             >
               {index[0].toUpperCase()}
             </button>
           ))}
+          {/* <button onClick={() => {
+            console.log(
+              'LocalStorage:', localStorage,
+              'Index:', index)
+          }} className={styles.button}>TESTE</button> */}
         </div>
       </section>
     </div>

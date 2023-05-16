@@ -1,12 +1,14 @@
 import styles from "./Checklist.module.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import checklists from "../components/Checklists";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { toast } from "react-toastify";
+import { Context } from "../context/Context";
 
-const Checklist = ({ setRandomKey, type, check, cookies, setCookies }) => {
+const Checklist = ({ setRandomKey }) => {
+  const {type, check, ans, setAns, index, answers} = useContext(Context)
   const [questions, setQuestions] = useState(
-    checklists[type].checks[check].questions
+    checklists[type]?.checks[check]?.questions
   );
 
   const bodyToast = {
@@ -18,52 +20,46 @@ const Checklist = ({ setRandomKey, type, check, cookies, setCookies }) => {
     draggable: true,
     progress: undefined,
     theme: "colored",
-    }
+  }
 
-  const [ans, setAns] = useState({});
   const [formatAns, setFormatAns] = useState();
   const [checkChangeCheck, setCheckChange] = useState();
 
   useEffect(() => {
-    if (cookies[type]) {
-      setAns(cookies[type]);
-    } else setCookies(type, "");
-  }, []);
-
-  useEffect(() => {
-    setQuestions(checklists[type].checks[check].questions);
+    setQuestions(checklists[type]?.checks[check]?.questions);
     setCheckChange(Math.random() * 999999);
   }, [check]);
 
   useEffect(() => {
     const inpFocus = document.getElementById(`idInpFocus`);
-    if (cookies[type] && cookies[type][check]) {
-      for (const value in questions) {
-        const inpAns = document.getElementById(`idInp${value}`);
-        let valueCookie = cookies[type][check][value];
-        if (valueCookie) {
-          inpAns.value = valueCookie;
-        } else inpAns.value = "";
-        setAns((prevValue) => ({
-          ...prevValue,
-          [check]: {
-            ...prevValue[check],
-            [value]: inpAns.value,
-          },
-        }));
+    if (answers) {
+      if (typeof JSON.parse(answers) == 'object'){
+        for (const value in questions) {
+          const inpAns = document.getElementById(`idInp${value}`);
+          let valueCookie = JSON.parse(answers)[value];
+          if (valueCookie) {
+            inpAns.value = valueCookie;
+          } else {
+            inpAns.value = "";
+          }
+          setAns((prevValue) => ({
+              ...prevValue,
+              [value]: inpAns.value,
+          }));
+        }
+        inpFocus
+          ? JSON.parse(answers).inpFocus
+            ? (inpFocus.value = JSON.parse(answers).inpFocus)
+            : (inpFocus.value = null)
+          : "";
       }
-      inpFocus
-        ? cookies[type][check].inpFocus
-          ? (inpFocus.value = cookies[type][check].inpFocus)
-          : (inpFocus.value = null)
-        : "";
     } else {
       for (const value in questions) {
         const inpAns = document.getElementById(`idInp${value}`);
         inpAns.value = null;
       }
     }
-  }, [checkChangeCheck]);
+  }, [checkChangeCheck, answers, index]);
 
   // WHEN ANS AND QUESTIONS CHANGE
   useEffect(() => {
@@ -71,22 +67,20 @@ const Checklist = ({ setRandomKey, type, check, cookies, setCookies }) => {
     for (const i in questions) {
       switch (type) {
         case "schedulling":
-          if (ans[check]) {
-            ans[check].inpFocus && i == 0
-              ? (formatedAns = `.·.·.·.·.·.·${ans[
-                  check
-                ].inpFocus.toUpperCase()}·.·.·.·.·.·.\n`)
+          if (ans) {
+            ans.inpFocus && i == 0
+              ? (formatedAns = `.·.·.·.·.·.·${ans.inpFocus.toUpperCase()}·.·.·.·.·.·.\n`)
               : "";
-            if (ans[check][i]) {
+            if (ans[i]) {
               if (questions[i].includes("PORTA")) {
                 formatedAns =
-                  formatedAns + ` ${questions[i]} ${ans[check][i]}\n`;
+                  formatedAns + ` ${questions[i]} ${ans[i]}\n`;
                 continue;
               }
 
               if (questions[i].includes("CAIXA")) {
                 formatedAns =
-                  formatedAns + `¶ ${questions[i]} ${ans[check][i]}`;
+                  formatedAns + `¶ ${questions[i]} ${ans[i]}`;
                 continue;
               }
 
@@ -94,31 +88,29 @@ const Checklist = ({ setRandomKey, type, check, cookies, setCookies }) => {
                 let question = questions[i].slice(0, questions[i].length-1)
                 if (i == 0 || i == 3 || i == 1) {
                   formatedAns = 
-                  formatedAns + `${question}....: ${ans[check][i]}\n`;
+                  formatedAns + `${question}....: ${ans[i]}\n`;
                 }else if (i == 2){
                   formatedAns = 
-                  formatedAns + `${question}...........: ${ans[check][i]}\n`;
+                  formatedAns + `${question}...........: ${ans[i]}\n`;
                 }else if (i == questions.length - 1){
                   formatedAns = 
-                  formatedAns + `\n${question}: ${ans[check][i]}`
+                  formatedAns + `\n${question}: ${ans[i]}`
                 }else {
                   formatedAns = 
-                  formatedAns + `${question}: ${ans[check][i]}\n`
+                  formatedAns + `${question}: ${ans[i]}\n`
                 }
                 continue
               }
               formatedAns =
-                formatedAns + `¶ ${questions[i]} ${ans[check][i]}\n`;
+                formatedAns + `¶ ${questions[i]} ${ans[i]}\n`;
             } else if (questions[i].includes("PORTA")) {
               formatedAns = formatedAns + `\n`;
               continue;
             }
-            ans[check].inpFocus && i >= questions.length - 1 && check !== "los"
+            ans.inpFocus && i >= questions.length - 1 && check !== "los"
               ? (formatedAns =
                   formatedAns +
-                  `.·.·.·.·.·.·${ans[
-                    check
-                  ].inpFocus.toUpperCase()}·.·.·.·.·.·.`)
+                  `.·.·.·.·.·.·${ans.inpFocus.toUpperCase()}·.·.·.·.·.·.`)
               : "";
           }
           if (check == "los") {
@@ -128,11 +120,9 @@ const Checklist = ({ setRandomKey, type, check, cookies, setCookies }) => {
                 "¶ MOTIVO: LOS VERMELHO\n" +
                 "¶ OBS: Verificar infra, ONU, conectores...";
 
-              ans[check]
-                ? ans[check].inpFocus
-                  ? (formatedAns += `\n.·.·.·.·.·.·${ans[
-                      check
-                    ].inpFocus.toUpperCase()}·.·.·.·.·.·.`)
+              ans
+                ? ans.inpFocus
+                  ? (formatedAns += `\n.·.·.·.·.·.·${ans.inpFocus.toUpperCase()}·.·.·.·.·.·.`)
                   : ""
                 : "";
               continue;
@@ -143,57 +133,58 @@ const Checklist = ({ setRandomKey, type, check, cookies, setCookies }) => {
         case "activation":
         case "maintenance":
         case "migration":
-          if (ans[check]) {
-            if (ans[check][i]) {
+          if (ans) {
+            if (ans[i]) {
               if (i <= 3) {
                 if (i == 3) {
                   formatedAns =
-                    formatedAns + `${questions[i]} ${ans[check][i]}\n\n\n`;
+                    formatedAns + `${questions[i]} ${ans[i]}\n\n\n`;
                   continue;
                 }
                 formatedAns =
-                  formatedAns + `${questions[i]} ${ans[check][i]}\n`;
+                  formatedAns + `${questions[i]} ${ans[i]}\n`;
                 continue;
               }
               formatedAns =
-                formatedAns + `${questions[i]}\n${ans[check][i]}\n\n`;
+                formatedAns + `${questions[i]}\n${ans[i]}\n\n`;
             }
           }
+          
           break;
 
         default:
-          if (ans[check]) {
-            if (ans[check][i]) {
+          if (ans) {
+            if (ans[i]) {
               formatedAns =
-                formatedAns + `${questions[i]}\n${ans[check][i]}\n\n`;
+                formatedAns + `${questions[i]}\n${ans[i]}\n\n`;
             }
           }
           break;
       }
     }
 
-    setCookies(type, ans);
+    ans ? localStorage.setItem(index, JSON.stringify(ans)) : ''
 
     setFormatAns(formatedAns);
   }, [ans, questions]);
 
   function handleAns(value) {
     setAns((prevValue) => ({
-      ...prevValue,
-      [check]: {
-        ...prevValue[check],
+        ...prevValue,
         [value.target.name]: value.target.value,
-      },
-    }));
+      }));
   }
 
   function resetForm() {
     let reset = confirm("RESETAR A PÁGINA?");
     if (reset) {
-      if (cookies[type]) {
-        cookies[type][check] ? delete cookies[type][check] : "";
+      const inpFocus = document.getElementById('idInpFocus');
+      for (const value in questions) {
+        const inpAns = document.getElementById(`idInp${value}`);
+        inpAns.value = ''
       }
-      setRandomKey(Math.random());
+      inpFocus ? inpFocus.value = '' : ''
+      setAns('{}')
     }
   }
 

@@ -1,20 +1,21 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Select from "react-select";
 import styles from "./Home.module.css";
 import Checklist from "./Checklist";
 import ChooseChecklist from "./ChooseChecklist";
-import {ToastContainer, toast} from 'react-toastify'
+import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import checklists from "../components/Checklists";
+import { Context } from "../context/Context";
+import Tab from "../components/Tab";
 
 const Home = ({ cookies, setCookies }) => {
-  const [type, setType] = useState("");
-  const [check, setCheck] = useState("");
+  const {type, check, setType, setCheck, tabs, index} = useContext(Context)
   const [randomKey, setRandomKey] = useState(Math.random());
 
   useEffect(() => {
-    cookies.type ? setType(cookies.type) : "";
-    cookies.check ? setCheck(cookies.check) : "";
+    cookies.cType ? setType(cookies.cType) : "";
+    cookies.cCheck ? setCheck(cookies.cCheck) : "";
     setTypes();
   }, []);
 
@@ -34,25 +35,30 @@ const Home = ({ cookies, setCookies }) => {
 
   function setInfos(e) {
     setCheck("");
-    setCookies("check", check, { path: "/" });
+    setCookies("cCheck", check, { path: "/" });
     setType(e.value);
-    setCookies("type", e.value, { path: "/" });
+    setCookies("cType", e.value, { path: "/" });
   }
 
   function setCookieCheck(valor) {
     setCheck(valor);
-    setCookies("check", valor, { path: "/" });
+    setCookies("cCheck", valor, { path: "/" });
   }
 
   return (
     <div className={styles.divContainerMain}>
       <div className={styles.divContainerChecklist}>
-        {check !== "" ? (
+        <div className={styles.tabsContainer}>
+          {
+            tabs && tabs.map(i => (
+              <Tab key={tabs.indexOf(i)} indexx={i.index} check={i.check} type={i.type} />
+            ))
+          }
+        </div>
+        {check !== "" && index ? (
           <Checklist
             setRandomKey={setRandomKey}
             key={randomKey}
-            type={type}
-            check={check}
             cookies={cookies}
             setCookies={setCookies}
           />
@@ -74,6 +80,7 @@ const Home = ({ cookies, setCookies }) => {
           <ChooseChecklist
             setCheck={setCookieCheck}
             cookies={cookies}
+            setCookies={setCookies}
             type={type}
           />
         ) : (
