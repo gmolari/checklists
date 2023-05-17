@@ -194,9 +194,9 @@ const Checklist = ({ setRandomKey }) => {
 
   return (
     <div className={styles.divMainContainer}>
-      <h2 className={styles.h2}> {checklists[type].checks[check].name[0]} </h2>
+      <h2 className={styles.h2}> {checklists[type]?.checks[check]?.name[0]} </h2>
       {type !== "schedulling"
-        ? questions.map((e) => (
+        ? questions?.map((e) => (
             <div
               key={`div${questions.indexOf(e)}`}
               className={styles.divQuestion}
