@@ -215,7 +215,7 @@ const Checklist = ({ setRandomKey }) => {
               />
             </div>
           ))
-        : questions.map((e) => (
+        : questions?.map((e) => (
             <div
               key={`div${questions.indexOf(e)}`}
               className={styles.divQuestionSche}
