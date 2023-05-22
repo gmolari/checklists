@@ -25,7 +25,7 @@ const checklists = {
           "Foi alterado o tipo do atendimento?",
         ],
       },
-      buildingsz: {
+      building: {
         name: ["Prédio/Condomínio", "buildingsz"],
         questions: [
           "Responsável pela realização dos procedimentos (Cliente):",
@@ -47,7 +47,7 @@ const checklists = {
           "Foi alterado o tipo do atendimento?",
         ],
       },
-      radiosz: {
+      radio: {
         name: ["Rádio", "radiosz"],
         questions: [
           "Responsável pela realização dos procedimentos (Cliente):",
@@ -346,7 +346,7 @@ const checklists = {
           "Foi alterado o tipo do atendimento?",
         ],
       },
-      buildingm: {
+      building: {
         name: ["Manutenção Pŕedio/Condomínio", "buildingm"],
         questions: [
           "Tecnico Externo:",
@@ -429,7 +429,7 @@ const checklists = {
           'Motivo:'
         ],
       },
-      fibersc: {
+      fiber: {
         name: ["Fibra", "fibersc"],
         questions: [
           "NOME: ",
@@ -445,7 +445,7 @@ const checklists = {
           "OBS:",
         ],
       },
-      buildingsc: {
+      building: {
         name: ["Prédio/condomínio", "buildingsc"],
         questions: [
           "NOME: ",
@@ -477,7 +477,7 @@ const checklists = {
     name: "Ativação Persis",
     src: 'activation',
     checks: {
-      fiberac: {
+      fiber: {
         name: ["Ativação Fibra", "fiberac"],
         questions: [
           "Técnico Externo:",
@@ -512,7 +512,7 @@ const checklists = {
           "Técnico foi informado para tirar foto novamente em caso da troca de equipamento durante a ativação ?",
         ],
       },
-      huawei_zteac: {
+      huawei_zte: {
         name: ["Ativação Huawei/ZTE", "huawei_zteac"],
         questions: [
           "Técnico Externo:",
@@ -548,7 +548,7 @@ const checklists = {
           "Técnico foi informado para tirar foto novamente em caso da troca de equipamento durante a ativação ?",
         ],
       },
-      buildingac: {
+      building: {
         name: ["Ativação Pŕedio/Condomínio", "buildingac"],
         questions: [
           "Técnico Externo:",
