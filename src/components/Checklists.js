@@ -3,8 +3,8 @@ const checklists = {
     name: "Smartzap",
     src: 'smartzap',
     checks: {
-      fibersz: {
-        name: ["Fibra", "fibersz"],
+      fiber: {
+        name: ["Fibra", "fiber"],
         questions: [
           "Responsável pela realização dos procedimentos (Cliente):",
           "Telefone utilizado para contato (Número do WhatsApp):",
@@ -26,7 +26,7 @@ const checklists = {
         ],
       },
       building: {
-        name: ["Prédio/Condomínio", "buildingsz"],
+        name: ["Prédio/Condomínio", "building"],
         questions: [
           "Responsável pela realização dos procedimentos (Cliente):",
           "Telefone utilizado para contato (Número do WhatsApp):",
@@ -48,7 +48,7 @@ const checklists = {
         ],
       },
       radio: {
-        name: ["Rádio", "radiosz"],
+        name: ["Rádio", "radio"],
         questions: [
           "Responsável pela realização dos procedimentos (Cliente):",
           "Telefone utilizado para contato (Número do WhatsApp):",
@@ -347,7 +347,7 @@ const checklists = {
         ],
       },
       building: {
-        name: ["Manutenção Pŕedio/Condomínio", "buildingm"],
+        name: ["Manutenção Pŕedio/Condomínio", "building"],
         questions: [
           "Tecnico Externo:",
           "Tecnico Interno:",
@@ -377,8 +377,8 @@ const checklists = {
           "2-Foi alterado o tipo do atendimento?",
         ],
       },
-      radiom: {
-        name: ["Manutenção Rádio", "radiom"],
+      radio: {
+        name: ["Manutenção Rádio", "radio"],
         questions: [
           "Técnico Externo:",
           "Técnico Interno:",
@@ -419,7 +419,7 @@ const checklists = {
     src: 'schedulling',
     checks: {
       messagesc: {
-        name: ["Mensagem", "messagesc"],
+        name: ["Mensagem", "message"],
         questions: [
           'Cliente:',
           'Código:' ,
@@ -430,7 +430,7 @@ const checklists = {
         ],
       },
       fiber: {
-        name: ["Fibra", "fibersc"],
+        name: ["Fibra", "fiber"],
         questions: [
           "NOME: ",
           "CONTATO:",
@@ -446,7 +446,7 @@ const checklists = {
         ],
       },
       building: {
-        name: ["Prédio/condomínio", "buildingsc"],
+        name: ["Prédio/condomínio", "building"],
         questions: [
           "NOME: ",
           "CONTATO:",
@@ -478,7 +478,7 @@ const checklists = {
     src: 'activation',
     checks: {
       fiber: {
-        name: ["Ativação Fibra", "fiberac"],
+        name: ["Ativação Fibra", "fiber"],
         questions: [
           "Técnico Externo:",
           "Técnico Interno:",
@@ -513,7 +513,7 @@ const checklists = {
         ],
       },
       huawei_zte: {
-        name: ["Ativação Huawei/ZTE", "huawei_zteac"],
+        name: ["Ativação Huawei/ZTE", "huawei_zte"],
         questions: [
           "Técnico Externo:",
           "Técnico Interno:",
@@ -549,7 +549,7 @@ const checklists = {
         ],
       },
       building: {
-        name: ["Ativação Pŕedio/Condomínio", "buildingac"],
+        name: ["Ativação Pŕedio/Condomínio", "building"],
         questions: [
           "Técnico Externo:",
           "Técnico Interno:",
