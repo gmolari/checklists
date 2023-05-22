@@ -21,7 +21,6 @@ export default function Tab({indexx, check, type}){
         setIndex(indexx)
         setType(type)
         if (del) {
-            deleteCookie(indexx)
             setIndex(tabs[myPlace]?.index ? tabs[myPlace]?.index : tabs[myPlace-1]?.index ? tabs[myPlace-1]?.index : '')
             setCheck(tabs[myPlace]?.check ? tabs[myPlace]?.check : tabs[myPlace-1]?.check ? tabs[myPlace-1]?.check : '')
             localStorage.removeItem(indexx)

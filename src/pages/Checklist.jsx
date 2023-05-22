@@ -1,15 +1,11 @@
 import styles from "./Checklist.module.css";
 import { useState, useEffect, useContext } from "react";
-import checklists from "../components/Checklists";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { toast } from "react-toastify";
 import { Context } from "../context/Context";
 
 const Checklist = ({ setRandomKey }) => {
-  const {type, check, ans, setAns, index, answers} = useContext(Context)
-  const [questions, setQuestions] = useState(
-    checklists[type]?.checks[check]?.questions
-  );
+  const {type, check, ans, setAns, index, answers, questions, nameChecklist} = useContext(Context)
 
   const bodyToast = {
     position: "top-right",
@@ -26,7 +22,6 @@ const Checklist = ({ setRandomKey }) => {
   const [checkChangeCheck, setCheckChange] = useState();
 
   useEffect(() => {
-    setQuestions(checklists[type]?.checks[check]?.questions);
     setCheckChange(Math.random() * 999999);
   }, [check]);
 
@@ -194,7 +189,7 @@ const Checklist = ({ setRandomKey }) => {
 
   return (
     <div className={styles.divMainContainer}>
-      <h2 className={styles.h2}> {checklists[type]?.checks[check]?.name[0]} </h2>
+      <h2 className={styles.h2}> {nameChecklist} </h2>
       {type !== "schedulling"
         ? questions?.map((e) => (
             <div
