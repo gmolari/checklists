@@ -418,7 +418,7 @@ const checklists = {
     name: "Agendamento",
     src: 'schedulling',
     checks: {
-      messagesc: {
+      message: {
         name: ["Mensagem", "message"],
         questions: [
           'Cliente:',
