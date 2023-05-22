@@ -512,8 +512,8 @@ const checklists = {
           "Técnico foi informado para tirar foto novamente em caso da troca de equipamento durante a ativação ?",
         ],
       },
-      huawei_zte: {
-        name: ["Ativação Huawei/ZTE", "huawei_zte"],
+      huawei_zteac: {
+        name: ["Ativação Huawei/ZTE", "huawei_zteac"],
         questions: [
           "Técnico Externo:",
           "Técnico Interno:",

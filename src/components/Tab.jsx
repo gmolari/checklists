@@ -23,6 +23,7 @@ export default function Tab({indexx, check, type}){
         if (del) {
             setIndex(tabs[myPlace]?.index ? tabs[myPlace]?.index : tabs[myPlace-1]?.index ? tabs[myPlace-1]?.index : '')
             setCheck(tabs[myPlace]?.check ? tabs[myPlace]?.check : tabs[myPlace-1]?.check ? tabs[myPlace-1]?.check : '')
+            setType(tabs[myPlace]?.type ? tabs[myPlace]?.type : tabs[myPlace-1]?.type ? tabs[myPlace-1]?.type : '')
             localStorage.removeItem(indexx)
         }  
         del = false

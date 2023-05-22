@@ -61,7 +61,6 @@ function UserProvider({children}){
     }, [check])
 
     useEffect(() => {
-        console.log(questions)
         if (!questions) {
             // console.log('Não existe questions no momento')
             // console.log("type: "+type, "check: "+check, "checklists:", checklists, "Questions:",checklists[type]?.checks[check]?.questions)
