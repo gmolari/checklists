@@ -23,7 +23,6 @@ export default function Tab({indexx, check, type}){
 
     function setInfos(e){
         if (del) {
-            console.log('Delete SET INFOS')
             setIndex('DEL')
             localStorage.removeItem(indexx)
         } else {
@@ -38,13 +37,11 @@ export default function Tab({indexx, check, type}){
     }
 
     function deleteTab(){
-        console.log(tabs)
         const item = tabs.filter(item => item.index == indexx)[0]
         const localItem = tabs.indexOf(item)
         tabs.splice(localItem, 1)        
         attLocalTabs();
         del = true
-        console.log('Delete', tabs)
     }
 
     return (
