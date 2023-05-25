@@ -14,18 +14,23 @@ export default function Tab({indexx, check, type}){
     useEffect(() => {
         if (indexx == index) setActive(true)
         else setActive(false)
-    }, [index])
-
-    function setInfos(e){
-        setCheck(check)
-        setIndex(indexx)
-        setType(type)
-        if (del) {
+        if (index == 'DEL') {
             setIndex(tabs[myPlace]?.index ? tabs[myPlace]?.index : tabs[myPlace-1]?.index ? tabs[myPlace-1]?.index : '')
             setCheck(tabs[myPlace]?.check ? tabs[myPlace]?.check : tabs[myPlace-1]?.check ? tabs[myPlace-1]?.check : '')
             setType(tabs[myPlace]?.type ? tabs[myPlace]?.type : tabs[myPlace-1]?.type ? tabs[myPlace-1]?.type : '')
+        }
+    }, [index])
+
+    function setInfos(e){
+        if (del) {
+            console.log('Delete SET INFOS')
+            setIndex('DEL')
             localStorage.removeItem(indexx)
-        }  
+        } else {
+            setCheck(check)
+            setIndex(indexx)
+            setType(type)
+        }
         del = false
         if (tabs.length <= 0) {
             setIndex('')
@@ -33,11 +38,13 @@ export default function Tab({indexx, check, type}){
     }
 
     function deleteTab(){
+        console.log(tabs)
         const item = tabs.filter(item => item.index == indexx)[0]
         const localItem = tabs.indexOf(item)
         tabs.splice(localItem, 1)        
         attLocalTabs();
         del = true
+        console.log('Delete', tabs)
     }
 
     return (
