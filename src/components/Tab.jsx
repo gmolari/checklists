@@ -14,18 +14,22 @@ export default function Tab({indexx, check, type}){
     useEffect(() => {
         if (indexx == index) setActive(true)
         else setActive(false)
-    }, [index])
-
-    function setInfos(e){
-        setCheck(check)
-        setIndex(indexx)
-        setType(type)
-        if (del) {
+        if (index == 'DEL') {
             setIndex(tabs[myPlace]?.index ? tabs[myPlace]?.index : tabs[myPlace-1]?.index ? tabs[myPlace-1]?.index : '')
             setCheck(tabs[myPlace]?.check ? tabs[myPlace]?.check : tabs[myPlace-1]?.check ? tabs[myPlace-1]?.check : '')
             setType(tabs[myPlace]?.type ? tabs[myPlace]?.type : tabs[myPlace-1]?.type ? tabs[myPlace-1]?.type : '')
+        }
+    }, [index])
+
+    function setInfos(e){
+        if (del) {
+            setIndex('DEL')
             localStorage.removeItem(indexx)
-        }  
+        } else {
+            setCheck(check)
+            setIndex(indexx)
+            setType(type)
+        }
         del = false
         if (tabs.length <= 0) {
             setIndex('')
