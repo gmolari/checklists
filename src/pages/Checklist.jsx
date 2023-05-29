@@ -159,7 +159,6 @@ const Checklist = ({ setRandomKey }) => {
     }
 
     if (ans) {
-      console.log('To setnado algo aqui man', ans)
       localStorage.setItem(index, JSON.stringify(ans))
     }
 
