@@ -5,7 +5,7 @@ import { Context } from '../context/Context'
 import svgCross from '../public/assets/x.svg'
 
 export default function Tab({indexx, check, type}){
-    const {setIndex, setCheck, setType,tabs, attLocalTabs, index, deleteCookie} = useContext(Context)
+    const {setIndex, setCheck, setType,tabs, attLocalTabs, index} = useContext(Context)
     const [active, setActive] = useState(false);
     let del = false
     let myPlace = tabs.indexOf(tabs.filter(i => indexx == i.index)[0])

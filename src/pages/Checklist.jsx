@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { Context } from "../context/Context";
 
 const Checklist = ({ setRandomKey }) => {
-  const {type, check, ans, setAns, index, answers, questions, nameChecklist} = useContext(Context)
+  const {type, check, ans, setAns, index, answers, questions, nameChecklist, setAnswers} = useContext(Context)
 
   const bodyToast = {
     position: "top-right",
@@ -54,7 +54,7 @@ const Checklist = ({ setRandomKey }) => {
         inpAns.value = null;
       }
     }
-  }, [checkChangeCheck, answers, index]);
+  }, [answers, index]);
 
   // WHEN ANS AND QUESTIONS CHANGE
   useEffect(() => {
@@ -158,7 +158,10 @@ const Checklist = ({ setRandomKey }) => {
       }
     }
 
-    ans ? localStorage.setItem(index, JSON.stringify(ans)) : ''
+    if (ans) {
+      console.log('To setnado algo aqui man', ans)
+      localStorage.setItem(index, JSON.stringify(ans))
+    }
 
     setFormatAns(formatedAns);
   }, [ans, questions]);
@@ -179,7 +182,7 @@ const Checklist = ({ setRandomKey }) => {
         inpAns.value = ''
       }
       inpFocus ? inpFocus.value = '' : ''
-      setAns('{}')
+      setAns('')
     }
   }
 

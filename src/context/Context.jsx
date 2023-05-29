@@ -14,7 +14,7 @@ function UserProvider({children}){
     const [check, setCheck] = useState(cookies.cCheck ? cookies.cCheck : '');
     const [index, setIndex] = useState(cookies.cIndex ? cookies.cIndex : '');
     const localTabs = JSON.parse(localStorage.getItem('tabs'))
-    const [ans, setAns] = useState({});
+    const [ans, setAns] = useState();
     const [infos, setInfos] = useState();
     const [answers, setAnswers] = useState(localStorage.getItem(index));
     const [questions, setQuestions] = useState(
@@ -36,6 +36,8 @@ function UserProvider({children}){
         if ( !localTabs || localTabs.length <= 0){
             setCheck('')
         }
+        if (answers)
+        setAns(JSON.parse(answers))
         // setInfos(cookies[index])
     }, [])
 
@@ -49,12 +51,10 @@ function UserProvider({children}){
 
     useEffect(() => {
         type || type == '' ? setCookies('cType', type) : ''
-        // setInfos(cookies[index])
     }, [type])
 
     useEffect(() => {
         check || check == '' ? setCookies('cCheck', check) : ''
-        setAnswers(localStorage.getItem(index))
         setAns('')
         setQuestions(checklists[type]?.checks[check]?.questions)
         setNameChecklist(checklists[type]?.checks[check]?.name[0])
@@ -62,10 +62,7 @@ function UserProvider({children}){
 
     useEffect(() => {
         if (!questions) {
-            // console.log('Não existe questions no momento')
-            // console.log("type: "+type, "check: "+check, "checklists:", checklists, "Questions:",checklists[type]?.checks[check]?.questions)
             setQuestions(checklists[type]?.checks[check]?.questions)
-            // console.log('Questions setadas')
         }
     }, [questions])
 
@@ -88,7 +85,8 @@ function UserProvider({children}){
                 deleteCookie,
                 answers,
                 questions,
-                nameChecklist
+                nameChecklist,
+                setAnswers
             }
         }>
             {children}
