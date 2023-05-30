@@ -26,6 +26,11 @@ const Checklist = ({ setRandomKey }) => {
   }, [check]);
 
   useEffect(() => {
+    if (answers)
+      setAns(JSON.parse(answers))
+  }, [checkChangeCheck])
+
+  useEffect(() => {
     const inpFocus = document.getElementById(`idInpFocus`);
     if (answers) {
       if (typeof JSON.parse(answers) == 'object'){

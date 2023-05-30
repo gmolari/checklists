@@ -14,13 +14,13 @@ function UserProvider({children}){
     const [check, setCheck] = useState(cookies.cCheck ? cookies.cCheck : '');
     const [index, setIndex] = useState(cookies.cIndex ? cookies.cIndex : '');
     const localTabs = JSON.parse(localStorage.getItem('tabs'))
-    const [ans, setAns] = useState();
     const [infos, setInfos] = useState();
     const [answers, setAnswers] = useState(localStorage.getItem(index));
     const [questions, setQuestions] = useState(
         checklists[type]?.checks[check]?.questions
     );
     const [nameChecklist, setNameChecklist] = useState(checklists[type]?.checks[check]?.name[0]);
+    const [ans, setAns] = useState();
 
     function deleteCookie(cookie){
         removeCookie(cookie)
