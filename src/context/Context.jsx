@@ -43,7 +43,7 @@ function UserProvider({children}){
 
     useEffect(() => {
         index || index == '' ? setCookies('cIndex', index) : ''
-        setAnswers(localStorage.getItem(index))
+        setAnswers(localStorage.getItem(index))        
         setAns('')
         setQuestions(checklists[type]?.checks[check]?.questions)
         setNameChecklist(checklists[type]?.checks[check]?.name[0])

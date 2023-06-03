@@ -47,17 +47,23 @@ const Checklist = ({ setRandomKey }) => {
               [value]: inpAns.value,
           }));
         }
-        inpFocus
-          ? JSON.parse(answers).inpFocus
-            ? (inpFocus.value = JSON.parse(answers).inpFocus)
-            : (inpFocus.value = null)
-          : "";
+      }
+      if (inpFocus) {
+        if (JSON.parse(answers).inpFocus){
+          inpFocus.value = JSON.parse(answers).inpFocus
+        }else inpFocus.value = ''
+        setAns((prevValue) => ({
+          ...prevValue,
+          inpFocus: JSON.parse(answers).inpFocus ? JSON.parse(answers).inpFocus : '',
+        }));
       }
     } else {
       for (const value in questions) {
         const inpAns = document.getElementById(`idInp${value}`);
         inpAns.value = null;
       }
+      inpFocus.value = ''
+      setAns({})
     }
   }, [answers, index]);
 
@@ -84,7 +90,7 @@ const Checklist = ({ setRandomKey }) => {
                 continue;
               }
 
-              if (check == 'messagesc'){
+              if (check == 'message'){
                 let question = questions[i].slice(0, questions[i].length-1)
                 if (i == 0 || i == 3 || i == 1) {
                   formatedAns = 
@@ -246,7 +252,7 @@ const Checklist = ({ setRandomKey }) => {
               />
             </div>
           ))}
-      {type === "schedulling" && check !== 'messagesc' ? (
+      {type === "schedulling" && check !== 'message' ? (
         <div className={styles.divQuestionSche}>
           <label htmlFor={`idInpFocus`} className={styles.p}>
             ¶ DESTAQUE:
