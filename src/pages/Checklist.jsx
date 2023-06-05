@@ -60,9 +60,10 @@ const Checklist = ({ setRandomKey }) => {
     } else {
       for (const value in questions) {
         const inpAns = document.getElementById(`idInp${value}`);
-        inpAns?.value = null;
+        inpAns.value = null;
       }
-      inpFocus?.value = ''
+      if (inpFocus)
+        inpFocus.value = ''
       setAns({})
     }
   }, [answers, index]);
