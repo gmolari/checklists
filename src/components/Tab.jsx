@@ -45,11 +45,9 @@ export default function Tab({indexx, check, type}){
     }
 
     return (
-        <div onClick={setInfos} className={active ? 'containerTab active' : 'containerTab'} >
+        <div title={indexx} onClick={setInfos} className={active ? 'containerTab active' : 'containerTab'} >
             <div className={styles.divNameTab}>
-                {
-                    indexx
-                }
+                <span>{indexx}</span> 
             </div>
             <div onClick={deleteTab} className={styles.containerTabDel}>
                 <img src={svgCross} alt="" />

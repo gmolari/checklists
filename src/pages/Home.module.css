@@ -18,6 +18,15 @@
 
 .divNameTab {
   padding: .5em 1.5em;
+  width: 100px;
+  max-width: 100px
+}
+
+.divNameTab span{
+  text-wrap: nowrap;
+  display: block;
+  max-width: 100%;
+  overflow: hidden
 }
 
 .containerTabDel{
