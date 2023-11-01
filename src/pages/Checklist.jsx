@@ -142,6 +142,16 @@ const Checklist = ({ setRandomKey }) => {
         case "migration":
           if (ans) {
             if (ans[i]) {
+              if (check == 'delta'){
+                if (i <= 2) {
+                  formatedAns =
+                    formatedAns + `${questions[i]} ${ans[i]}\n`;
+                  continue;
+                }
+                formatedAns =
+                formatedAns + `${questions[i]}\n${ans[i]}\n\n`;
+                continue
+              }
               if (i <= 3) {
                 if (i == 3) {
                   formatedAns =
